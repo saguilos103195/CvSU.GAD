@@ -1810,6 +1810,7 @@
     <Content Include="Content\Stylesheets\master.css" />
     <Content Include="Content\Stylesheets\ui.css" />
     <Content Include="Documents\Colleges.aspx" />
+    <Content Include="Documents\Programs.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -1827,6 +1828,13 @@
     </Compile>
     <Compile Include="Documents\Colleges.aspx.designer.cs">
       <DependentUpon>Colleges.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\Programs.aspx.cs">
+      <DependentUpon>Programs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documents\Programs.aspx.designer.cs">
+      <DependentUpon>Programs.aspx</DependentUpon>
     </Compile>
     <Compile Include="GAD.Master.cs">
       <DependentUpon>GAD.Master</DependentUpon>
