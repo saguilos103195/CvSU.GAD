@@ -17,7 +17,7 @@
 		<div class="form-tabs">
 			<span onclick="switchTab(0)">Add</span>
 			<span onclick="switchTab(1)">View All</span>
-			<span onclick="switchTab(2)">Archived</span>
+			<span onclick="switchTab(4)">Archived</span>
 		</div>
 		<%--<div class="form-body tab-control">
 			<div class="form-col-1">
