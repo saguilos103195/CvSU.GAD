@@ -1,0 +1,101 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GAD.master.cs" Inherits="CvSU.GAD.Web.GAD" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>CvSU - Gender and Development</title>
+	
+	<link rel="stylesheet" href="Content/Scripts/jquery-ui-1.12.1/jquery-ui.min.css" />
+	<link rel="stylesheet" href="Content/Scripts/fontawesome-free-5.8.2-web/css/all.css" />
+	<link rel="stylesheet" href="Content/Scripts/datatables/datatables.min.css" />
+	<link rel="stylesheet" href="Content/Stylesheets/bootstrap.css" />
+	<link rel="stylesheet" href="Content/Stylesheets/master.css" />
+	<link rel="stylesheet" href="Content/Stylesheets/ui.css" />
+	
+	<script type="text/javascript" src="../Content/Scripts/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../Content/Scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../Content/Scripts/asp-helpers.js"></script>
+	<script type="text/javascript" src="../Content/Scripts/master.js"></script>
+	<script type="text/javascript" src="../Content/Scripts/datatables/datatables.min.js"></script>
+
+	<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="master">
+			<div class="master-alert">
+				<div>
+					<i></i>
+					<p></p>
+					<span></span>
+					<a href="#"></a>
+				</div>
+			</div>
+			<div class="master-sidebar">
+				<div class="master-sidebar-title">
+					<img src="../Content/Images/cvsu-logo.png" />
+					<p>Gender and Development</p>
+				</div>
+				<div class="master-sidebar-account">
+					<div class="master-sidebar-picture">
+						<img src="../Content/Images/NC.jpg" />
+					</div>
+					<p>
+						<span>Samuel Aguilos</span>
+						<label class="fas fa-sort-down"></label>
+					</p>
+					<div class="master-sidebar-account-menu">
+						<a><span class="fas fa-user"></span><p>Profile</p></a>
+						<a><span class="fas fa-sign-out-alt"></span><p>Logout</p></a>
+					</div>
+				</div>
+				<div class="master-sidebar-menu">
+					<div class="master-sidebar-menuitem">
+						<p><label class="fas fa-user-cog"></label><span>Accounts</span><i class="fas fa-chevron-left"></i></p>
+						<div>
+							<a href="../accounts/createaccount.aspx">Create Accounts</a>
+							<a href="#">View Accounts</a>
+						</div>
+					</div>
+					<div class="master-sidebar-menuitem">
+						<p><label class="fas fa-venus-mars"></label><span>Sex Disaggregation</span><i class="fas fa-chevron-left"></i></p>
+						<div>
+							<a href="#">Student</a>
+							<a href="#">Faculty</a>
+							<a href="#">Non-faculty</a>
+						</div>
+					</div>
+					<div class="master-sidebar-menuitem">
+						<p><label class="fas fa-user-cog"></label><span>GAD Resource Pool</span><i class="fas fa-chevron-left"></i></p>
+						<div>
+							<a href="#">View</a>
+							<a href="#">Edit</a>
+						</div>
+					</div>
+					<div class="master-sidebar-menuitem">
+						<p><label class="fas fa-book"></label><span>Documents</span><i class="fas fa-chevron-left"></i></p>
+						<div>
+							<a href="../documents/colleges.aspx">Colleges</a>
+							<a href="#">Departments</a>
+							<a href="#">Programs</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="master-body">
+				<div class="master-body-header">
+
+				</div>
+				<div class="master-body-content">
+					<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+					</asp:ContentPlaceHolder>
+				</div>
+			</div>
+        </div>
+    </form>
+</body>
+</html>
