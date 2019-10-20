@@ -24,6 +24,7 @@ namespace CvSU.GAD.DataAccess.Models
         public string Title { get; set; }
         public string Alias { get; set; }
         public bool IsMain { get; set; }
+        public bool isArchived { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Departments { get; set; }

@@ -18,6 +18,7 @@ namespace CvSU.GAD.DataAccess.Models
         public int DepartmentID { get; set; }
         public string Title { get; set; }
         public string Alias { get; set; }
+        public bool IsArchived { get; set; }
     
         public virtual Department Department { get; set; }
     }

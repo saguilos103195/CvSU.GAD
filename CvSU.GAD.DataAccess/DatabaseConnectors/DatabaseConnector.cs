@@ -36,5 +36,10 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 				innerException = innerException.InnerException;
 			}
 		}
+
+		public void LogInfo(string info)
+		{
+			_log.Info(info);
+		}
 	}
 }

@@ -159,6 +159,7 @@
     <Content Include="Content\Scripts\datatables\datatables.js" />
     <Content Include="Content\Scripts\datatables\datatables.min.css" />
     <Content Include="Content\Scripts\datatables\datatables.min.js" />
+    <Content Include="Content\Scripts\departments.js" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\less\brands.less" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\less\fontawesome.less" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\less\regular.less" />
@@ -1810,6 +1811,7 @@
     <Content Include="Content\Stylesheets\master.css" />
     <Content Include="Content\Stylesheets\ui.css" />
     <Content Include="Documents\Colleges.aspx" />
+    <Content Include="Documents\Departments.aspx" />
     <Content Include="Documents\Programs.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="Web.config" />
@@ -1822,12 +1824,22 @@
     <Compile Include="Accounts\CreateAccount.aspx.designer.cs">
       <DependentUpon>CreateAccount.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Content\Classes\CustomPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Documents\Colleges.aspx.cs">
       <DependentUpon>Colleges.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Documents\Colleges.aspx.designer.cs">
       <DependentUpon>Colleges.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\Departments.aspx.cs">
+      <DependentUpon>Departments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documents\Departments.aspx.designer.cs">
+      <DependentUpon>Departments.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documents\Programs.aspx.cs">
       <DependentUpon>Programs.aspx</DependentUpon>

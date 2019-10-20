@@ -24,6 +24,7 @@ namespace CvSU.GAD.DataAccess.Models
         public int CollegeID { get; set; }
         public string Title { get; set; }
         public string Alias { get; set; }
+        public bool IsArchived { get; set; }
     
         public virtual College College { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

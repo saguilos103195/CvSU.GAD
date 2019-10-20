@@ -1,5 +1,6 @@
 ﻿using CvSU.GAD.DataAccess.DatabaseConnectors;
 using CvSU.GAD.DataAccess.Models;
+using CvSU.GAD.Web.Content.Classes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace CvSU.GAD.Web.Documents
 {
-	public partial class Colleges : System.Web.UI.Page
+	public partial class Colleges : CustomPage
 	{
 		CollegeConnector CollegeConnector { get; set; }
 
@@ -38,18 +39,17 @@ namespace CvSU.GAD.Web.Documents
 			newCollege.Alias = aliasTxt.Value;
 			newCollege.IsMain = typeChkBx.Checked;
 			newCollege.Title = titleTxt.Value;
-			bool isSaved = CollegeConnector.AddCollege(newCollege);
+			string message = CollegeConnector.AddCollege(newCollege);
 			string showAlert = "";
-			if (isSaved)
+			if (string.IsNullOrEmpty(message))
 			{
 				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully added!', 'OK', '#009efb', 'colleges.aspx');  </script>";
-				ScriptManager.RegisterStartupScript(this, typeof(Page), "showAlert", showAlert, false);
 			}
 			else
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', 'Something went wrong!', 'OK', '#009efb', '#');  </script>";
-				ScriptManager.RegisterStartupScript(this, typeof(Page), "showAlert", showAlert, false);
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
 			}
+			LoadJavaSript("showAlert", showAlert);
 		}
 
 		protected void ArchiveBtn_Click(object sender, EventArgs e)

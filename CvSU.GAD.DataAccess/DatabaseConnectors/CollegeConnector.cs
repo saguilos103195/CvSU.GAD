@@ -13,36 +13,37 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 {
 	public class CollegeConnector : DatabaseConnector
 	{
-		private DataAccessFactory DataAccessFactory { get; set; }
-		private static Logger _log = LogManager.GetCurrentClassLogger();
+		private DataAccessFactory _dataAccessFactory { get; }
 
 		public CollegeConnector()
 		{
-			DataAccessFactory = new DataAccessFactory();
+			_dataAccessFactory = new DataAccessFactory();
 		}
 
-		public bool AddCollege(College newCollege)
+		public string AddCollege(College newCollege)
 		{
+			string message = "Failed to save.";
+
 			try
 			{
-				using (CVSUGADDBContext ctx = DataAccessFactory.GetCVSUGADDBContext())
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					using (DbContextTransaction transaction = ctx.Database.BeginTransaction())
+					using (DbContextTransaction transaction = context.Database.BeginTransaction())
 					{
+						bool isSaved = false;
+
 						try
 						{
-							ctx.Colleges.Add(newCollege);
-							int isSaved = ctx.SaveChanges();
+							College dbCollege = context.Colleges.FirstOrDefault(d => d.Title == newCollege.Title);
 
-							if (isSaved > 0)
+							if (dbCollege == null)
 							{
-								transaction.Commit();
-								return true;
+								context.Colleges.Add(newCollege);
+								isSaved = context.SaveChanges() > 0;
 							}
 							else
 							{
-								transaction.Rollback();
-								return false;
+								message += "College already exist in the database. ";
 							}
 							
 						}
@@ -50,22 +51,38 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 						{
 							transaction.Rollback();
 							LogDbEntityValidationException(ex);
-							return false;
+							message = "Please contact the support. ";
 						}
 						catch (Exception ex)
 						{
 							transaction.Rollback();
 							LogException(ex);
-							return false;
+							message = "Please contact the support. ";
 						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							message = string.Empty;
+							LogInfo($"New College {newCollege.Title} is successfully saved.");
+						}
+						else
+						{
+							transaction.Rollback();
+							LogInfo($"New College {newCollege.Title} is failed to save.");
+							message = "Please contact the support. ";
+						}
+
 					}
 				}
 			}
 			catch (Exception ex)
 			{
 				LogException(ex);
-				return false;
+				message = "Please contact the support. ";
 			}
+
+			return message;
 		}
 
 		public List<College> GetColleges()
@@ -73,7 +90,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			List<College> colleges = new List<College>();
 			try
 			{
-				using (CVSUGADDBContext ctx = DataAccessFactory.GetCVSUGADDBContext())
+				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
 					colleges = ctx.Colleges.ToList();
 				}
@@ -84,6 +101,34 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			}
 
 			return colleges;
+		}
+
+		public string ArchiveCollege(int collegeID)
+		{
+			string message = "Failed to save.";
+			try
+			{
+				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					College collegeToArchive = ctx.Colleges.FirstOrDefault(c => c.CollegeID == collegeID);
+
+					if (collegeToArchive != null)
+					{
+						//collegeToArchive.
+					}
+					else
+					{
+						message = "College to Archive does not exist."
+					}
+
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw;
+			}
+			return message;
 		}
 
 	}
