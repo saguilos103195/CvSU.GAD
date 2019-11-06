@@ -7,9 +7,35 @@
 	<div class="form-modal-overlay">
 		<div class="archive-modal">
 			<p>Are you sure want to archive</p>
-			<span>College of Engineering and Information Technology</span>
+			<span></span>
 			<asp:Button runat="server" ID="ArchiveBtn" OnClick="ArchiveBtn_Click" CssClass="button-control button-red" Text="Ok" />
 			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
+		</div>
+		<div class="retrieve-modal">
+			<p>Are you sure want to retrieve</p>
+			<span></span>
+			<asp:Button runat="server" ID="RetrieveBtn" OnClick="RetrieveBtn_Click" CssClass="button-control button-red" Text="Ok" />
+			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
+		</div>
+		<div class="edit-modal">
+			<p>Edit</p>
+			<div>
+				<p>Title</p>
+				<input require type="text" runat="server" id="editTitleTxt" class="input-text-control" />
+				<span></span>
+			</div>
+			<div>
+				<p>Alias</p>
+				<input require type="text" runat="server" id="editAliasTxt" class="input-text-control" />
+				<span></span>
+			</div>
+			<div>
+				<label class="check-control">
+					<p>Main Campus</p>
+					<input runat="server" id="editTypeChkBx" value="true" type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+			</div>
 		</div>
 	</div>
 	<div class="form">
@@ -23,14 +49,14 @@
 			<div class="form-col-1">
 				<div>
 					<p>Title</p>
-					<input required runat="server" id="titleTxt" type="text" class="input-text-control" />
-					<span>Test Error</span>
+					<input require runat="server" id="titleTxt" type="text" class="input-text-control" />
+					<span></span>
 				</div>
 			</div>
 			<div class="form-col-1">
 				<div>
 					<p>Alias</p>
-					<input required runat="server" id="aliasTxt" type="text" class="input-text-control" />
+					<input require runat="server" id="aliasTxt" type="text" class="input-text-control" />
 					<span></span>
 				</div>
 			</div>

@@ -35,7 +35,7 @@
 
 $(document).ready(function () {
 
-	$("*[required]").focusin(function () {
+	$("*[require]").focusin(function () {
 
 		$(this).removeAttr("style");
 		$(this).next().removeAttr("style");
@@ -44,11 +44,11 @@ $(document).ready(function () {
 
 });
 
-function isFormValid() {
+function isFormValid(classUsed) {
 	var isValid = true;
 	var gotFocus = false;
 
-	$("*[required]").each(function () {
+	$(classUsed + " *[require]").each(function () {
 		if ($(this).val() === "")
 		{
 			$(this).css("border-color", "#f62d51");

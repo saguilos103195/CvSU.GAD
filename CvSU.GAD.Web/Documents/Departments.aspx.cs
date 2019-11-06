@@ -17,7 +17,6 @@ namespace CvSU.GAD.Web.Documents
 		{
 			CollegeConnector collegeConnector = new CollegeConnector();
 			List<College> dbColleges = collegeConnector.GetColleges();
-			Dictionary<int, string> collegeList = new Dictionary<int, string>() {  };
 			var collegesSelectList = collegeConnector.GetColleges().Select(c => new { ID = c.CollegeID, Name = c.Title }).ToList();
 			string collegeSelectJSON = JsonConvert.SerializeObject(collegesSelectList);
 			string loadJsonObjects = $"<script type=\"text/javascript\">var jsonColleges = {collegeSelectJSON}; </script>";

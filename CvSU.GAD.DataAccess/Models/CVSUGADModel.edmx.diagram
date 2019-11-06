@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="7.875" />
         <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="3" PointY="10.5" />
-        <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="8.5" />
         <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="CVSUGADModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" />
         <AssociationConnector Association="CVSUGADModel.FK_Education_Account" />

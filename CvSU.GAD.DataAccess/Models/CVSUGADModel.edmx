@@ -23,7 +23,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Alias" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsMain" Type="bit" Nullable="false" />
-          <Property Name="isArchived" Type="bit" Nullable="false" />
+          <Property Name="IsArchived" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -211,7 +211,7 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsMain" Type="Boolean" Nullable="false" />
-          <Property Name="isArchived" Type="Boolean" Nullable="false" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Departments" Relationship="CVSUGADModel.FK_Department_College" FromRole="College" ToRole="Department" />
         </EntityType>
         <EntityType Name="Department">
@@ -351,7 +351,7 @@
           <EntitySetMapping Name="Colleges">
             <EntityTypeMapping TypeName="CVSUGADModel.College">
               <MappingFragment StoreEntitySet="College">
-                <ScalarProperty Name="isArchived" ColumnName="isArchived" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
                 <ScalarProperty Name="IsMain" ColumnName="IsMain" />
                 <ScalarProperty Name="Alias" ColumnName="Alias" />
                 <ScalarProperty Name="Title" ColumnName="Title" />

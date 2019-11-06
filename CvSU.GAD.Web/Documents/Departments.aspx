@@ -22,14 +22,14 @@
 			<div class="form-col-1">
 				<div>
 					<p>Title</p>
-					<input required runat="server" id="titleTxt" type="text" class="input-text-control" />
+					<input require runat="server" id="titleTxt" type="text" class="input-text-control" />
 					<span>Test Error</span>
 				</div>
 			</div>
 			<div class="form-col-1">
 				<div>
 					<p>Alias</p>
-					<input required runat="server" id="aliasTxt" type="text" class="input-text-control" />
+					<input require runat="server" id="aliasTxt" type="text" class="input-text-control" />
 					<span></span>
 				</div>
 			</div>

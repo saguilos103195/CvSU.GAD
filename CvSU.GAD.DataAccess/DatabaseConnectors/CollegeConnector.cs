@@ -108,26 +108,122 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			string message = "Failed to save.";
 			try
 			{
-				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					College collegeToArchive = ctx.Colleges.FirstOrDefault(c => c.CollegeID == collegeID);
+					College collegeToArchive = context.Colleges.FirstOrDefault(c => c.CollegeID == collegeID);
 
-					if (collegeToArchive != null)
+					using (DbContextTransaction transaction = context.Database.BeginTransaction())
 					{
-						//collegeToArchive.
-					}
-					else
-					{
-						message = "College to Archive does not exist."
-					}
+						bool isSaved = false;
 
+						try
+						{
+							if (collegeToArchive != null)
+							{
+								collegeToArchive.IsArchived = true;
+								isSaved = context.SaveChanges() > 0;
+							}
+							else
+							{
+								message = "College to Archive does not exist.";
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							message = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							message = "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							message = string.Empty;
+							LogInfo($"{collegeToArchive.Title} is successfully archived.");
+						}
+						else
+						{
+							transaction.Rollback();
+							LogInfo($"{collegeToArchive.Title} is failed to archive.");
+							message = "Please contact the support. ";
+						}
+					}
 				}
 			}
 			catch (Exception ex)
 			{
-
-				throw;
+				LogException(ex);
+				message = "Please contact the support. ";
 			}
+
+			return message;
+		}
+
+		public string RetrieveCollege(int collegeID)
+		{
+			string message = "Failed to save.";
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					College collegeToArchive = context.Colleges.FirstOrDefault(c => c.CollegeID == collegeID);
+
+					using (DbContextTransaction transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							if (collegeToArchive != null)
+							{
+								collegeToArchive.IsArchived = false;
+								isSaved = context.SaveChanges() > 0;
+							}
+							else
+							{
+								message = "College to Retrieve does not exist.";
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							message = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							message = "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							message = string.Empty;
+							LogInfo($"{collegeToArchive.Title} is successfully retrieved.");
+						}
+						else
+						{
+							transaction.Rollback();
+							LogInfo($"{collegeToArchive.Title} is failed to retrieve.");
+							message = "Please contact the support. ";
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				message = "Please contact the support. ";
+			}
+
 			return message;
 		}
 

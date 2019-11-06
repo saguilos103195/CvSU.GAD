@@ -30,7 +30,7 @@ namespace CvSU.GAD.Web.Documents
 		{
 			string JSONColleges = JsonConvert.SerializeObject(CollegeConnector.GetColleges());
 			string getColleges = "<script type=\"text/javascript\"> var collegesJSON = " + JSONColleges + " </script>";
-			ScriptManager.RegisterStartupScript(this, typeof(Page), "getColleges", getColleges, false);
+			LoadJavaSript("getColleges", getColleges);
 		}
 
 		protected void createBtn_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace CvSU.GAD.Web.Documents
 			newCollege.IsMain = typeChkBx.Checked;
 			newCollege.Title = titleTxt.Value;
 			string message = CollegeConnector.AddCollege(newCollege);
-			string showAlert = "";
+			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
 				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully added!', 'OK', '#009efb', 'colleges.aspx');  </script>";
@@ -54,7 +54,32 @@ namespace CvSU.GAD.Web.Documents
 
 		protected void ArchiveBtn_Click(object sender, EventArgs e)
 		{
+			string message = CollegeConnector.ArchiveCollege(int.Parse(selectedID.Value));
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully archived!', 'OK', '#009efb', 'colleges.aspx');  </script>";
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
+		}
 
+		protected void RetrieveBtn_Click(object sender, EventArgs e)
+		{
+			string message = CollegeConnector.RetrieveCollege(int.Parse(selectedID.Value));
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully retrieved!', 'OK', '#009efb', 'colleges.aspx');  </script>";
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
 		}
 	}
 }

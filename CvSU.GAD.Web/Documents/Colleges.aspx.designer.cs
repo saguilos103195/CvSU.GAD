@@ -31,6 +31,42 @@ namespace CvSU.GAD.Web.Documents {
         protected global::System.Web.UI.WebControls.Button ArchiveBtn;
         
         /// <summary>
+        /// RetrieveBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button RetrieveBtn;
+        
+        /// <summary>
+        /// editTitleTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText editTitleTxt;
+        
+        /// <summary>
+        /// editAliasTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText editAliasTxt;
+        
+        /// <summary>
+        /// editTypeChkBx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox editTypeChkBx;
+        
+        /// <summary>
         /// titleTxt control.
         /// </summary>
         /// <remarks>
