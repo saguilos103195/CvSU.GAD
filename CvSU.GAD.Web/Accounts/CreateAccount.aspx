@@ -31,7 +31,7 @@
 			<div class="form-col-1">
 				<div>
 					<p>Type</p>
-					<select require class="select-control">
+					<select require class="select-control" id="accountTypeSel" runat="server">
 						<option selected disabled value="">Select Type</option>
 						<option>Administrator</option>
 						<option>Coordinator</option>

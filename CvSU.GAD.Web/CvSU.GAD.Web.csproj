@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Accounts\CreateAccount.aspx" />
+    <Content Include="Accounts\ManageAccounts.aspx" />
     <Content Include="Content\Fonts\OpenSans\BoldItalic\OpenSans-BoldItalic.eot" />
     <Content Include="Content\Fonts\OpenSans\BoldItalic\OpenSans-BoldItalic.ttf" />
     <Content Include="Content\Fonts\OpenSans\BoldItalic\OpenSans-BoldItalic.woff" />
@@ -1823,6 +1824,13 @@
     </Compile>
     <Compile Include="Accounts\CreateAccount.aspx.designer.cs">
       <DependentUpon>CreateAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts\ManageAccounts.aspx.cs">
+      <DependentUpon>ManageAccounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accounts\ManageAccounts.aspx.designer.cs">
+      <DependentUpon>ManageAccounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\Classes\CustomPage.cs">
       <SubType>ASPXCodeBehind</SubType>

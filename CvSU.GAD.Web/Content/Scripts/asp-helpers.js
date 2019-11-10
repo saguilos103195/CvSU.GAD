@@ -65,6 +65,13 @@ function isFormValid(classUsed) {
 				$(this).next().next().css("display", "block");
 				$(this).next().next().html("This field is required");
 				$(this).next().next().css("color", "#f62d51");
+
+				if (gotFocus === false) {
+					$("html, body").scrollTop($(this).next().offset().top - 50);
+					gotFocus = true;
+				}
+
+				isValid = false;
 			}
 			else
 			{
