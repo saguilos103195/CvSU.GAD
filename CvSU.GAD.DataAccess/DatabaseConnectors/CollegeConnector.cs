@@ -227,5 +227,69 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return message;
 		}
 
+		public string UpdateCollege(College updatedCollege)
+		{
+			string message = "Failed to save.";
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					College college = context.Colleges.FirstOrDefault(c => c.CollegeID == updatedCollege.CollegeID);
+
+					using (DbContextTransaction transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							if (college != null)
+							{
+								college.Title = updatedCollege.Title;
+								college.Alias = updatedCollege.Alias;
+								college.IsMain = updatedCollege.IsMain;
+								isSaved = context.SaveChanges() > 0;
+							}
+							else
+							{
+								message = "College to Update does not exist.";
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							message = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							message = "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							message = string.Empty;
+							LogInfo($"{updatedCollege.Title} is successfully retrieved.");
+						}
+						else
+						{
+							transaction.Rollback();
+							LogInfo($"{updatedCollege.Title} is failed to retrieve.");
+							message = "Please contact the support. ";
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				message = "Please contact the support. ";
+			}
+
+			return message;
+		}
+
 	}
 }

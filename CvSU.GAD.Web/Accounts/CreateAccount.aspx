@@ -2,15 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-	<script type="text/javascript">
-
-		$(document).ready(function () {
-
-			$(".select-control").selectmenu();
-
-		});
-
-	</script>
+	<script type="text/javascript" src="../Content/Scripts/accounts.js"></script>
 	<div class="form">
 		<p>Accounts</p>
 		<div class="form-body">
@@ -18,28 +10,28 @@
 			<div class="form-col-1">
 				<div>
 					<p>Username</p>
-					<input type="text" class="input-text-control" />
+					<input require type="text" class="input-text-control" id="usernameTxt" runat="server" />
 					<span></span>
 				</div>
 			</div>
 			<div class="form-col-1">
 				<div>
 					<p>Password</p>
-					<input type="password" class="input-text-control" />
+					<input require type="password" class="input-text-control" id="passwordTxt" runat="server" />
 					<span></span>
 				</div>
 			</div>
 			<div class="form-col-1">
 				<div>
 					<p>Confirm Password</p>
-					<input type="password" class="input-text-control" />
+					<input require type="password" class="input-text-control" id="confirmPasswordTxt" runat="server" />
 					<span></span>
 				</div>
 			</div>
 			<div class="form-col-1">
 				<div>
 					<p>Type</p>
-					<select class="select-control">
+					<select require class="select-control">
 						<option selected disabled value="">Select Type</option>
 						<option>Administrator</option>
 						<option>Coordinator</option>
@@ -49,6 +41,7 @@
 			</div>
 			<div class="form-footer">
 				<button class="button-control button-green" type="button">Create</button>
+				<asp:Button runat="server" ID="CreateBtn" OnClick="CreateBtn_Click" />
 			</div>
 		</div>
 	</div>

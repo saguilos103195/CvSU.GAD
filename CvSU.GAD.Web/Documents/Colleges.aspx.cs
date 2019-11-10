@@ -81,5 +81,22 @@ namespace CvSU.GAD.Web.Documents
 			}
 			LoadJavaSript("showAlert", showAlert);
 		}
+
+		protected void EditBtn_Click(object sender, EventArgs e)
+		{
+			College updateCollege = new College { CollegeID = int.Parse(selectedID.Value), Title = editTitleTxt.Value, Alias = editAliasTxt.Value, IsArchived = false, IsMain = editTypeChkBx.Checked };
+
+			string message = CollegeConnector.UpdateCollege(updateCollege);
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully updated!', 'OK', '#009efb', 'colleges.aspx');  </script>";
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
+		}
 	}
 }

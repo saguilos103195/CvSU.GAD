@@ -48,7 +48,7 @@
             <div class="modal-foot">
 				<button class="button-control button-transparent" type="button" onclick="hideModal()">Cancel</button>
 				<button class="button-control button-green updateBtn" type="button">Update</button>
-				<asp:Button ID="EditBtn" runat="server"  />
+				<asp:Button ID="EditBtn" runat="server" OnClick="EditBtn_Click" />
 			</div>
 		</div>
 	</div>

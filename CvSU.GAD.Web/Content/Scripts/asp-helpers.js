@@ -42,31 +42,57 @@ $(document).ready(function () {
 
 	});
 
+	$(document).on("focusin", ".ui-selectmenu-button", function () {
+
+		$(this).removeAttr("style");
+		$(this).next().removeAttr("style");
+
+	});
+
 });
 
 function isFormValid(classUsed) {
 	var isValid = true;
 	var gotFocus = false;
 
-	$(classUsed + " *[require]").each(function () {
-		if ($(this).val() === "")
+	$(classUsed + " *[require]").each(function ()
+	{
+		if ($(this).is("select"))
 		{
-			$(this).css("border-color", "#f62d51");
-			$(this).next().css("display", "block");
-			$(this).next().html("This field is required");
-			$(this).next().css("color", "#f62d51");
-
-			if (gotFocus === false) {
-				$("html, body").scrollTop($(this).offset().top - 50);
-				gotFocus = true;
+			if ($(this).val() === "" || $(this).val() === null)
+			{
+				$(this).next().css("border-color", "#f62d51");
+				$(this).next().next().css("display", "block");
+				$(this).next().next().html("This field is required");
+				$(this).next().next().css("color", "#f62d51");
 			}
-
-			isValid = false;
+			else
+			{
+				$(this).next().removeAttr("style");
+				$(this).next().next().removeAttr("style");
+			}
 		}
 		else
 		{
-			$(this).removeAttr("style");
-			$(this).next().removeAttr("style");
+			if ($(this).val() === "")
+			{
+				$(this).css("border-color", "#f62d51");
+				$(this).next().css("display", "block");
+				$(this).next().html("This field is required");
+				$(this).next().css("color", "#f62d51");
+
+				if (gotFocus === false) {
+					$("html, body").scrollTop($(this).offset().top - 50);
+					gotFocus = true;
+				}
+
+				isValid = false;
+			}
+			else
+			{
+				$(this).removeAttr("style");
+				$(this).next().removeAttr("style");
+			}
 		}
 	});
 
