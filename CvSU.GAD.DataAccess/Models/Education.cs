@@ -15,13 +15,13 @@ namespace CvSU.GAD.DataAccess.Models
     public partial class Education
     {
         public int EducationID { get; set; }
-        public int AccountID { get; set; }
+        public int ProfileID { get; set; }
         public string SchoolName { get; set; }
         public string Course { get; set; }
         public string EducationalLevel { get; set; }
         public System.DateTime DateFrom { get; set; }
         public System.DateTime DateTo { get; set; }
     
-        public virtual Account Account { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 }

@@ -14,6 +14,12 @@ namespace CvSU.GAD.DataAccess.Models
     
     public partial class Profile
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Profile()
+        {
+            this.Educations = new HashSet<Education>();
+        }
+    
         public int ProfileID { get; set; }
         public int AccountID { get; set; }
         public string Firstname { get; set; }
@@ -28,10 +34,12 @@ namespace CvSU.GAD.DataAccess.Models
         public string Religion { get; set; }
         public string Designation { get; set; }
         public string OfficeAddress { get; set; }
-        public System.DateTime EngagedFrom { get; set; }
-        public System.DateTime EngagedTo { get; set; }
-        public bool WillTravel { get; set; }
+        public Nullable<System.DateTime> EngagedFrom { get; set; }
+        public Nullable<System.DateTime> EngagedTo { get; set; }
+        public Nullable<bool> WillTravel { get; set; }
     
         public virtual Account Account { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Education> Educations { get; set; }
     }
 }

@@ -34,11 +34,13 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 						try
 						{
-							var dbCollege = context.Colleges.Include(c => c.Departments).FirstOrDefault(c => c.CollegeID == newDepartment.CollegeID);
+							var dbCollege = context.Colleges.Include(c => c.Departments)
+								.FirstOrDefault(c => c.CollegeID == newDepartment.CollegeID);
 
 							if (dbCollege != null)
 							{
-								Department dbDepartment = dbCollege.Departments.FirstOrDefault(d => d.Title == newDepartment.Title);
+								Department dbDepartment = dbCollege.Departments
+									.FirstOrDefault(d => d.Title == newDepartment.Title);
 
 								if (dbDepartment == null)
 								{
@@ -57,7 +59,6 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 						}
 						catch (DbEntityValidationException ex)
 						{
-							transaction.Rollback();
 							LogDbEntityValidationException(ex);
 							message = "Please contact the support. ";
 						}
@@ -90,7 +91,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return message;
 		}
 
-		public List<Department> GetDepartments()
+		public List<Department> GetDepartments(int collegeId)
 		{
 			List<Department> departments = null;
 
@@ -98,7 +99,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					departments = context.Departments.ToList();
+					departments = context.Departments.Where(d => d.CollegeID == collegeId).ToList();
 				}
 			}
 			catch (Exception ex)
@@ -107,6 +108,146 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			}
 
 			return departments;
+		}
+
+		public Department GetDepartment(int departmentId)
+		{
+			Department department = null;
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					department = context.Departments.FirstOrDefault(d => d.DepartmentID == departmentId);
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return department;
+		}
+
+		public string UpdateDepartment(Department department)
+		{
+			string resultMessage = "Failed to updated. ";
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isUpdated = false;
+
+						try
+						{
+							var dbDepartment = context.Departments.FirstOrDefault(d => d.DepartmentID == department.DepartmentID);
+
+							if (dbDepartment != null)
+							{
+								dbDepartment.CollegeID = department.CollegeID;
+								department.Alias = department.Alias;
+								department.IsArchived = department.IsArchived;
+								department.Title = department.Title;
+
+								isUpdated = context.SaveChanges() > 0;
+							}
+							else
+							{
+								resultMessage = "Department doesn't exist on the databaes.";
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							LogDbEntityValidationException(ex);
+							resultMessage = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							LogException(ex);
+							resultMessage = "Please contact the support. ";
+						}
+
+						if (isUpdated)
+						{
+							transaction.Commit();
+							resultMessage = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				resultMessage = "Please contact the support. ";
+			}
+
+			return resultMessage;
+		}
+
+		public string SetArchiveDepartment(int departmentId, bool isArchive)
+		{
+			string resultMessage = "Failed to archive.";
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					bool isUpdated = false;
+
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						try
+						{
+							var dbDepartment = context.Departments.FirstOrDefault(d => d.DepartmentID == departmentId);
+
+							if (dbDepartment != null)
+							{
+								dbDepartment.IsArchived = isArchive;
+								isUpdated = context.SaveChanges() > 0;
+							}
+							else
+							{
+								resultMessage = "Department doesn't exist in the database.";
+							}
+						}
+						catch (Exception ex)
+						{
+							LogException(ex);
+							resultMessage = "Please contact the support. ";
+						}
+
+						if (isUpdated)
+						{
+							transaction.Commit();
+							resultMessage = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+						}
+					}
+				}
+			}
+			catch (DbEntityValidationException ex)
+			{
+				LogDbEntityValidationException(ex);
+				resultMessage = "Please contact the support. ";
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				resultMessage = "Please contact the support. ";
+			}
+
+			return resultMessage;
+
 		}
 	}
 }

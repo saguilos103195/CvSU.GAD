@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\saguilos\Downloads\CvSU.GAD\CvSU.GAD\CvSU.GAD.DataAccess\Models\CVSUGADModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Visual Studio Projects\CvSU.GAD\CvSU.GAD.DataAccess\Models\CVSUGADModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
