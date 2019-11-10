@@ -124,6 +124,7 @@
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.ttf" />
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.woff" />
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.woff2" />
+    <Content Include="Content\Scripts\accounts.js" />
     <Content Include="Content\Scripts\asp-helpers.js" />
     <Content Include="Content\Scripts\colleges.js" />
     <Content Include="Content\Scripts\datatables\DataTables-1.10.18\css\dataTables.bootstrap.css" />

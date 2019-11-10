@@ -13,5 +13,10 @@ namespace CvSU.GAD.Web.Accounts
 		{
 
 		}
+
+		protected void CreateBtn_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

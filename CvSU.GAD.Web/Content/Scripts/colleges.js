@@ -17,7 +17,7 @@
 		if (isFormValid(".edit-modal")) {
 			$(this).css("pointer-events", "none");
 			$(this).css("opacity", ".9");
-			$(".form-footer > input[type=submit]").click();
+			$(".modal-foot > input[type=submit]").click();
 		}
 
 	});

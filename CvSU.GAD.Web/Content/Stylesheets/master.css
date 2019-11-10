@@ -320,6 +320,7 @@
 	cursor: pointer;
 	border-radius: 5px;
 	outline: none;
+	text-decoration: none;
 }
 
 .master-alert > div > a:hover
