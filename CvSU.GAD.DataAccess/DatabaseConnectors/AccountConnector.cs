@@ -15,6 +15,9 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 		private string _accountStatusNew { get; }
 		private string _accountStatusActive { get; }
 		private string _accountStatusArchive { get; }
+		private string _accountTypeAdmin { get; }
+		private string _accountTypeCoordinator { get; }
+
 
 		public AccountConnector()
 		{
@@ -22,6 +25,8 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			_accountStatusNew = "New";
 			_accountStatusActive = "Active";
 			_accountStatusActive = "Archive";
+			_accountTypeAdmin = "Admin";
+			_accountTypeCoordinator = "Coordinator";
 		}
 
 		public string AddAccount(Account account)
@@ -140,6 +145,29 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			}
 
 			return resultMessage;
+		}
+
+		public Profile GetProfile(int accountId)
+		{
+			Profile profile = null;
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					profile = context.Profiles.Include(p => p.Educations).FirstOrDefault(p => p.AccountID == accountId);
+				}
+			}
+			catch (DbEntityValidationException ex)
+			{
+				LogDbEntityValidationException(ex);
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return profile;
 		}
 
 
