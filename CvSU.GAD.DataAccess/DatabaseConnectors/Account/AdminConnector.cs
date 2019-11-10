@@ -4,32 +4,14 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
-using System.Data.Entity;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
-namespace CvSU.GAD.DataAccess.DatabaseConnectors
+namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 {
-	public class AccountConnector : DatabaseConnector
+	public class AdminConnector : AccountConnector
 	{
-		private DataAccessFactory _dataAccessFactory { get; }
-		private string _accountStatusNew { get; }
-		private string _accountStatusActive { get; }
-		private string _accountStatusArchive { get; }
-		private string _accountTypeAdmin { get; }
-		private string _accountTypeCoordinator { get; }
-
-
-		public AccountConnector()
-		{
-			_dataAccessFactory = new DataAccessFactory();
-			_accountStatusNew = "New";
-			_accountStatusActive = "Active";
-			_accountStatusActive = "Archive";
-			_accountTypeAdmin = "Admin";
-			_accountTypeCoordinator = "Coordinator";
-		}
-
-		public string AddAccount(Account account)
+		public string AddAccount(Models.Account account)
 		{
 			string resultMessage = "Failed to save.";
 
@@ -147,15 +129,25 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return resultMessage;
 		}
 
-		public Profile GetProfile(int accountId)
+		public List<Models.Account> GetAccounts(int accountId)
 		{
-			Profile profile = null;
+			List<Models.Account> accounts = null;
 
 			try
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					profile = context.Profiles.Include(p => p.Educations).FirstOrDefault(p => p.AccountID == accountId);
+					var adminAccount = context.Accounts
+						.FirstOrDefault(a => a.AccountID == accountId && a.Type == _accountTypeAdmin);
+
+					if (adminAccount != null)
+					{
+						accounts = context.Accounts.Where(a => a.Type != _accountTypeAdmin).ToList();
+					}
+					else
+					{
+						_log.Warn($"Unauthozired account id '{accountId}'.");
+					}
 				}
 			}
 			catch (DbEntityValidationException ex)
@@ -167,9 +159,75 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 				LogException(ex);
 			}
 
-			return profile;
+			return accounts;
 		}
 
+		public string ArciveAccount(int adminAccountId, int accountId)
+		{
+			string messageResult = "Failed to archive account";
 
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isArchied = false;
+
+						try
+						{
+							var dbAdmin = context.Accounts
+								.FirstOrDefault(a => a.AccountID == adminAccountId && a.Type == _accountTypeAdmin);
+
+							if (dbAdmin != null)
+							{
+								var dbAccount = context.Accounts.FirstOrDefault(a => a.AccountID == accountId);
+
+								if (dbAccount != null)
+								{
+									dbAccount.Status = _accountStatusArchive;
+									isArchied = context.SaveChanges() > 0;
+								}
+								else
+								{
+									messageResult = "Account doesn'y exist.";
+								}
+							}
+							else
+							{
+								messageResult = "Unauthorized.";
+							}
+						}
+						catch (Exception ex)
+						{
+							LogException(ex);
+							messageResult = "Please contact the support. ";
+						}
+
+						if (isArchied)
+						{
+							transaction.Commit();
+							messageResult = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+						}
+					}
+				}
+			}
+			catch (DbEntityValidationException ex)
+			{
+				LogDbEntityValidationException(ex);
+				messageResult = "Please contact the support. ";
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				messageResult = "Please contact the support. ";
+			}
+
+			return messageResult;
+		}
 	}
 }

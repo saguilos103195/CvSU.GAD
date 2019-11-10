@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CvSU.GAD.DataAccess.DatabaseConnectors
 {
-	public class CourseConnector : DatabaseConnector
+	public class ProgramConnector : DatabaseConnector
 	{
 		private DataAccessFactory _dataAccessFactory { get; }
 
-		public CourseConnector()
+		public ProgramConnector()
 		{
 			_dataAccessFactory = new DataAccessFactory();
 		}

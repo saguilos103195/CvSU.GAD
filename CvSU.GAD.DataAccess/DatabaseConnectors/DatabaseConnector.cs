@@ -10,7 +10,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 {
 	public class DatabaseConnector
 	{
-		private static Logger _log = LogManager.GetCurrentClassLogger();
+		protected static Logger _log = LogManager.GetCurrentClassLogger();
 
 		public void LogDbEntityValidationException(DbEntityValidationException ex)
 		{

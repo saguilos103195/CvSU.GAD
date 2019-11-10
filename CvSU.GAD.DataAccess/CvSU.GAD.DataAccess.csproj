@@ -64,9 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessFactory.cs" />
-    <Compile Include="DatabaseConnectors\AccountConnector.cs" />
+    <Compile Include="DatabaseConnectors\Account\AccountConnector.cs" />
+    <Compile Include="DatabaseConnectors\Account\AdminConnector.cs" />
     <Compile Include="DatabaseConnectors\CollegeConnector.cs" />
-    <Compile Include="DatabaseConnectors\CourseConnector.cs" />
+    <Compile Include="DatabaseConnectors\Account\CoordinatorConnector.cs" />
+    <Compile Include="DatabaseConnectors\ProgramConnector.cs" />
     <Compile Include="DatabaseConnectors\DatabaseConnector.cs" />
     <Compile Include="DatabaseConnectors\DepartmentConnector.cs" />
     <Compile Include="DatabaseContexts\CVSUGADDBContext.cs" />
