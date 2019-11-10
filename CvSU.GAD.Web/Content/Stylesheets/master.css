@@ -339,7 +339,7 @@
 	top: 0;
 }
 
-.archive-modal
+.archive-alert
 {
 	width: 500px;
 	min-height: 350px;
@@ -352,35 +352,42 @@
 	display: none;
 }
 
-.archive-modal > p
+.archive-alert > i
+{
+	font-size: 100px;
+	color: #facea8;
+	display: block;
+	margin: 30px 0px;
+}
+
+.archive-alert > p
 {
 	font-size: 20px;
 	margin-bottom: 0px;
-	padding-top: 30px;
 }
 
-.archive-modal > span
+.archive-alert > span
 {
 	font-size: 20px;
-	height: 170px;
 	display: block;
+	padding-bottom: 20px;
 }
 
-.archive-modal > input[type=submit]
+.archive-alert > input[type=submit]
 {
 	font-size: 20px;
 	margin: 0px 5px;
 	width: 100px;
 }
 
-.archive-modal > button
+.archive-alert > button
 {
 	font-size: 20px;
 	margin: 0px 5px;
 	width: 100px;
 }
 
-.retrieve-modal
+.retrieve-alert
 {
 	width: 500px;
 	min-height: 350px;
@@ -393,32 +400,114 @@
 	display: none;
 }
 
-.retrieve-modal > p
+.retrieve-alert > i
+{
+	font-size: 100px;
+	color: #facea8;
+	display: block;
+	margin: 30px 0px;
+}
+
+.retrieve-alert > p
 {
 	font-size: 20px;
 	margin-bottom: 0px;
-	padding-top: 30px;
 }
 
-.retrieve-modal > span
+.retrieve-alert > span
 {
 	font-size: 20px;
-	height: 170px;
 	display: block;
+	padding-bottom: 20px;
 }
 
-.retrieve-modal > input[type=submit]
+.retrieve-alert > input[type=submit]
 {
 	font-size: 20px;
 	margin: 0px 5px;
 	width: 100px;
 }
 
-.retrieve-modal > button
+.retrieve-alert > button
 {
 	font-size: 20px;
 	margin: 0px 5px;
 	width: 100px;
+}
+
+.edit-modal
+{
+	width: 1000px;
+	min-height: 350px;
+	background-color: #FFFFFF;
+	margin: auto;
+	margin-top: calc((100vh - 430px)/2);
+	border-radius: 5px;
+	text-align: left;
+	overflow: hidden;
+	display: none;
+}
+
+.modal-head
+{
+	border-bottom: 1px solid #dee2e6;
+	height: 60px;
+}
+
+.modal-head > button
+{
+	float: right;
+	background: none;
+	border: none;
+	font-weight: 700;
+	font-family: Arial;
+	font-size: 30px;
+	padding: 7px 15px;
+	outline: none;
+}
+
+.modal-head > span
+{
+	font-size: 18px;
+	padding: 16px;
+	display: inline-block;
+}
+
+.modal-head > button:hover
+{
+	color: #627077;
+}
+
+.modal-cont
+{
+	padding: 15px;
+}
+
+.modal-cont > div:not(:last-child)
+{
+	height: 110px;
+}
+
+.modal-cont > div > p
+{
+	margin-bottom: 10px;
+}
+
+.modal-cont > div > span
+{
+	font-size: 13px;
+	display: none;
+}
+
+.modal-foot
+{
+	text-align: right;
+	padding: 12px;
+}
+
+.modal-foot > input[type=submit]
+{
+	display: none;
 }
 
 .form > p

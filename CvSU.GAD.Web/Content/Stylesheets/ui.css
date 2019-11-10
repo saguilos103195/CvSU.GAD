@@ -120,6 +120,12 @@
 	background-color: #ffbc34;
 }
 
+.button-transparent
+{
+	background-color: transparent;
+	color: #90a4ae;
+}
+
 .check-control 
 {
 	display: inline-block;
@@ -190,8 +196,8 @@
 {
 	left: 5px;
 	top: 3px;
-	width: 2px;
-	height: 5px;
+	width: 4px;
+	height: 7px;
 	border: solid white;
 	border-width: 0 2px 2px 0;
 	-webkit-transform: rotate(45deg);

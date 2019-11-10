@@ -12,6 +12,16 @@
 
 	});
 
+	$(document).on("click", ".updateBtn", function () {
+
+		if (isFormValid(".edit-modal")) {
+			$(this).css("pointer-events", "none");
+			$(this).css("opacity", ".9");
+			$(".form-footer > input[type=submit]").click();
+		}
+
+	});
+
 	$("#viewTable").DataTable({
 
 		columns: [
@@ -44,7 +54,7 @@
 			$(archiveBtn).attr("type", "button");
 			$(archiveBtn).addClass("button-control button-red");
 			$(archiveBtn).html("Archive");
-			$(archiveBtn).attr("onclick", "showModal($('.archive-modal')); archiveItem(" + college.CollegeID + ");");
+			$(archiveBtn).attr("onclick", "showModal($('.archive-alert')); archiveItem(" + college.CollegeID + ");");
 			archiveBtn = archiveBtn.outerHTML;
 
 			var editBtn = document.createElement("button");
@@ -78,7 +88,7 @@
 			$(retrieveBtn).attr("type", "button");
 			$(retrieveBtn).addClass("button-control button-blue");
 			$(retrieveBtn).html("Retrieve");
-			$(retrieveBtn).attr("onclick", "showModal($('.retrieve-modal')); retrieveItem(" + college.CollegeID + ");");
+			$(retrieveBtn).attr("onclick", "showModal($('.retrieve-alert')); retrieveItem(" + college.CollegeID + ");");
 			retrieveBtn = retrieveBtn.outerHTML;
 
 			$('#archiveTable').dataTable().fnAddData([
@@ -100,7 +110,22 @@ function archiveItem(collegeID)
 		if (collegeID == college.CollegeID)
 		{
 			$(".selectedID").val(collegeID);
-			$(".archive-modal > span").html(college.Title);
+			$(".archive-alert > span").html(college.Title);
+		}
+
+	});
+}
+
+function editItem(collegeID)
+{
+	jQuery.each(collegesJSON, function (index, college) {
+
+		if (collegeID == college.CollegeID)
+		{
+			$(".selectedID").val(collegeID);
+			$(".editTitleTxt").val(college.Title);
+			$(".editAliasTxt").val(college.Alias);
+			$(".editTypeChkBx").attr("checked", college.IsMain);
 		}
 
 	});
@@ -113,7 +138,7 @@ function retrieveItem(collegeID)
 		if (collegeID == college.CollegeID)
 		{
 			$(".selectedID").val(collegeID);
-			$(".retrieve-modal > span").html(college.Title);
+			$(".retrieve-alert > span").html(college.Title);
 		}
 
 	});
