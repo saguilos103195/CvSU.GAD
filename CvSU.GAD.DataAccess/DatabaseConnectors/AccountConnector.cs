@@ -12,9 +12,9 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 	public class AccountConnector : DatabaseConnector
 	{
 		private DataAccessFactory _dataAccessFactory { get; }
-		private string _accountStatusNew { get; }
-		private string _accountStatusActive { get; }
-		private string _accountStatusArchive { get; }
+		public string _accountStatusNew { get; }
+		public string _accountStatusActive { get; }
+		public string _accountStatusArchive { get; }
 		private string _accountTypeAdmin { get; }
 		private string _accountTypeCoordinator { get; }
 
@@ -52,7 +52,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 							}
 							else
 							{
-								resultMessage = $"Username '{account.Username}' is already exist.";
+								resultMessage = $"Username {account.Username} already exist.";
 							}
 						}
 						catch (Exception ex)
