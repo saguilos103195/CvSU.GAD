@@ -1,4 +1,4 @@
-﻿using CvSU.GAD.DataAccess.DatabaseConnectors;
+﻿using CvSU.GAD.DataAccess.DatabaseConnectors.Account;
 using CvSU.GAD.DataAccess.Models;
 using CvSU.GAD.Web.Content.Classes;
 using System;
@@ -12,12 +12,12 @@ namespace CvSU.GAD.Web.Accounts
 {
 	public partial class CreateAccount : CustomPage
 	{
-		AccountConnector AccountConnector { get; }
+        AdminConnector AdminConnector { get; }
 
-		public CreateAccount()
+        public CreateAccount()
 		{
-			AccountConnector = new AccountConnector();
-		}
+            AdminConnector = new AdminConnector();
+        }
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -26,8 +26,8 @@ namespace CvSU.GAD.Web.Accounts
 
 		protected void CreateBtn_Click(object sender, EventArgs e)
 		{
-			Account newAccount = new Account { Username = usernameTxt.Value, Password = passwordTxt.Value, Status = AccountConnector._accountStatusNew, Type = accountTypeSel.Value };
-			string message = AccountConnector.AddAccount(newAccount);
+			Account newAccount = new Account { Username = usernameTxt.Value, Password = passwordTxt.Value, Status = AdminConnector._accountStatusNew, Type = accountTypeSel.Value };
+			string message = AdminConnector.AddAccount(newAccount);
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{

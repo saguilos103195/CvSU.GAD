@@ -1,0 +1,231 @@
+﻿.master-sidebar
+{
+    display: none;
+}
+
+.master-body-header
+{
+    display: none;
+}
+
+.master-body
+{
+    width: 100%;
+}
+
+.master-body-content
+{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.setup
+{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.setup > p
+{
+    font-size: 21px;
+    padding: 20px 0px;
+}
+
+.setup-body
+{
+    background-color: #FFFFFF;
+    padding: 40px;
+}
+
+.setup .wizard .steps ul
+{
+    display: flex;
+}
+
+.setup .wizard .steps ul > li
+{
+    flex-grow: 1;
+    flex-basis: 0;
+    position: relative;
+}
+
+.setup .wizard .steps ul > li:after
+{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    background-color: #51d487;
+    top: 25px;
+    right: 0;
+    z-index: 9;
+}
+
+.setup .wizard .steps ul > li:before
+{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    background-color: #51d487;
+    top: 25px;
+    left: 0;
+    z-index: 9;
+}
+
+.setup .wizard .steps ul > li > a
+{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.setup .wizard .steps ul > li > a > .number
+{
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    border: 3px solid #51d487;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 42px;
+    color: #51d487;
+    z-index: 10;
+    position: relative;
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.setup .wizard .steps ul > .disabled:before
+{
+    background-color: #F3F3F3;
+}
+
+.setup .wizard .steps ul > .disabled:after
+{
+    background-color: #F3F3F3;
+}
+
+.setup .wizard .steps ul > .disabled > a > .number
+{
+    border: 3px solid #F3F3F3;
+    color: #F3F3F3;
+}
+
+.setup .wizard .steps ul > .disabled > a
+{
+    color: rgba(144, 164, 174, 0.5);
+}
+
+.setup .wizard .steps ul > .current:after
+{
+    background-color: #F3F3F3;
+}
+
+.setup .wizard .steps ul > .current ~ li:after
+{
+    background-color: #F3F3F3;
+}
+
+.setup .wizard .steps ul > .current ~ li:before
+{
+    background-color: #F3F3F3;
+}
+
+.setup .wizard .steps ul > .current > a > .number
+{
+    border: 3px solid #51d487;
+    color: #51d487;
+}
+
+.setup .wizard .steps ul > .current > a
+{
+    color: #90a4ae;
+}
+
+.setup .wizard .steps ul > .done > a > .number
+{
+    background-color: #51d487;
+    color: #FFFFFF;
+}
+
+.setup .wizard .steps ul > .done > a
+{
+    color: rgba(144, 164, 174, 0.5);
+}
+
+.setup .wizard .steps ul > .first:before
+{
+    display: none;
+}
+
+.setup .wizard .steps ul > .last:after
+{
+    display: none;
+}
+
+.setup .wizard .actions
+{
+    text-align: right;
+}
+
+.setup .wizard .actions ul li
+{
+    display: inline-block;
+}
+
+.setup .wizard .actions ul li a[href="#previous"]
+{
+	font-size: 14px;
+	padding: 8px 10px;
+	border-radius: 3px;
+	cursor: pointer;
+	outline: none;
+	margin: 0px 5px;
+    background-color: #FFFFFF;
+    border: 1px solid #d9d9d9;
+    color: #54667a;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.setup .wizard .actions ul li a[href="#next"]
+{
+	font-size: 14px;
+	padding: 8px 10px;
+	border-radius: 3px;
+	cursor: pointer;
+	outline: none;
+	margin: 0px 5px;
+    background-color: #009efb;
+    border: 1px solid #009efb;
+    color: #FFFFFF;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.setup .wizard .actions ul li a[href="#finish"]
+{
+	font-size: 14px;
+	padding: 8px 10px;
+	border-radius: 3px;
+	cursor: pointer;
+	outline: none;
+	margin: 0px 5px;
+    background-color: #51d487;
+    border: 1px solid #51d487;
+    color: #FFFFFF;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.setup .wizard .content h3
+{
+    display: none;
+}
+
+

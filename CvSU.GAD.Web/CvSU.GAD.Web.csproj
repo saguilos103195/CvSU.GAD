@@ -84,6 +84,7 @@
   <ItemGroup>
     <Content Include="Accounts\CreateAccount.aspx" />
     <Content Include="Accounts\ManageAccounts.aspx" />
+    <Content Include="Accounts\Setup.aspx" />
     <Content Include="Content\Fonts\OpenSans\BoldItalic\OpenSans-BoldItalic.eot" />
     <Content Include="Content\Fonts\OpenSans\BoldItalic\OpenSans-BoldItalic.ttf" />
     <Content Include="Content\Fonts\OpenSans\BoldItalic\OpenSans-BoldItalic.woff" />
@@ -1801,7 +1802,9 @@
     <Content Include="Content\Scripts\jquery-ui-1.12.1\jquery-ui.theme.css" />
     <Content Include="Content\Scripts\jquery-ui-1.12.1\jquery-ui.theme.min.css" />
     <Content Include="Content\Scripts\jquery-ui-1.12.1\LICENSE.txt" />
+    <Content Include="Content\Scripts\jquery.steps.min.js" />
     <Content Include="Content\Scripts\master.js" />
+    <Content Include="Content\Scripts\setup.js" />
     <Content Include="Content\Stylesheets\animate.css" />
     <Content Include="Content\Stylesheets\bootstrap-grid.css" />
     <Content Include="Content\Stylesheets\bootstrap-grid.min.css" />
@@ -1810,6 +1813,7 @@
     <Content Include="Content\Stylesheets\bootstrap.css" />
     <Content Include="Content\Stylesheets\bootstrap.min.css" />
     <Content Include="Content\Stylesheets\master.css" />
+    <Content Include="Content\Stylesheets\setup.css" />
     <Content Include="Content\Stylesheets\ui.css" />
     <Content Include="Documents\Colleges.aspx" />
     <Content Include="Documents\Departments.aspx" />
@@ -1831,6 +1835,13 @@
     </Compile>
     <Compile Include="Accounts\ManageAccounts.aspx.designer.cs">
       <DependentUpon>ManageAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts\Setup.aspx.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accounts\Setup.aspx.designer.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Content\Classes\CustomPage.cs">
       <SubType>ASPXCodeBehind</SubType>

@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
 	$(".select-control").selectmenu();
-
+    switchTab(1);
 	$(".form-footer > button").click(function () {
 
 		if (isFormValid(".form-body")) {

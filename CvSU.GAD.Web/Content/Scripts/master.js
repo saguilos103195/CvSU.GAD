@@ -33,7 +33,7 @@ $(document).ready(function () {
 	$(".form-tabs > span:first-of-type").addClass("form-active-tab");
 	$(".tab-control").eq(0).removeAttr("style");
 
-	switchTab(1);
+	
 
 });
 

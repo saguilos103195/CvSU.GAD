@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="fc2458250f324ea6b0b91b8256ba357e" Name="Diagram1">
-        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="5.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="10.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVSUGADModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <AssociationConnector Association="CVSUGADModel.FK_Profile_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="CVSUGADModel.FK_Department_College" ManuallyRouted="false" />
-        <AssociationConnector Association="CVSUGADModel.FK_Program_Department" ManuallyRouted="false" />
-        <AssociationConnector Association="CVSUGADModel.FK_Educations_Profiles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="5.75" PointY="6" />
+        <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="8" PointY="6" />
+        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="2.125" />
+        <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="10.25" PointY="6" />
+        <EntityTypeShape EntityType="CVSUGADModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="CVSUGADModel.FK_Profile_Account" />
+        <AssociationConnector Association="CVSUGADModel.FK_Department_College" />
+        <AssociationConnector Association="CVSUGADModel.FK_Program_Department" />
+        <AssociationConnector Association="CVSUGADModel.FK_Educations_Profiles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -85,7 +85,7 @@
 
 .button-control
 {
-	border: none;
+	border: 1px solid;
 	font-size: 14px;
 	padding: 8px 10px;
 	border-radius: 3px;
@@ -103,26 +103,38 @@
 .button-green
 {
 	background-color: #51d487;
+    border: 1px solid #51d487;
 }
 
 .button-blue
 {
 	background-color: #009efb;
+    border: 1px solid #009efb;
 }
 
 .button-red
 {
 	background-color: #f62d51;
+    border: 1px solid #f62d51;
 }
 
 .button-yellow
 {
 	background-color: #ffbc34;
+    border: 1px solid #ffbc34;
+}
+
+.button-white
+{
+    background-color: #FFFFFF;
+    border: 1px solid #d9d9d9;
+    color: #54667a;
 }
 
 .button-transparent
 {
 	background-color: transparent;
+    border: 1px solid transparent;
 	color: #90a4ae;
 }
 
