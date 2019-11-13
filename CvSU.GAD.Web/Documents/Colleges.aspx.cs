@@ -13,7 +13,7 @@ namespace CvSU.GAD.Web.Documents
 {
 	public partial class Colleges : CustomPage
 	{
-		CollegeConnector CollegeConnector { get; }
+		private CollegeConnector CollegeConnector { get; }
 
 		public Colleges()
 		{

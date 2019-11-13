@@ -35,7 +35,7 @@
 
 $(document).ready(function () {
 
-	$("*[require]").focusin(function () {
+	$(document).on("focusin", "*[require]", function () {
 
 		$(this).removeAttr("style");
 		$(this).next().removeAttr("style");
@@ -51,11 +51,12 @@ $(document).ready(function () {
 
 });
 
-function isFormValid(classUsed) {
+function isFormValid(form)
+{
 	var isValid = true;
 	var gotFocus = false;
 
-	$(classUsed + " *[require]").each(function ()
+	form.find("*[require]").each(function ()
 	{
 		if ($(this).is("select"))
 		{

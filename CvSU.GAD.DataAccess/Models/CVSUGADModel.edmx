@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CVSUGADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CVSUGADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountID" />
@@ -59,27 +59,33 @@
           <Property Name="Birthdate" Type="datetime" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="CellphoneNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="TelephoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellphoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TelephoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="Religion" Type="nvarchar" MaxLength="200" />
-          <Property Name="Designation" Type="nvarchar" MaxLength="200" />
-          <Property Name="OfficeAddress" Type="nvarchar" MaxLength="500" />
-          <Property Name="EngagedFrom" Type="datetime" />
-          <Property Name="EngagedTo" Type="datetime" />
-          <Property Name="WillTravel" Type="bit" />
+          <Property Name="Religion" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="OfficeAddress" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="EngagedFrom" Type="datetime" Nullable="false" />
+          <Property Name="EngagedTo" Type="datetime" Nullable="false" />
+          <Property Name="WillTravel" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CVSUGAD.dbo.Program' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Program">
           <Key>
             <PropertyRef Name="ProgramID" />
+            <PropertyRef Name="DepartmentID" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="IsArchived" />
           </Key>
-          <Property Name="ProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramID" Type="int" Nullable="false" />
           <Property Name="DepartmentID" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Alias" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsArchived" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -101,7 +107,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Educations_Profiles">
+        <Association Name="FK_Education_Profile">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="Education" Type="Self.Education" Multiplicity="*" />
           <ReferentialConstraint>
@@ -115,13 +121,13 @@
         </Association>
         <Association Name="FK_Profile_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="AccountID" />
             </Principal>
             <Dependent Role="Profile">
-              <PropertyRef Name="ProfileID" />
+              <PropertyRef Name="AccountID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -143,13 +149,21 @@
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagram" EntityType="Self.sysdiagram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Program" EntityType="Self.Program" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Program].[ProgramID] AS [ProgramID], 
+    [Program].[DepartmentID] AS [DepartmentID], 
+    [Program].[Title] AS [Title], 
+    [Program].[Alias] AS [Alias], 
+    [Program].[IsArchived] AS [IsArchived]
+    FROM [dbo].[Program] AS [Program]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Department_College" Association="Self.FK_Department_College">
             <End Role="College" EntitySet="College" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
-          <AssociationSet Name="FK_Educations_Profiles" Association="Self.FK_Educations_Profiles">
+          <AssociationSet Name="FK_Education_Profile" Association="Self.FK_Education_Profile">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="Education" EntitySet="Education" />
           </AssociationSet>
@@ -162,56 +176,32 @@
             <End Role="Program" EntitySet="Program" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CVSUGADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="CVSUGADEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="CVSUGADModel.Account" />
-          <EntitySet Name="Colleges" EntityType="CVSUGADModel.College" />
-          <EntitySet Name="Departments" EntityType="CVSUGADModel.Department" />
-          <EntitySet Name="Educations" EntityType="CVSUGADModel.Education" />
-          <EntitySet Name="Profiles" EntityType="CVSUGADModel.Profile" />
-          <EntitySet Name="Programs" EntityType="CVSUGADModel.Program" />
-          <EntitySet Name="sysdiagrams" EntityType="CVSUGADModel.sysdiagram" />
-          <AssociationSet Name="FK_Profile_Account" Association="CVSUGADModel.FK_Profile_Account">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Profile" EntitySet="Profiles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Department_College" Association="CVSUGADModel.FK_Department_College">
-            <End Role="College" EntitySet="Colleges" />
-            <End Role="Department" EntitySet="Departments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Program_Department" Association="CVSUGADModel.FK_Program_Department">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Program" EntitySet="Programs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Educations_Profiles" Association="CVSUGADModel.FK_Educations_Profiles">
-            <End Role="Profile" EntitySet="Profiles" />
-            <End Role="Education" EntitySet="Educations" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountID" />
           </Key>
           <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Account" ToRole="Profile" />
+          <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK_Profile_Account" FromRole="Account" ToRole="Profile" />
         </EntityType>
         <EntityType Name="College">
           <Key>
             <PropertyRef Name="CollegeID" />
           </Key>
           <Property Name="CollegeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsMain" Type="Boolean" Nullable="false" />
           <Property Name="IsArchived" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Departments" Relationship="CVSUGADModel.FK_Department_College" FromRole="College" ToRole="Department" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Department_College" FromRole="College" ToRole="Department" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -219,11 +209,11 @@
           </Key>
           <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CollegeID" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsArchived" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="College" Relationship="CVSUGADModel.FK_Department_College" FromRole="Department" ToRole="College" />
-          <NavigationProperty Name="Programs" Relationship="CVSUGADModel.FK_Program_Department" FromRole="Department" ToRole="Program" />
+          <NavigationProperty Name="College" Relationship="Self.FK_Department_College" FromRole="Department" ToRole="College" />
+          <NavigationProperty Name="Programs" Relationship="Self.FK_Program_Department" FromRole="Department" ToRole="Program" />
         </EntityType>
         <EntityType Name="Education">
           <Key>
@@ -231,12 +221,12 @@
           </Key>
           <Property Name="EducationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProfileID" Type="Int32" Nullable="false" />
-          <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Course" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="EducationalLevel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Course" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EducationalLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Educations_Profiles" FromRole="Education" ToRole="Profile" />
+          <NavigationProperty Name="Profile" Relationship="Self.FK_Education_Profile" FromRole="Education" ToRole="Profile" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -244,60 +234,64 @@
           </Key>
           <Property Name="ProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountID" Type="Int32" Nullable="false" />
-          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Middlename" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Middlename" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CellphoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Religion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="OfficeAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="EngagedFrom" Type="DateTime" Precision="3" />
-          <Property Name="EngagedTo" Type="DateTime" Precision="3" />
-          <Property Name="WillTravel" Type="Boolean" />
-          <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Profile" ToRole="Account" />
-          <NavigationProperty Name="Educations" Relationship="CVSUGADModel.FK_Educations_Profiles" FromRole="Profile" ToRole="Education" />
-        </EntityType>
-        <EntityType Name="Program">
-          <Key>
-            <PropertyRef Name="ProgramID" />
-          </Key>
-          <Property Name="ProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsArchived" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Department" Relationship="CVSUGADModel.FK_Program_Department" FromRole="Program" ToRole="Department" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CellphoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Religion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfficeAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EngagedFrom" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EngagedTo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WillTravel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Profile_Account" FromRole="Profile" ToRole="Account" />
+          <NavigationProperty Name="Educations" Relationship="Self.FK_Education_Profile" FromRole="Profile" ToRole="Education" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+            <PropertyRef Name="DepartmentID" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="IsArchived" />
+          </Key>
+          <Property Name="ProgramID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Program_Department" FromRole="Program" ToRole="Department" />
+        </EntityType>
         <Association Name="FK_Profile_Account">
-          <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
-          <End Type="CVSUGADModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="AccountID" />
             </Principal>
             <Dependent Role="Profile">
-              <PropertyRef Name="ProfileID" />
+              <PropertyRef Name="AccountID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_College">
-          <End Type="CVSUGADModel.College" Role="College" Multiplicity="1" />
-          <End Type="CVSUGADModel.Department" Role="Department" Multiplicity="*" />
+          <End Role="College" Type="Self.College" Multiplicity="1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="College">
               <PropertyRef Name="CollegeID" />
@@ -308,8 +302,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Program_Department">
-          <End Type="CVSUGADModel.Department" Role="Department" Multiplicity="1" />
-          <End Type="CVSUGADModel.Program" Role="Program" Multiplicity="*" />
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Program" Type="Self.Program" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
               <PropertyRef Name="DepartmentID" />
@@ -319,9 +313,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Educations_Profiles">
-          <End Type="CVSUGADModel.Profile" Role="Profile" Multiplicity="1" />
-          <End Type="CVSUGADModel.Education" Role="Education" Multiplicity="*" />
+        <Association Name="FK_Education_Profile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="Education" Type="Self.Education" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Profile">
               <PropertyRef Name="ProfileID" />
@@ -331,6 +325,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="CVSUGADEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Colleges" EntityType="Self.College" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Educations" EntityType="Self.Education" />
+          <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Programs" EntityType="Self.Program" />
+          <AssociationSet Name="FK_Profile_Account" Association="Self.FK_Profile_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_College" Association="Self.FK_Department_College">
+            <End Role="College" EntitySet="Colleges" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Program_Department" Association="Self.FK_Program_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Program" EntitySet="Programs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Education_Profile" Association="Self.FK_Education_Profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Education" EntitySet="Educations" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -340,91 +359,91 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="CVSUGADModel.Account">
               <MappingFragment StoreEntitySet="Account">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Colleges">
             <EntityTypeMapping TypeName="CVSUGADModel.College">
               <MappingFragment StoreEntitySet="College">
-                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
-                <ScalarProperty Name="IsMain" ColumnName="IsMain" />
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="CVSUGADModel.Department">
               <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Educations">
             <EntityTypeMapping TypeName="CVSUGADModel.Education">
               <MappingFragment StoreEntitySet="Education">
-                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
-                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
-                <ScalarProperty Name="EducationalLevel" ColumnName="EducationalLevel" />
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
-                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
                 <ScalarProperty Name="EducationID" ColumnName="EducationID" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="EducationalLevel" ColumnName="EducationalLevel" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Profiles">
             <EntityTypeMapping TypeName="CVSUGADModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
-                <ScalarProperty Name="WillTravel" ColumnName="WillTravel" />
-                <ScalarProperty Name="EngagedTo" ColumnName="EngagedTo" />
-                <ScalarProperty Name="EngagedFrom" ColumnName="EngagedFrom" />
-                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
-                <ScalarProperty Name="Designation" ColumnName="Designation" />
-                <ScalarProperty Name="Religion" ColumnName="Religion" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
-                <ScalarProperty Name="CellphoneNumber" ColumnName="CellphoneNumber" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
                 <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CellphoneNumber" ColumnName="CellphoneNumber" />
+                <ScalarProperty Name="TelephoneNumber" ColumnName="TelephoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="EngagedFrom" ColumnName="EngagedFrom" />
+                <ScalarProperty Name="EngagedTo" ColumnName="EngagedTo" />
+                <ScalarProperty Name="WillTravel" ColumnName="WillTravel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CVSUGADModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Programs">
             <EntityTypeMapping TypeName="CVSUGADModel.Program">
               <MappingFragment StoreEntitySet="Program">
-                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CVSUGADModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagram">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

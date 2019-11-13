@@ -1,6 +1,8 @@
-﻿$(document).ready(function () {
+﻿var educCount = 1;
 
-    $(".setup-body").steps({
+$(document).ready(function () {
+
+    $(".setup-content").steps({
         headerTag: "h3",
         bodyTag: "section",
         transitionEffect: 1,
@@ -15,18 +17,85 @@
             next: "Next",
             previous: "Previous",
             loading: "Loading ..."
+        },
+        onStepChanging: function () {
+
+			return isFormValid($(".wizard .content .current"));
+        },
+        onFinishing: function () {
+
+			return isFormValid($(".wizard .content .current"));
+        },
+		onFinished: function (event, currentIndex) {
+			$(".setup > input[type=hidden]").val(JSON.stringify(ProcessModel("EducationList", 0).EducationalAttainments));
+			$(".setup > input[type=submit]").click();
+
         }
-        //onStepChanging: function (event, currentIndex, newIndex) {
-        //    form.validate().settings.ignore = ":disabled,:hidden";
-        //    return form.valid();
-        //},
-        //onFinishing: function (event, currentIndex) {
-        //    form.validate().settings.ignore = ":disabled";
-        //    return form.valid();
-        //},
-        //onFinished: function (event, currentIndex) {
-        //    alert("Submitted!");
-        //}
     });
 
+	$(".select-control").selectmenu();
+	$(".birthDateTxt").datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+	$('.birthDateTxt').on("cut copy paste", function (e) {
+		e.preventDefault();
+	});
+	$(".engageFromTxt").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function (date) { $(".engageToTxt").datepicker("option", "minDate", date); }
+	});
+	$('.engageFromTxt').on("cut copy paste", function (e) {
+		e.preventDefault();
+	});
+	$(".engageToTxt").datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+	$('.engageToTxt').on("cut copy paste", function (e) {
+		e.preventDefault();
+	});
+
+	$("#educationList .inclusiveDateFromTxt").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function (date) { $("#educationList .inclusiveDateToTxt").datepicker("option", "minDate", date); }
+	});
+	$("#educationList .inclusiveDateToTxt").datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+
+
 });
+
+function addEducationalAttainment()
+{
+	var educTemplate = $(".template.education-item").clone();
+	educTemplate.attr("item", educCount);
+	educTemplate.removeClass("template");
+	educTemplate.find(".select-control").next().remove();
+	educTemplate.find(".select-control").selectmenu();
+	$("#educationList").append(educTemplate);
+	educTemplate.find(".inclusiveDateFromTxt").datepicker({
+		onSelect: function (date) { educTemplate.find(".inclusiveDateToTxt").datepicker("option", "minDate", date); }
+	});
+	educTemplate.find(".inclusiveDateToTxt").datepicker();
+	educCount++;
+}
+
+function removeEducationalAttainment(element)
+{
+	var container = $(element).parent().parent();
+	$(element).parent().remove();
+	var counter = 0;
+	container.children(".education-item").each(function () {
+
+		$(this).attr("item", counter);
+
+		counter++;
+	});
+
+	educCount = counter;
+}

@@ -23,7 +23,7 @@
 				<div>
 					<p>Title</p>
 					<input require runat="server" id="titleTxt" type="text" class="input-text-control" />
-					<span>Test Error</span>
+					<span></span>
 				</div>
 			</div>
 			<div class="form-col-1">

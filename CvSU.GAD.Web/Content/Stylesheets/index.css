@@ -1,0 +1,59 @@
+﻿.master-sidebar
+{
+    display: none;
+}
+
+.master-body-header
+{
+    display: none;
+}
+
+.master-body
+{
+    width: 100%;
+}
+
+.master-body-content
+{
+    width: 100%;
+    min-height: 100vh;
+	height: auto;
+}
+
+.login
+{
+	text-align: center;
+	height: calc(100vh - 40px);
+}
+
+.login > p
+{
+	font-size: 35px;
+	color: #51d487;
+}
+
+.login-body
+{
+	background-color: #FFFFFF;
+	width: 400px;
+	margin: 0 auto;
+	text-align: left;
+	padding: 20px 0px;
+}
+
+.login-body > p
+{
+	padding: 0px 20px;
+	font-size: 20px;
+}
+
+.login-body > div > div > input[type=submit]
+{
+	width: 100%;
+	margin: 0px;
+}
+
+.form-col-1 > div
+{
+	height: 70px;
+}

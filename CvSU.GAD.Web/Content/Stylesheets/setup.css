@@ -17,24 +17,26 @@
 {
     width: 100%;
     min-height: 100vh;
+	height: auto;
 }
 
 .setup
 {
     width: 1000px;
     margin: 0 auto;
+	padding-bottom: 50px;
 }
 
 .setup > p
 {
     font-size: 21px;
-    padding: 20px 0px;
+    padding: 10px 0px;
 }
 
 .setup-body
 {
     background-color: #FFFFFF;
-    padding: 40px;
+    padding: 40px 25px;
 }
 
 .setup .wizard .steps ul
@@ -118,7 +120,7 @@
 
 .setup .wizard .steps ul > .disabled > a
 {
-    color: rgba(144, 164, 174, 0.5);
+    color: rgba(84, 102, 122, 0.5);
 }
 
 .setup .wizard .steps ul > .current:after
@@ -144,7 +146,7 @@
 
 .setup .wizard .steps ul > .current > a
 {
-    color: #90a4ae;
+    color: #54667a;
 }
 
 .setup .wizard .steps ul > .done > a > .number
@@ -155,7 +157,7 @@
 
 .setup .wizard .steps ul > .done > a
 {
-    color: rgba(144, 164, 174, 0.5);
+    color: rgba(84, 102, 122, 0.5);
 }
 
 .setup .wizard .steps ul > .first:before
@@ -223,9 +225,48 @@
     text-decoration: none;
 }
 
+.setup .wizard .content
+{
+    padding-top: 20px;
+}
+
 .setup .wizard .content h3
 {
     display: none;
 }
 
+.setup-body > span
+{
+    font-size: 14px;
+    display: block;
+    margin-bottom: 20px;
+    padding: 0px 18px;
+}
 
+.educational-form-control
+{
+	padding: 20px 15px;
+	text-align: right;
+}
+
+.education-item:not(:first-of-type)
+{
+	border-top: 1px solid #ced4da;
+}
+
+.education-item > button
+{
+	float: right;
+	background-color: transparent;
+	border: none;
+	font-weight: 700;
+	font-size: 25px;
+	height: 40px;
+	width: 40px;
+	outline: none;
+}
+
+.setup > input[type=submit]
+{
+	display: none;
+}

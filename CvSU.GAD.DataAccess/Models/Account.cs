@@ -14,12 +14,19 @@ namespace CvSU.GAD.DataAccess.Models
     
     public partial class Account
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Account()
+        {
+            this.Profiles = new HashSet<Profile>();
+        }
+    
         public int AccountID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Status { get; set; }
         public string Type { get; set; }
     
-        public virtual Profile Profile { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Profile> Profiles { get; set; }
     }
 }

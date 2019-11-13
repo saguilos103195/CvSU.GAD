@@ -6,10 +6,11 @@ using System.Text;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using CvSU.GAD.DataAccess.Models;
+using Newtonsoft.Json;
 
 namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 {
-	public abstract class AccountConnector : DatabaseConnector
+	public class AccountConnector : DatabaseConnector
 	{
 		internal DataAccessFactory _dataAccessFactory;
 		public string _accountStatusNew { get; }
@@ -28,15 +29,16 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			_accountTypeCoordinator = "Coordinator";
 		}
 
-		public string Login(string username, string password)
+		public Tuple<bool, string> Login(string username, string password)
 		{
 			string messageResult = "Failed to login invalid username and password.";
+			Models.Account dbAccount = new Models.Account();
 
 			try
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					var dbAccount = context.Accounts
+					dbAccount = context.Accounts
 						.FirstOrDefault(a => a.Username == username && a.Password == password && a.Status != _accountStatusArchive);
 
 					if (dbAccount != null)
@@ -56,13 +58,13 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 				messageResult = "Please contact support.";
 			}
 
-			return messageResult;
+			return Tuple.Create(messageResult == "", messageResult == "" ? JsonConvert.SerializeObject(dbAccount) : messageResult);
 		}
 
 		public string UpdatePassword(int accountId, string newPassword)
 		{
 			string messageResult = "Failed to update.";
-
+			
 			try
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
@@ -73,7 +75,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 
 						try
 						{
-							var dbAccount = context.Accounts.FirstOrDefault(a => a.AccountID == accountId);
+							Models.Account dbAccount = context.Accounts.FirstOrDefault(a => a.AccountID == accountId);
 
 							if (dbAccount != null)
 							{
@@ -138,6 +140,65 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			}
 
 			return profile;
+		}
+
+		public string AddProfile(Profile profile)
+		{
+			string resultMessage = "Failed to save.";
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							Models.Account dbAccount = context.Accounts.Include(a => a.Profiles).FirstOrDefault(a => a.AccountID == profile.AccountID);
+
+							if (dbAccount.Profiles.Count < 1)
+							{
+								context.Profiles.Add(profile);
+								dbAccount.Status = _accountStatusActive;
+								isSaved = context.SaveChanges() > 0;
+							}
+							else
+							{
+								resultMessage = "Account has already registered.";
+							}
+						}
+						catch (Exception ex)
+						{
+							LogException(ex);
+							resultMessage = "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							resultMessage = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+						}
+					}
+				}
+			}
+			catch (DbEntityValidationException ex)
+			{
+				LogDbEntityValidationException(ex);
+				resultMessage = "Please contact the support. ";
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				resultMessage = "Please contact the support. ";
+			}
+
+			return resultMessage;
 		}
 	}
 }

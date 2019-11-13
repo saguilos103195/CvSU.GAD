@@ -1780,6 +1780,7 @@
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\webfonts\fa-brands-400.svg" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\webfonts\fa-regular-400.svg" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\Scripts\index.js" />
     <Content Include="Content\Scripts\jquery-3.1.1.js" />
     <Content Include="Content\Scripts\jquery-3.1.1.min.js" />
     <Content Include="Content\Scripts\jquery-3.1.1.slim.js" />
@@ -1812,12 +1813,14 @@
     <Content Include="Content\Stylesheets\bootstrap-reboot.min.css" />
     <Content Include="Content\Stylesheets\bootstrap.css" />
     <Content Include="Content\Stylesheets\bootstrap.min.css" />
+    <Content Include="Content\Stylesheets\index.css" />
     <Content Include="Content\Stylesheets\master.css" />
     <Content Include="Content\Stylesheets\setup.css" />
     <Content Include="Content\Stylesheets\ui.css" />
     <Content Include="Documents\Colleges.aspx" />
     <Content Include="Documents\Departments.aspx" />
     <Content Include="Documents\Programs.aspx" />
+    <Content Include="Index.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -1873,6 +1876,13 @@
     </Compile>
     <Compile Include="GAD.Master.designer.cs">
       <DependentUpon>GAD.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test.aspx.cs">
