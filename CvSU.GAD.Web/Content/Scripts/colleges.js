@@ -29,7 +29,7 @@
 			{ title: "Alias" },
 			{ title: "Type" },
 			{ title: "Action" }
-		],
+		]
 
 	});
 
@@ -40,16 +40,22 @@
 			{ title: "Alias" },
 			{ title: "Type" },
 			{ title: "Action" }
-		],
+		]
 
 	});
 
+	loadCollegeTable();
+	loadArchivedCollegeTable();
+
+});
+
+function loadCollegeTable()
+{
 	$('#viewTable').dataTable().fnClearTable();
 
 	jQuery.each(collegesJSON, function (index, college) {
 
-		if (!college.IsArchived)
-		{
+		if (!college.IsArchived) {
 			var archiveBtn = document.createElement("button");
 			$(archiveBtn).attr("type", "button");
 			$(archiveBtn).addClass("button-control button-red");
@@ -75,15 +81,15 @@
 		}
 
 	});
+}
 
+function loadArchivedCollegeTable()
+{
 	$('#archiveTable').dataTable().fnClearTable();
 
 	jQuery.each(collegesJSON, function (index, college) {
 
-		console.log(college);
-
-		if (college.IsArchived)
-		{
+		if (college.IsArchived) {
 			var retrieveBtn = document.createElement("button");
 			$(retrieveBtn).attr("type", "button");
 			$(retrieveBtn).addClass("button-control button-blue");
@@ -100,8 +106,7 @@
 		}
 
 	});
-
-});
+}
 
 function archiveItem(collegeID)
 {
@@ -142,16 +147,4 @@ function retrieveItem(collegeID)
 		}
 
 	});
-}
-
-function hideModal()
-{
-	$(".form-modal-overlay").removeAttr("style");
-	$(".form-modal-overlay > *").removeAttr("style");
-}
-
-function showModal(modal)
-{
-	$(".form-modal-overlay").css("display", "block");
-	$(modal).css("display", "block");
 }

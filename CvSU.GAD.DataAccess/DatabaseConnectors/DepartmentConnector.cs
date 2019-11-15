@@ -91,7 +91,26 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return message;
 		}
 
-		public List<Department> GetDepartments(int collegeId)
+		public List<Department> GetDepartments()
+		{
+			List<Department> departments = null;
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					departments = context.Departments.ToList();
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return departments;
+		}
+
+		public List<Department> GetDepartmentsByCollege(int collegeId)
 		{
 			List<Department> departments = null;
 
@@ -148,9 +167,9 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 							if (dbDepartment != null)
 							{
 								dbDepartment.CollegeID = department.CollegeID;
-								department.Alias = department.Alias;
-								department.IsArchived = department.IsArchived;
-								department.Title = department.Title;
+								dbDepartment.Alias = department.Alias;
+								dbDepartment.IsArchived = department.IsArchived;
+								dbDepartment.Title = department.Title;
 
 								isUpdated = context.SaveChanges() > 0;
 							}
@@ -191,7 +210,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return resultMessage;
 		}
 
-		public string SetArchiveDepartment(int departmentId, bool isArchive)
+		public string ArchiveDepartment(int departmentId, bool isArchive)
 		{
 			string resultMessage = "Failed to archive.";
 

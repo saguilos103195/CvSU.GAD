@@ -1805,6 +1805,7 @@
     <Content Include="Content\Scripts\jquery-ui-1.12.1\LICENSE.txt" />
     <Content Include="Content\Scripts\jquery.steps.min.js" />
     <Content Include="Content\Scripts\master.js" />
+    <Content Include="Content\Scripts\programs.js" />
     <Content Include="Content\Scripts\setup.js" />
     <Content Include="Content\Stylesheets\animate.css" />
     <Content Include="Content\Stylesheets\bootstrap-grid.css" />

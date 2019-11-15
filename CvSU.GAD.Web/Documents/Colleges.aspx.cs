@@ -22,18 +22,17 @@ namespace CvSU.GAD.Web.Documents
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			GetColleges();
-			
+			LoadJSData();
 		}
 
-		private void GetColleges()
+		private void LoadJSData()
 		{
-			string JSONColleges = JsonConvert.SerializeObject(CollegeConnector.GetColleges());
-			string getColleges = "<script type=\"text/javascript\"> var collegesJSON = " + JSONColleges + " </script>";
-			LoadJavaSript("getColleges", getColleges);
+			string collegesJSON = JsonConvert.SerializeObject(CollegeConnector.GetColleges());
+			string loadJSData = "<script type=\"text/javascript\"> var collegesJSON = " + collegesJSON + " </script>";
+			LoadJavaSript("loadJSData", loadJSData);
 		}
 
-		protected void createBtn_Click(object sender, EventArgs e)
+		protected void CreateBtn_Click(object sender, EventArgs e)
 		{
 			College newCollege = new College();
 			newCollege.Alias = aliasTxt.Value;

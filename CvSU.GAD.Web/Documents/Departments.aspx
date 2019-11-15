@@ -2,13 +2,53 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+	<script type="text/javascript" src="../Content/Scripts/departments.js"></script>
 	<input type="hidden" runat="server" id="selectedID" class="selectedID" />
 	<div class="form-modal-overlay">
-		<div class="archive-modal">
+		<div class="archive-alert">
+			<i class="far fa-question-circle"></i>
 			<p>Are you sure want to archive</p>
 			<span></span>
+			<asp:Button runat="server" ID="ArchiveBtn" OnClick="ArchiveBtn_Click" CssClass="button-control button-red" Text="Ok" />
 			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
-			<asp:Button runat="server" ID="ArchiveBtn" CssClass="button-control button-red" Text="Ok" OnClick="ArchiveBtn_Click" />
+		</div>
+		<div class="retrieve-alert">
+			<i class="far fa-question-circle"></i>
+			<p>Are you sure want to retrieve</p>
+			<span></span>
+			<asp:Button runat="server" ID="RetrieveBtn" OnClick="RetrieveBtn_Click" CssClass="button-control button-red" Text="Ok" />
+			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
+		</div>
+		<div class="edit-modal">
+			<div class="modal-head">
+				<span>Edit</span>
+				<button type="button" onclick="hideModal()">×</button>
+			</div>
+			<div class="modal-cont">
+				<div>
+					<p>Title</p>
+					<input require runat="server" id="editTitleTxt" class="input-text-control editTitleTxt" />
+					<span></span>
+				</div>
+				<div>
+					<p>Alias</p>
+					<input require runat="server" id="editAliasTxt" type="text" class="input-text-control editAliasTxt" />
+					<span></span>
+				</div>
+				<div>
+					<p>College</p>
+                    <select require class="select-control" id="editCollegeSel">
+				        <option selected disabled value="">Select College</option>
+			        </select>
+			        <span></span>
+					<input type="hidden" runat="server" id="editSelectedCollegeTxt" class="editSelectedCollegeTxt" />
+				</div>
+			</div>
+            <div class="modal-foot">
+				<button class="button-control button-transparent" type="button" onclick="hideModal()">Cancel</button>
+				<button class="button-control button-green updateBtn" type="button">Update</button>
+				<asp:Button ID="EditBtn" runat="server" OnClick="EditBtn_Click" />
+			</div>
 		</div>
 	</div>
 	<div class="form">
@@ -35,17 +75,24 @@
 			</div>
             <div class="form-col-1">
                 <div>
-                    <select class="select-control" id="selectCollege" onchange="getSelectedCollege()">
+					<p>College</p>
+                    <select require class="select-control" id="collegeSel">
 				        <option selected disabled value="">Select College</option>
 			        </select>
 			        <span></span>
                 </div>
+				<input type="hidden" runat="server" id="selectedCollegeTxt" class="selectedCollegeTxt" />
             </div>
 			<div class="form-footer">
 				<button class="button-control button-green" type="button">Create</button>
 				<asp:Button runat="server" ID="CreateBtn" CssClass="button-control button-green" OnClick="CreateBtn_Click" />
 			</div>
 		</div>
+		<div class="table-view-control tab-control">
+			<table class="table-control" id="viewTable"></table>
+		</div>
+		<div class="table-view-control tab-control">
+			<table class="table-control" id="archiveTable"></table>
+		</div>
 	</div>
-	<script type="text/javascript" src="../Content/Scripts/departments.js"></script>
 </asp:Content>

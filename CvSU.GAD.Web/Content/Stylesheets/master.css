@@ -482,6 +482,10 @@
 .modal-cont
 {
 	padding: 15px;
+	max-height: 330px;
+	overflow: scroll;
+	overflow-x: hidden;
+	overflow: auto;
 }
 
 .modal-cont > div:not(:last-child)
@@ -494,7 +498,7 @@
 	margin-bottom: 10px;
 }
 
-.modal-cont > div > span
+.modal-cont > div > span:not(.ui-selectmenu-button)
 {
 	font-size: 13px;
 	display: none;
@@ -504,6 +508,7 @@
 {
 	text-align: right;
 	padding: 12px;
+	border-top: 1px solid #dee2e6;
 }
 
 .modal-foot > input[type=submit]

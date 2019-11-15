@@ -54,3 +54,15 @@ function switchTab(tabindex)
 	$(".form-tabs > span:nth-of-type(" + (tabindex + 1)  + ")").addClass("form-active-tab");
 	$(".tab-control").eq(tabindex).removeAttr("style");
 }
+
+function hideModal()
+{
+	$(".form-modal-overlay").removeAttr("style");
+	$(".form-modal-overlay > *").removeAttr("style");
+}
+
+function showModal(modal)
+{
+	$(".form-modal-overlay").css("display", "block");
+	$(modal).css("display", "block");
+}

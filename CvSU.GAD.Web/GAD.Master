@@ -80,8 +80,8 @@
 						<p><label class="fas fa-book"></label><span>Documents</span><i class="fas fa-chevron-left"></i></p>
 						<div>
 							<a href="../documents/colleges.aspx">Colleges</a>
-							<a href="#">Departments</a>
-							<a href="#">Programs</a>
+							<a href="../documents/departments.aspx">Departments</a>
+							<a href="../documents/programs.aspx">Programs</a>
 						</div>
 					</div>
 				</div>

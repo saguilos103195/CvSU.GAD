@@ -85,7 +85,7 @@
 			</div>
 			<div class="form-footer">
 				<button class="button-control button-green" type="button">Create</button>
-				<asp:Button ID="createBtn" runat="server" OnClick="createBtn_Click" />
+				<asp:Button ID="CreateBtn" runat="server" OnClick="CreateBtn_Click" />
 			</div>
 		</div>
 		<div class="table-view-control tab-control">

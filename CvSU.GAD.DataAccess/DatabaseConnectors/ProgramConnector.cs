@@ -71,7 +71,30 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return resultMessage;
 		}
 
-		public List<Program> GetPrograms(int departmentId)
+		public List<Program> GetPrograms()
+		{
+			List<Program> programs = null;
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					programs = context.Programs.ToList();
+				}
+			}
+			catch (DbEntityValidationException ex)
+			{
+				LogDbEntityValidationException(ex);
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return programs;
+		}
+
+		public List<Program> GetProgramsByDepartment(int departmentId)
 		{
 			List<Program> programs = null;
 
