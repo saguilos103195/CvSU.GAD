@@ -1,5 +1,9 @@
-﻿using System;
+﻿using CvSU.GAD.DataAccess.DatabaseContexts;
+using CvSU.GAD.DataAccess.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,41 +12,133 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 {
 	public class DisaggregationConnector : DatabaseConnector
 	{
-		//private DataAccessFactory _dataAccessFactory { get; }
+		private DataAccessFactory _dataAccessFactory { get; }
 
-		//public DisaggregationConnector()
-		//{
-		//	_dataAccessFactory = new DataAccessFactory();
-		//}
+		public DisaggregationConnector()
+		{
+			_dataAccessFactory = new DataAccessFactory();
+		}
 
-		//public string AddStudentDisaggregation(Disaggregation)
-		//{
-		//	string message = "Failed to save.";
+		public string AddDisaggregation(Disaggregation newDisaggregation)
+		{
+			string message = "Failed to save.";
 
-		//	try
-		//	{
-		//		using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
-		//		{
-		//			using (DbContextTransaction transaction = context.Database.BeginTransaction())
-		//			{
-		//				bool isSaved = false;
-		//			}
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		LogException(ex);
-		//		message = "Please contact the support. ";
-		//	}
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (DbContextTransaction transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
 
-		//	return message;
-		//}
+						try
+						{
+							Disaggregation dbDisaggregation = context.Disaggregations.FirstOrDefault(d => (d.Semester == newDisaggregation.Semester && d.SchoolYear == newDisaggregation.SchoolYear));
 
-		//public string AddNonStudentDisaggregation()
-		//{
-		//	string message = "Failed to save.";
+							if (dbDisaggregation == null)
+							{
+								context.Disaggregations.Add(newDisaggregation);
+								isSaved = context.SaveChanges() > 0;
+							}
+							else
+							{
+								message += "Disaggregation data already exist for this period. ";
+							}
 
-		//	return message;
-		//}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							message = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							message = "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							message = string.Empty;
+							LogInfo($"Disaggregation successfully saved.");
+						}
+						else
+						{
+							transaction.Rollback();
+							LogInfo($"Disaggregation failed to save.");
+							message = "Please contact the support. ";
+						}
+
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				message = "Please contact the support. ";
+			}
+
+			return message;
+		}
+
+		public List<Disaggregation> GetStudentDisaggregation()
+		{
+			List<Disaggregation> disaggregation = new List<Disaggregation>();
+
+			try
+			{
+				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					disaggregation = ctx.Disaggregations.Include(d => d.Program).Where(d => d.PositionID == 0).ToList();
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return disaggregation;
+		}
+
+		public List<Disaggregation> GetFacultyDisaggregation()
+		{
+			List<Disaggregation> disaggregation = new List<Disaggregation>();
+
+			try
+			{
+				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					disaggregation = ctx.Disaggregations.Include(d => d.Position.IsFaculty).Where(d => d.ProgramID == 0).ToList();
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return disaggregation;
+		}
+
+		public List<Disaggregation> GetNonFacultyDisaggregation()
+		{
+			List<Disaggregation> disaggregation = new List<Disaggregation>();
+
+			try
+			{
+				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					disaggregation = ctx.Disaggregations.Include(d => !d.Position.IsFaculty).Where(d => d.ProgramID == 0).ToList();
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return disaggregation;
+		}
 	}
 }

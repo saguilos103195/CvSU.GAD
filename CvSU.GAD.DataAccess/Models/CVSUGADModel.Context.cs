@@ -28,6 +28,7 @@ namespace CvSU.GAD.DataAccess.Models
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<College> Colleges { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Disaggregation> Disaggregations { get; set; }
         public virtual DbSet<Education> Educations { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }

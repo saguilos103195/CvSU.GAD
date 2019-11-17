@@ -98,6 +98,9 @@
     <Compile Include="Models\Department.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Disaggregation.cs">
+      <DependentUpon>CVSUGADModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Education.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>

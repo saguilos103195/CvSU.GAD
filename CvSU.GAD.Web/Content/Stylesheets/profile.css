@@ -36,12 +36,12 @@
 	color: #90a4ae;
 }
 
-.form-col-1 > div, .form-col-2 > div , .form-col-3 > div
+.form-col-1 > div, .form-col-2 > div , .form-col-3 > div, .form-col-4 > div
 {
 	height: 60px;
 }
 
-.form-col-1 > div > p, .form-col-2 > div > p, .form-col-3 > div > p
+.form-col-1 > div > p, .form-col-2 > div > p, .form-col-3 > div > p, .form-col-4 > div > p
 {
 	margin-bottom: 0px;
 	padding-bottom: 0px;

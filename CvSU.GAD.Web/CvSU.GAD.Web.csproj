@@ -1811,6 +1811,7 @@
     <Content Include="Content\Scripts\profile.js" />
     <Content Include="Content\Scripts\programs.js" />
     <Content Include="Content\Scripts\setup.js" />
+    <Content Include="Content\Scripts\student.js" />
     <Content Include="Content\Stylesheets\animate.css" />
     <Content Include="Content\Stylesheets\bootstrap-grid.css" />
     <Content Include="Content\Stylesheets\bootstrap-grid.min.css" />
@@ -1823,6 +1824,7 @@
     <Content Include="Content\Stylesheets\profile.css" />
     <Content Include="Content\Stylesheets\setup.css" />
     <Content Include="Content\Stylesheets\ui.css" />
+    <Content Include="Disaggregation\Student.aspx" />
     <Content Include="Documents\Colleges.aspx" />
     <Content Include="Documents\Departments.aspx" />
     <Content Include="Documents\Positions.aspx" />
@@ -1862,6 +1864,13 @@
     </Compile>
     <Compile Include="Content\Classes\CustomPage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Disaggregation\Student.aspx.cs">
+      <DependentUpon>Student.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Disaggregation\Student.aspx.designer.cs">
+      <DependentUpon>Student.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documents\Colleges.aspx.cs">
       <DependentUpon>Colleges.aspx</DependentUpon>
