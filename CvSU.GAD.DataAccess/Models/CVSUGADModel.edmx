@@ -48,6 +48,15 @@
           <Property Name="DateFrom" Type="datetime" Nullable="false" />
           <Property Name="DateTo" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsFaculty" Type="bit" Nullable="false" />
+          <Property Name="IsArchived" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Profile">
           <Key>
             <PropertyRef Name="ProfileID" />
@@ -154,6 +163,7 @@
           <EntitySet Name="College" EntityType="Self.College" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seminar" EntityType="Self.Seminar" Schema="dbo" store:Type="Tables" />
@@ -187,6 +197,7 @@
           <EntitySet Name="Colleges" EntityType="CVSUGADModel.College" />
           <EntitySet Name="Departments" EntityType="CVSUGADModel.Department" />
           <EntitySet Name="Educations" EntityType="CVSUGADModel.Education" />
+          <EntitySet Name="Positions" EntityType="CVSUGADModel.Position" />
           <EntitySet Name="Profiles" EntityType="CVSUGADModel.Profile" />
           <EntitySet Name="Programs" EntityType="CVSUGADModel.Program" />
           <EntitySet Name="Seminars" EntityType="CVSUGADModel.Seminar" />
@@ -259,6 +270,15 @@
           <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Education_Profile" FromRole="Education" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsFaculty" Type="Boolean" Nullable="false" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -415,6 +435,16 @@
                 <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
                 <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
                 <ScalarProperty Name="EducationID" ColumnName="EducationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="CVSUGADModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="IsFaculty" ColumnName="IsFaculty" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

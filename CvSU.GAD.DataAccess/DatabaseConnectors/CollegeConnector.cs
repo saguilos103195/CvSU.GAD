@@ -92,7 +92,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					colleges = ctx.Colleges.ToList();
+					colleges = ctx.Colleges.Where(c => c.CollegeID != 0).ToList();
 				}
 			}
 			catch (Exception ex)

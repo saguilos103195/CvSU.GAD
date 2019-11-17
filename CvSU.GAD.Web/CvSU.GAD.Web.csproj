@@ -1807,6 +1807,7 @@
     <Content Include="Content\Scripts\jquery.steps.min.js" />
     <Content Include="Content\Scripts\master.js" />
     <Content Include="Content\Scripts\moment.js" />
+    <Content Include="Content\Scripts\positions.js" />
     <Content Include="Content\Scripts\profile.js" />
     <Content Include="Content\Scripts\programs.js" />
     <Content Include="Content\Scripts\setup.js" />
@@ -1824,6 +1825,7 @@
     <Content Include="Content\Stylesheets\ui.css" />
     <Content Include="Documents\Colleges.aspx" />
     <Content Include="Documents\Departments.aspx" />
+    <Content Include="Documents\Positions.aspx" />
     <Content Include="Documents\Programs.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Test.aspx" />
@@ -1874,6 +1876,13 @@
     </Compile>
     <Compile Include="Documents\Departments.aspx.designer.cs">
       <DependentUpon>Departments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\Positions.aspx.cs">
+      <DependentUpon>Positions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documents\Positions.aspx.designer.cs">
+      <DependentUpon>Positions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documents\Programs.aspx.cs">
       <DependentUpon>Programs.aspx</DependentUpon>
