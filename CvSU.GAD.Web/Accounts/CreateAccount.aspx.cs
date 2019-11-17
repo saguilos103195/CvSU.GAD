@@ -1,6 +1,8 @@
-﻿using CvSU.GAD.DataAccess.DatabaseConnectors.Account;
+﻿using CvSU.GAD.DataAccess.DatabaseConnectors;
+using CvSU.GAD.DataAccess.DatabaseConnectors.Account;
 using CvSU.GAD.DataAccess.Models;
 using CvSU.GAD.Web.Content.Classes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +15,28 @@ namespace CvSU.GAD.Web.Accounts
 	public partial class CreateAccount : CustomPage
 	{
         AdminConnector AdminConnector { get; }
+		CollegeConnector CollegeConnector { get; }
 
-        public CreateAccount()
+
+		public CreateAccount()
 		{
             AdminConnector = new AdminConnector();
+			CollegeConnector = new CollegeConnector();
         }
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			LoadJSData();
+		}
 
+		private void LoadJSData()
+		{
+			var collegesSelectList = CollegeConnector.GetColleges().Select(c => new { ID = c.CollegeID, Name = c.Title, c.Alias }).ToList();
+			string collegeSelectJSON = JsonConvert.SerializeObject(collegesSelectList);
+			string loadJSData = $"<script type=\"text/javascript\">" + Environment.NewLine +
+									$"var collegeSelectJSON = {collegeSelectJSON}; " + Environment.NewLine +
+								$"</script>";
+			LoadJavaSript("loadJSData", loadJSData);
 		}
 
 		protected void CreateBtn_Click(object sender, EventArgs e)

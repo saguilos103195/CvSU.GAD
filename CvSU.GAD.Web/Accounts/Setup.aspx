@@ -23,7 +23,7 @@
 		<div class="form-col-3">
 			<div>
 				<p>Type</p>
-				<select class="select-control" require model="EducationalAttainments" attr="DateFrom" attrtype="single">
+				<select class="select-control" require model="EducationalAttainments" attr="EducationalLevel" attrtype="single">
 					<option selected disabled value="">Select Level</option>
 					<option>College</option>
 					<option>Post Graduate</option>
