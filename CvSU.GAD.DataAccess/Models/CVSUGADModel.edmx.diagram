@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="83473ffe11ba4dc0b5724d1cc26627e9" Name="Diagram1">
-        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.5" PointY="2" />
         <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="5.75" PointY="6" />
         <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="8" PointY="6" />
-        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="2.125" />
+        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="6.5" PointY="2.25" />
         <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="10.25" PointY="6" />
         <AssociationConnector Association="CVSUGADModel.FK_Profile_Account" />
