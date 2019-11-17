@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GAD.Master" AutoEventWireup="true" CodeBehind="Student.aspx.cs" Inherits="CvSU.GAD.Web.Disaggregation.Student" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GAD.Master" AutoEventWireup="true" CodeBehind="Faculty.aspx.cs" Inherits="CvSU.GAD.Web.Disaggregation.Faculty" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-	<script type="text/javascript" src="../Content/Scripts/student.js"></script>
+	<script type="text/javascript" src="../Content/Scripts/faculty.js"></script>
 	<input type="hidden" runat="server" id="selectedID" class="selectedID" />
 	<div class="form-modal-overlay">
 		<div class="archive-alert">
@@ -13,7 +12,7 @@
 		</div>
 	</div>
 	<div class="form">
-		<p>Student Sex Disaggregation</p>
+		<p>Faculty Sex Disaggregation</p>
 		<div class="form-tabs">
 			<span onclick="switchTab(0)">Add</span>
 			<span onclick="switchTab(1)">View All</span>
@@ -40,13 +39,13 @@
             </div>
 			<div class="form-col-1">
 				<div>
-					<p>Program/Course</p>
-                    <select require class="select-control" id="programSel">
-				        <option selected disabled value="">Select Department First</option>
+					<p>Position</p>
+                    <select require class="select-control" id="positionSel">
+				        <option selected disabled value="">Select Position</option>
 			        </select>
 			        <span></span>
                 </div>
-				<input type="hidden" runat="server" id="selectedProgramTxt" class="selectedProgramTxt" />
+				<input type="hidden" runat="server" id="selectedPositionTxt" class="selectedPositionTxt" />
 			</div>
 			<div class="form-col-4">
 				<div>

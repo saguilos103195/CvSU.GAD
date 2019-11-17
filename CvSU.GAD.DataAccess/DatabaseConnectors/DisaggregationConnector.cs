@@ -33,7 +33,10 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 						try
 						{
-							Disaggregation dbDisaggregation = context.Disaggregations.FirstOrDefault(d => (d.Semester == newDisaggregation.Semester && d.SchoolYear == newDisaggregation.SchoolYear));
+							Disaggregation dbDisaggregation = context.Disaggregations.FirstOrDefault(d => (
+							((d.PositionID == 0 && d.ProgramID == newDisaggregation.ProgramID) || 
+							(d.ProgramID == 0 && d.PositionID == newDisaggregation.PositionID)) && 
+							d.Semester == newDisaggregation.Semester && d.SchoolYear == newDisaggregation.SchoolYear));
 
 							if (dbDisaggregation == null)
 							{
@@ -42,7 +45,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 							}
 							else
 							{
-								message += "Disaggregation data already exist for this period. ";
+								message = "Disaggregation data already exist for this period. ";
 							}
 
 						}
@@ -69,7 +72,6 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 						{
 							transaction.Rollback();
 							LogInfo($"Disaggregation failed to save.");
-							message = "Please contact the support. ";
 						}
 
 					}
@@ -139,6 +141,71 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			}
 
 			return disaggregation;
+		}
+
+		public string DeleteDisaggregation(int disaggregationID)
+		{
+			string message = "Failed to save.";
+
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (DbContextTransaction transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							Disaggregation dbDisaggregation = context.Disaggregations.FirstOrDefault(d => d.DisaggregationID == disaggregationID);
+
+							if (dbDisaggregation != null)
+							{
+								context.Disaggregations.Remove(dbDisaggregation);
+								isSaved = context.SaveChanges() > 0;
+							}
+							else
+							{
+								message += "Disaggregation data doesn't exist. ";
+							}
+
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							message = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							message = "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							message = string.Empty;
+							LogInfo($"Disaggregation successfully deleted.");
+						}
+						else
+						{
+							transaction.Rollback();
+							LogInfo($"Disaggregation failed to delete.");
+							message = "Please contact the support. ";
+						}
+
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				message = "Please contact the support. ";
+			}
+
+			return message;
 		}
 	}
 }

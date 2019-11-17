@@ -10,7 +10,7 @@
 namespace CvSU.GAD.Web.Disaggregation {
     
     
-    public partial class Student {
+    public partial class Faculty {
         
         /// <summary>
         /// selectedID control.
@@ -40,13 +40,13 @@ namespace CvSU.GAD.Web.Disaggregation {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden selectedDepartmentTxt;
         
         /// <summary>
-        /// selectedProgramTxt control.
+        /// selectedPositionTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden selectedProgramTxt;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden selectedPositionTxt;
         
         /// <summary>
         /// maleQTxt control.

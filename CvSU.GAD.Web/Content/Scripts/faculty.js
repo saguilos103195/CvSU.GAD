@@ -12,20 +12,17 @@
 	$(document).on("selectmenuchange", "#collegeSel", function () 
 	{
 		loadDepartment($(this).val());
-		loadProgram(0);
 		$(".selectedDepartmentTxt").val("");
-		$(".selectedProgramTxt").val("");
 	});
 
 	$(document).on("selectmenuchange", "#departmentSel", function () 
 	{
 		$(".selectedDepartmentTxt").val($(this).val());
-		loadProgram($(this).val());
 	});
 
-	$(document).on("selectmenuchange", "#programSel", function () 
+	$(document).on("selectmenuchange", "#positionSel", function () 
 	{
-		$(".selectedProgramTxt").val($(this).val());
+		$(".selectedPositionTxt").val($(this).val());
 	});
 
 	$(document).on("selectmenuchange", "#schoolYearSel", function () 
@@ -50,6 +47,7 @@
 	switchTab(0);
 	$(".select-control").selectmenu();
 	loadCollege();
+	loadPosition();
 	loadSchoolYear();
 	loadSDDAta();
 
@@ -59,22 +57,24 @@ function loadSDDAta()
 {
 	$('#viewTable').dataTable().fnClearTable();
 
-	jQuery.each(studentSDJSON, function (index, studentSD) {
+	console.log(facultySDJSON);
+
+	jQuery.each(facultySDJSON, function (index, facultySD) {
 
 		var deleteBtn = document.createElement("button");
 		$(deleteBtn).attr("type", "button");
 		$(deleteBtn).addClass("button-control button-red");
 		$(deleteBtn).html("Delete");
-		$(deleteBtn).attr("onclick", "showModal($('.archive-alert')); deleteItem(" + studentSD.DisaggregationID + ");");
+		$(deleteBtn).attr("onclick", "showModal($('.archive-alert')); deleteItem(" + facultySD.DisaggregationID + ");");
 		deleteBtn = deleteBtn.outerHTML;
 
 		$('#viewTable').dataTable().fnAddData([
-			(programSelectJSON.find(d => d.ID == studentSD.ProgramID).Name),
-			(departmentSelectJSON.find(d => d.ID == studentSD.DepartmentID).Alias),
-			studentSD.MaleQuantity,
-			studentSD.FemaleQuantity,
-			studentSD.Semester,
-			studentSD.SchoolYear,
+			(positionSelectJSON.find(d => d.ID == facultySD.PositionID).Name),
+			(departmentSelectJSON.find(d => d.ID == facultySD.DepartmentID).Alias),
+			facultySD.MaleQuantity,
+			facultySD.FemaleQuantity,
+			facultySD.Semester,
+			facultySD.SchoolYear,
 			deleteBtn
 		]);
 	});
@@ -116,23 +116,18 @@ function loadDepartment(collegeID)
 	$("#departmentSel").selectmenu("refresh");
 }
 
-function loadProgram(departmentID)
+function loadPosition()
 {
-	$("#programSel").children("option").remove();
-	$("#programSel").append("<option selected disabled value=''>Select Program/Course</option>");
-	jQuery.each(programSelectJSON, function (index, item) {
+	jQuery.each(positionSelectJSON, function (index, item) {
 
-		if (item.DepartmentID == departmentID)
-		{
-			var option = document.createElement("option");
-			$(option).html(item.Name);
-			$(option).val(item.ID);
-			$("#programSel").append(option);
-		}
+		var option = document.createElement("option");
+		$(option).html(item.Name);
+		$(option).val(item.ID);
+		$("#positionSel").append(option);
 
 	});
 
-	$("#programSel").selectmenu("refresh");
+	$("#positionSel").selectmenu("refresh");
 }
 
 function loadSchoolYear()
