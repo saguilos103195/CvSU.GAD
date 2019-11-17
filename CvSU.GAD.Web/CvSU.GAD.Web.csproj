@@ -84,6 +84,7 @@
   <ItemGroup>
     <Content Include="Accounts\CreateAccount.aspx" />
     <Content Include="Accounts\ManageAccounts.aspx" />
+    <Content Include="Accounts\Profile.aspx" />
     <Content Include="Accounts\Setup.aspx" />
     <Content Include="Content\Fonts\OpenSans\BoldItalic\OpenSans-BoldItalic.eot" />
     <Content Include="Content\Fonts\OpenSans\BoldItalic\OpenSans-BoldItalic.ttf" />
@@ -1805,6 +1806,8 @@
     <Content Include="Content\Scripts\jquery-ui-1.12.1\LICENSE.txt" />
     <Content Include="Content\Scripts\jquery.steps.min.js" />
     <Content Include="Content\Scripts\master.js" />
+    <Content Include="Content\Scripts\moment.js" />
+    <Content Include="Content\Scripts\profile.js" />
     <Content Include="Content\Scripts\programs.js" />
     <Content Include="Content\Scripts\setup.js" />
     <Content Include="Content\Stylesheets\animate.css" />
@@ -1816,6 +1819,7 @@
     <Content Include="Content\Stylesheets\bootstrap.min.css" />
     <Content Include="Content\Stylesheets\index.css" />
     <Content Include="Content\Stylesheets\master.css" />
+    <Content Include="Content\Stylesheets\profile.css" />
     <Content Include="Content\Stylesheets\setup.css" />
     <Content Include="Content\Stylesheets\ui.css" />
     <Content Include="Documents\Colleges.aspx" />
@@ -1839,6 +1843,13 @@
     </Compile>
     <Compile Include="Accounts\ManageAccounts.aspx.designer.cs">
       <DependentUpon>ManageAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts\Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accounts\Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Accounts\Setup.aspx.cs">
       <DependentUpon>Setup.aspx</DependentUpon>

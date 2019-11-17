@@ -31,13 +31,23 @@
 			<div class="form-col-1">
 				<div>
 					<p>Type</p>
-					<select require class="select-control" id="accountTypeSel" runat="server">
+					<select require class="select-control accountTypeSel" id="accountTypeSel" runat="server">
 						<option selected disabled value="">Select Type</option>
 						<option>Administrator</option>
 						<option>Coordinator</option>
 					</select>
 					<span></span>
 				</div>
+			</div>
+			<div class="form-col-1">
+				<div>
+					<p>College</p>
+					<select require class="select-control" id="collegeSel">
+						<option selected disabled value="">Select College</option>
+					</select>
+					<span></span>
+				</div>
+				<input type="hidden" class="selectedCollegeTxt" runat="server" id="selectedCollegeTxt" />
 			</div>
 			<div class="form-footer">
 				<button class="button-control button-green" type="button">Create</button>

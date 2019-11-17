@@ -105,9 +105,6 @@
     <Compile Include="Models\Program.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>CVSUGADModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

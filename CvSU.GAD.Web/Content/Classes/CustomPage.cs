@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using CvSU.GAD.DataAccess.DatabaseConnectors.Account;
+using CvSU.GAD.DataAccess.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,14 @@ namespace CvSU.GAD.Web.Content.Classes
 {
 	public class CustomPage : Page
 	{
+		DataAccess.Models.Account SessionAccount { get; set; }
+		AccountConnector AccountConnector { get; }
+
+		public CustomPage()
+		{
+			AccountConnector = new AccountConnector();
+		}
+
 		protected void LoadJavaSript(string key, string script)
 		{
 			ScriptManager.RegisterStartupScript(this, typeof(Page), key, script, false);
@@ -16,14 +26,27 @@ namespace CvSU.GAD.Web.Content.Classes
 		
 		protected DataAccess.Models.Account GetAccountSession()
 		{
-			DataAccess.Models.Account sessionAccount = null;
+			SessionAccount = null;
 
 			if (HttpContext.Current.Session["AccountJSON"] != null)
 			{
-				sessionAccount = JsonConvert.DeserializeObject<DataAccess.Models.Account>(HttpContext.Current.Session["AccountJSON"].ToString());
+				SessionAccount = JsonConvert.DeserializeObject<DataAccess.Models.Account>(HttpContext.Current.Session["AccountJSON"].ToString());
 			}
 
-			return sessionAccount;
+			return SessionAccount;
+		}
+
+		protected void LoadJSProfile()
+		{
+			GetAccountSession();
+			
+			if (SessionAccount != null)
+			{
+				Profile profile = AccountConnector.GetProfile(SessionAccount.AccountID);
+				string loadProfile = $"<script type=\"text/javascript\"> var profileJSON = {JsonConvert.SerializeObject(profile, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })}; </script>";
+				LoadJavaSript("loadProfile", loadProfile);
+			}
+			
 		}
 	}
 }

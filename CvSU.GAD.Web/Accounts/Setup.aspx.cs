@@ -2,6 +2,7 @@
 using CvSU.GAD.DataAccess.Models;
 using CvSU.GAD.Web.Content.Classes;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,15 @@ namespace CvSU.GAD.Web.Accounts
 			{
 				Response.Redirect("../index.aspx", true);
 			}
+			else if (!CurrentAccount.Status.ToLower().Equals("new"))
+			{
+				Response.Redirect("../dashboard.aspx");
+			}
         }
 
 		protected void CreateProfileBtn_Click(object sender, EventArgs e)
 		{
-			Profile newProfile = new Profile();
+			DataAccess.Models.Profile newProfile = new DataAccess.Models.Profile();
 			newProfile.AccountID = CurrentAccount.AccountID;
 			newProfile.Firstname = fnameTxt.Value;
 			newProfile.Middlename = mnameTxt.Value;
@@ -50,7 +55,7 @@ namespace CvSU.GAD.Web.Accounts
 			newProfile.EngagedFrom = DateTime.Parse(engageFromTxt.Value);
 			newProfile.EngagedTo = DateTime.Parse(engageToTxt.Value);
 			newProfile.WillTravel = willingChkBox.Checked;
-			newProfile.Educations = JsonConvert.DeserializeObject<List<Education>>(educListTxt.Value);
+			newProfile.Educations = JsonConvert.DeserializeObject<List<Education>>(educListTxt.Value, new IsoDateTimeConverter() { DateTimeFormat = "dd/MM/yyyy" } );
 			
 			string message = AccountConnector.AddProfile(newProfile);
 			string showAlert;

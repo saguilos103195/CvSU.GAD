@@ -10,6 +10,15 @@
 	$(".master-alert > div > i").css("color", iconColor);
 }
 
+function loadAdminTemplateInfo()
+{
+	if (profileJSON != null)
+	{
+		$("#sidebarProfileName").html(profileJSON.Firstname + " " + profileJSON.Middlename.charAt(0) + ". " + profileJSON.Lastname);
+	}
+}
+
+
 $(document).ready(function () {
 
 	$(".master-alert > div > a").click(function () {

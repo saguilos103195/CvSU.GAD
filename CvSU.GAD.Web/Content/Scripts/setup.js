@@ -35,6 +35,7 @@ $(document).ready(function () {
 
 	$(".select-control").selectmenu();
 	$(".birthDateTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
 		changeMonth: true,
 		changeYear: true
 	});
@@ -42,6 +43,7 @@ $(document).ready(function () {
 		e.preventDefault();
 	});
 	$(".engageFromTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
 		changeMonth: true,
 		changeYear: true,
 		onSelect: function (date) { $(".engageToTxt").datepicker("option", "minDate", date); }
@@ -50,6 +52,7 @@ $(document).ready(function () {
 		e.preventDefault();
 	});
 	$(".engageToTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
 		changeMonth: true,
 		changeYear: true
 	});
@@ -58,11 +61,13 @@ $(document).ready(function () {
 	});
 
 	$("#educationList .inclusiveDateFromTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
 		changeMonth: true,
 		changeYear: true,
 		onSelect: function (date) { $("#educationList .inclusiveDateToTxt").datepicker("option", "minDate", date); }
 	});
 	$("#educationList .inclusiveDateToTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
 		changeMonth: true,
 		changeYear: true
 	});
@@ -79,9 +84,12 @@ function addEducationalAttainment()
 	educTemplate.find(".select-control").selectmenu();
 	$("#educationList").append(educTemplate);
 	educTemplate.find(".inclusiveDateFromTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
 		onSelect: function (date) { educTemplate.find(".inclusiveDateToTxt").datepicker("option", "minDate", date); }
 	});
-	educTemplate.find(".inclusiveDateToTxt").datepicker();
+	educTemplate.find(".inclusiveDateToTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
+	});
 	educCount++;
 }
 
