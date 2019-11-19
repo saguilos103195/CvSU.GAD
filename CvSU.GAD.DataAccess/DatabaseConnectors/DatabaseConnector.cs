@@ -98,5 +98,10 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 		{
 			_log.Info(info);
 		}
-	}
+
+        public void LogWarn(string info)
+        {
+            _log.Warn(info);
+        }
+    }
 }
