@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace CvSU.GAD.Web.Disaggregation
 {
-	public partial class Faculty : CustomPage
+	public partial class Nonfaculty : CustomPage
 	{
 		private CollegeConnector CollegeConnector { get; }
 		private DepartmentConnector DepartmentConnector { get; }
@@ -19,7 +19,7 @@ namespace CvSU.GAD.Web.Disaggregation
 		private DisaggregationConnector DisaggregationConnector { get; }
 		private Account CurrentAccount { get; set; }
 
-		public Faculty()
+		public Nonfaculty()
 		{
 			CollegeConnector = new CollegeConnector();
 			DepartmentConnector = new DepartmentConnector();
@@ -45,13 +45,13 @@ namespace CvSU.GAD.Web.Disaggregation
 
 		private void LoadJSData()
 		{
-			var positionsSelectList = PositionConnector.GetPositions().Where(p => p.IsFaculty).Select(d => new { ID = d.PositionID, Name = d.Title }).ToList();
+			var positionsSelectList = PositionConnector.GetPositions().Where(p => !p.IsFaculty).Select(d => new { ID = d.PositionID, Name = d.Title }).ToList();
 			string positionSelectJSON = JsonConvert.SerializeObject(positionsSelectList);
 			var departmentsSelectList = DepartmentConnector.GetDepartments().Select(d => new { ID = d.DepartmentID, Name = d.Title, d.Alias, d.CollegeID }).ToList();
 			string departmentSelectJSON = JsonConvert.SerializeObject(departmentsSelectList);
 			var collegesSelectList = CollegeConnector.GetColleges().Select(c => new { ID = c.CollegeID, Name = c.Title, c.Alias }).ToList();
 			string collegeSelectJSON = JsonConvert.SerializeObject(collegesSelectList);
-			string facultySDJSON = JsonConvert.SerializeObject(DisaggregationConnector.GetFacultyDisaggregation(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+			string facultySDJSON = JsonConvert.SerializeObject(DisaggregationConnector.GetNonFacultyDisaggregation(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
 			string loadJSData = $"<script type=\"text/javascript\">" + Environment.NewLine +
 									$"var collegeSelectJSON = {collegeSelectJSON}; " + Environment.NewLine +
 									$"var departmentSelectJSON = {departmentSelectJSON}; " + Environment.NewLine +
@@ -67,7 +67,7 @@ namespace CvSU.GAD.Web.Disaggregation
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Data successfully deleted!', 'OK', '#009efb', 'faculty.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Data successfully deleted!', 'OK', '#009efb', 'nonfaculty.aspx');  </script>";
 			}
 			else
 			{
@@ -94,7 +94,7 @@ namespace CvSU.GAD.Web.Disaggregation
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Data successfully added!', 'OK', '#009efb', 'faculty.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Data successfully added!', 'OK', '#009efb', 'nonfaculty.aspx');  </script>";
 			}
 			else
 			{

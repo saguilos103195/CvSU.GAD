@@ -44,7 +44,7 @@
 
 	});
 
-	switchTab(0);
+	switchTab(1);
 	$(".select-control").selectmenu();
 	loadCollege();
 	loadPosition();

@@ -113,7 +113,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					disaggregation = ctx.Disaggregations.Include(d => d.Position.IsFaculty).Where(d => d.ProgramID == 0).ToList();
+					disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d => d.ProgramID == 0 && d.Position.IsFaculty).ToList();
 				}
 			}
 			catch (Exception ex)
@@ -132,7 +132,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					disaggregation = ctx.Disaggregations.Include(d => !d.Position.IsFaculty).Where(d => d.ProgramID == 0).ToList();
+					disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d => d.ProgramID == 0 && !d.Position.IsFaculty).ToList();
 				}
 			}
 			catch (Exception ex)

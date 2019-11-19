@@ -1826,6 +1826,7 @@
     <Content Include="Content\Stylesheets\setup.css" />
     <Content Include="Content\Stylesheets\ui.css" />
     <Content Include="Disaggregation\Faculty.aspx" />
+    <Content Include="Disaggregation\Nonfaculty.aspx" />
     <Content Include="Disaggregation\Student.aspx" />
     <Content Include="Documents\Colleges.aspx" />
     <Content Include="Documents\Departments.aspx" />
@@ -1873,6 +1874,13 @@
     </Compile>
     <Compile Include="Disaggregation\Faculty.aspx.designer.cs">
       <DependentUpon>Faculty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Disaggregation\Nonfaculty.aspx.cs">
+      <DependentUpon>Nonfaculty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Disaggregation\Nonfaculty.aspx.designer.cs">
+      <DependentUpon>Nonfaculty.aspx</DependentUpon>
     </Compile>
     <Compile Include="Disaggregation\Student.aspx.cs">
       <DependentUpon>Student.aspx</DependentUpon>
