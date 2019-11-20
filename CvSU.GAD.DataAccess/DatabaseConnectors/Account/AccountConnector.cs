@@ -408,7 +408,6 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
                                     {
                                         resultMessage = "No changes found.";
                                     }
-
                                 }
                                 else
                                 {
