@@ -31,5 +31,6 @@ namespace CvSU.GAD.DataAccess.Models
         public virtual DbSet<Education> Educations { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Program> Programs { get; set; }
+        public virtual DbSet<Seminar> Seminars { get; set; }
     }
 }

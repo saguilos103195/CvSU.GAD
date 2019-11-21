@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/16/2019 15:39:44
+-- Date Created: 11/17/2019 21:08:47
 -- Generated from EDMX file: C:\Users\mjavier\source\repos\saguilos103195\CvSU.GAD\CvSU.GAD.DataAccess\Models\CVSUGADModel.edmx
 -- --------------------------------------------------
 
@@ -17,40 +17,46 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_Department_College]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Department] DROP CONSTRAINT [FK_Department_College];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Education_Profile]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Education] DROP CONSTRAINT [FK_Education_Profile];
-GO
 IF OBJECT_ID(N'[dbo].[FK_Profile_Account]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Profile] DROP CONSTRAINT [FK_Profile_Account];
+    ALTER TABLE [dbo].[Profiles] DROP CONSTRAINT [FK_Profile_Account];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Seminar_Account]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Seminars] DROP CONSTRAINT [FK_Seminar_Account];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Department_College]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Departments] DROP CONSTRAINT [FK_Department_College];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Program_Department]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Program] DROP CONSTRAINT [FK_Program_Department];
+    ALTER TABLE [dbo].[Programs] DROP CONSTRAINT [FK_Program_Department];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Education_Profile]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Educations] DROP CONSTRAINT [FK_Education_Profile];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Account]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Account];
+IF OBJECT_ID(N'[dbo].[Accounts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Accounts];
 GO
-IF OBJECT_ID(N'[dbo].[College]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[College];
+IF OBJECT_ID(N'[dbo].[Colleges]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Colleges];
 GO
-IF OBJECT_ID(N'[dbo].[Department]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Department];
+IF OBJECT_ID(N'[dbo].[Departments]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Departments];
 GO
-IF OBJECT_ID(N'[dbo].[Education]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Education];
+IF OBJECT_ID(N'[dbo].[Educations]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Educations];
 GO
-IF OBJECT_ID(N'[dbo].[Profile]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Profile];
+IF OBJECT_ID(N'[dbo].[Profiles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Profiles];
 GO
-IF OBJECT_ID(N'[dbo].[Program]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Program];
+IF OBJECT_ID(N'[dbo].[Programs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Programs];
+GO
+IF OBJECT_ID(N'[dbo].[Seminars]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Seminars];
 GO
 
 -- --------------------------------------------------
@@ -63,7 +69,8 @@ CREATE TABLE [dbo].[Accounts] (
     [Username] nvarchar(200)  NOT NULL,
     [Password] nvarchar(200)  NOT NULL,
     [Status] nvarchar(50)  NOT NULL,
-    [Type] nvarchar(50)  NOT NULL
+    [Type] nvarchar(50)  NOT NULL,
+    [CollegeID] int  NULL
 );
 GO
 
@@ -131,6 +138,15 @@ CREATE TABLE [dbo].[Programs] (
 );
 GO
 
+-- Creating table 'Seminars'
+CREATE TABLE [dbo].[Seminars] (
+    [SeminarID] int IDENTITY(1,1) NOT NULL,
+    [AccountID] int  NOT NULL,
+    [Name] nvarchar(500)  NOT NULL,
+    [Year] nvarchar(50)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -171,6 +187,12 @@ ADD CONSTRAINT [PK_Programs]
     PRIMARY KEY CLUSTERED ([ProgramID] ASC);
 GO
 
+-- Creating primary key on [SeminarID] in table 'Seminars'
+ALTER TABLE [dbo].[Seminars]
+ADD CONSTRAINT [PK_Seminars]
+    PRIMARY KEY CLUSTERED ([SeminarID] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -187,6 +209,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_Profile_Account'
 CREATE INDEX [IX_FK_Profile_Account]
 ON [dbo].[Profiles]
+    ([AccountID]);
+GO
+
+-- Creating foreign key on [AccountID] in table 'Seminars'
+ALTER TABLE [dbo].[Seminars]
+ADD CONSTRAINT [FK_Seminar_Account]
+    FOREIGN KEY ([AccountID])
+    REFERENCES [dbo].[Accounts]
+        ([AccountID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Seminar_Account'
+CREATE INDEX [IX_FK_Seminar_Account]
+ON [dbo].[Seminars]
     ([AccountID]);
 GO
 

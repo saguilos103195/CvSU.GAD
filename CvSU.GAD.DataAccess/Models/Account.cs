@@ -18,6 +18,7 @@ namespace CvSU.GAD.DataAccess.Models
         public Account()
         {
             this.Profiles = new HashSet<Profile>();
+            this.Seminars = new HashSet<Seminar>();
         }
     
         public int AccountID { get; set; }
@@ -29,5 +30,7 @@ namespace CvSU.GAD.DataAccess.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profile> Profiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Seminar> Seminars { get; set; }
     }
 }
