@@ -15,10 +15,10 @@ namespace CvSU.GAD.DataAccess.Models
     public partial class Seminar
     {
         public int SeminarID { get; set; }
-        public int AccountID { get; set; }
+        public int ProfileID { get; set; }
         public string Name { get; set; }
         public string Year { get; set; }
     
-        public virtual Account Account { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 }

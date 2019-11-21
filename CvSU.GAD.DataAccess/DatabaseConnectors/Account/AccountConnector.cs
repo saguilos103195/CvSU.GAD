@@ -257,12 +257,6 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
                                     numberOfChanges++;
                                 }
 
-                                if (dbProfile.Gender != profile.Gender)
-                                {
-                                    dbProfile.Gender = profile.Gender;
-                                    numberOfChanges++;
-                                }
-
                                 if (dbProfile.Lastname != profile.Lastname)
                                 {
                                     dbProfile.Lastname = profile.Lastname;

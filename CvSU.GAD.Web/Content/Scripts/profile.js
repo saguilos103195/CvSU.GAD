@@ -2,7 +2,19 @@
 
 	loadAdminTemplateInfo();
 	loadProfile();
-	console.log(profileJSON);
+	switchTab(0);
+
+	$(".profile-tab > button").click(function () {
+
+		if (isFormValid($(".profile-tab")))
+		{
+			$(this).css("pointer-events", "none");
+			$(this).css("opacity", ".9");
+			$(".profile-tab > input[type=submit]").click();
+		}
+
+	});
+
 	$(".bdateTxt").datepicker({ dateFormat: 'dd/mm/yy' });
 	$('.bdateTxt').on("cut copy paste", function (e) {
 		e.preventDefault();

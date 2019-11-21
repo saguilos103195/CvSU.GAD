@@ -108,7 +108,7 @@
             <PropertyRef Name="SeminarID" />
           </Key>
           <Property Name="SeminarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="ProfileID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Year" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -196,15 +196,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Seminar_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+        <Association Name="FK_Seminar_Profile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="Seminar" Type="Self.Seminar" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="AccountID" />
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
             </Principal>
             <Dependent Role="Seminar">
-              <PropertyRef Name="AccountID" />
+              <PropertyRef Name="ProfileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -246,8 +246,8 @@
             <End Role="Department" EntitySet="Department" />
             <End Role="Program" EntitySet="Program" />
           </AssociationSet>
-          <AssociationSet Name="FK_Seminar_Account" Association="Self.FK_Seminar_Account">
-            <End Role="Account" EntitySet="Account" />
+          <AssociationSet Name="FK_Seminar_Profile" Association="Self.FK_Seminar_Profile">
+            <End Role="Profile" EntitySet="Profile" />
             <End Role="Seminar" EntitySet="Seminar" />
           </AssociationSet>
         </EntityContainer>
@@ -273,10 +273,6 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Profile" EntitySet="Profiles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Seminar_Account" Association="CVSUGADModel.FK_Seminar_Account">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Seminar" EntitySet="Seminars" />
-          </AssociationSet>
           <AssociationSet Name="FK_Department_College" Association="CVSUGADModel.FK_Department_College">
             <End Role="College" EntitySet="Colleges" />
             <End Role="Department" EntitySet="Departments" />
@@ -297,6 +293,10 @@
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="Education" EntitySet="Educations" />
           </AssociationSet>
+          <AssociationSet Name="FK_Seminar_Profile" Association="CVSUGADModel.FK_Seminar_Profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Seminar" EntitySet="Seminars" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -310,7 +310,6 @@
           <Property Name="CollegeID" Type="Int32" />
           <NavigationProperty Name="Disaggregations" Relationship="CVSUGADModel.FK_Disaggregation_Account" FromRole="Account" ToRole="Disaggregation" />
           <NavigationProperty Name="Profiles" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Account" ToRole="Profile" />
-          <NavigationProperty Name="Seminars" Relationship="CVSUGADModel.FK_Seminar_Account" FromRole="Account" ToRole="Seminar" />
         </EntityType>
         <EntityType Name="College">
           <Key>
@@ -398,6 +397,7 @@
           <Property Name="WillTravel" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Profile" ToRole="Account" />
           <NavigationProperty Name="Educations" Relationship="CVSUGADModel.FK_Education_Profile" FromRole="Profile" ToRole="Education" />
+          <NavigationProperty Name="Seminars" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Profile" ToRole="Seminar" />
         </EntityType>
         <EntityType Name="Program">
           <Key>
@@ -416,10 +416,10 @@
             <PropertyRef Name="SeminarID" />
           </Key>
           <Property Name="SeminarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="ProfileID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Seminar_Account" FromRole="Seminar" ToRole="Account" />
+          <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Seminar" ToRole="Profile" />
         </EntityType>
         <Association Name="FK_Disaggregation_Account">
           <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
@@ -441,18 +441,6 @@
               <PropertyRef Name="AccountID" />
             </Principal>
             <Dependent Role="Profile">
-              <PropertyRef Name="AccountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Seminar_Account">
-          <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
-          <End Type="CVSUGADModel.Seminar" Role="Seminar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="AccountID" />
-            </Principal>
-            <Dependent Role="Seminar">
               <PropertyRef Name="AccountID" />
             </Dependent>
           </ReferentialConstraint>
@@ -513,6 +501,18 @@
               <PropertyRef Name="ProfileID" />
             </Principal>
             <Dependent Role="Education">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seminar_Profile">
+          <End Type="CVSUGADModel.Profile" Role="Profile" Multiplicity="1" />
+          <End Type="CVSUGADModel.Seminar" Role="Seminar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="Seminar">
               <PropertyRef Name="ProfileID" />
             </Dependent>
           </ReferentialConstraint>
@@ -634,7 +634,7 @@
               <MappingFragment StoreEntitySet="Seminar">
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
                 <ScalarProperty Name="SeminarID" ColumnName="SeminarID" />
               </MappingFragment>
             </EntityTypeMapping>
