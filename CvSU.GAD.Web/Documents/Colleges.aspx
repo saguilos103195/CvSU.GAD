@@ -19,7 +19,7 @@
 			<asp:Button runat="server" ID="RetrieveBtn" OnClick="RetrieveBtn_Click" CssClass="button-control button-red" Text="Ok" />
 			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
 		</div>
-		<div class="edit-modal">
+		<div class="form-modal">
 			<div class="modal-head">
 				<span>Edit</span>
 				<button type="button" onclick="hideModal()">×</button>
