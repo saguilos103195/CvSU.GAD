@@ -32,6 +32,7 @@ namespace CvSU.GAD.Web.Accounts
 			{
 				Response.Redirect("accounts/setup.aspx");
 			}
+
 			LoadJSProfile();
 		}
 
@@ -60,7 +61,7 @@ namespace CvSU.GAD.Web.Accounts
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Program successfully archived!', 'OK', '#009efb', 'profile.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Profile successfully updated!', 'OK', '#009efb', 'profile.aspx');  </script>";
 				
 			}
 			else

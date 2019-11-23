@@ -48,6 +48,8 @@
 
 function loadProfile()
 {
+	console.log(profileJSON);
+
 	$(".fnameTxt").val(profileJSON.Firstname);
 	$(".mnameTxt").val(profileJSON.Middlename);
 	$(".lnameTxt").val(profileJSON.Lastname);
@@ -63,4 +65,23 @@ function loadProfile()
 	$(".engagedFromTxt").val( moment(profileJSON.EngagedFrom).format("DD/MM/YYYY"));
 	$(".engagedToTxt").val(moment(profileJSON.EngagedTo).format("DD/MM/YYYY"));
 	$(".willingChkBox").attr("checked", profileJSON.WillTravel);
+
+	if (profileJSON.Educations.length > 0 && profileJSON.Educations != null)
+	{
+		jQuery.each(profileJSON.Educations, function (index, education) {
+
+			$(".educ-list").append("<div>" +
+										"<label>" + moment(education.DateFrom).format("DD/MM/YYYY") + " - " +  moment(education.DateTo).format("DD/MM/YYYY") + "</label>" +
+										"<h5>" + education.Course + "</h5>" +
+										"<p>" + education.SchoolName + "</p>" +
+										"<span>" + education.EducationalLevel + "</span>" +
+									"</div>");
+
+		});
+	}
+}
+
+function loadEducation()
+{
+
 }

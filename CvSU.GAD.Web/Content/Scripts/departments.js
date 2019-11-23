@@ -13,7 +13,7 @@
 
 	$(document).on("click", ".updateBtn", function () {
 
-		if (isFormValid($(".edit-modal"))) {
+		if (isFormValid($(".form-modal"))) {
 			$(this).css("pointer-events", "none");
 			$(this).css("opacity", ".9");
 			$(".modal-foot > input[type=submit]").click();
@@ -79,7 +79,7 @@ function loadDepartmentTable()
 			$(editBtn).attr("type", "button");
 			$(editBtn).addClass("button-control button-blue");
 			$(editBtn).html("Edit");
-			$(editBtn).attr("onclick", "showModal($('.edit-modal')); editItem(" + department.DepartmentID + ");");
+			$(editBtn).attr("onclick", "showModal($('.form-modal')); editItem(" + department.DepartmentID + ");");
 			editBtn = editBtn.outerHTML;
 
 

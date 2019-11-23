@@ -14,7 +14,7 @@
 
 	$(document).on("click", ".updateBtn", function () {
 
-		if (isFormValid($(".edit-modal"))) {
+		if (isFormValid($(".form-modal"))) {
 			$(this).css("pointer-events", "none");
 			$(this).css("opacity", ".9");
 			$(".modal-foot > input[type=submit]").click();
@@ -65,7 +65,7 @@ function loadPositionTable()
 			$(editBtn).attr("type", "button");
 			$(editBtn).addClass("button-control button-blue");
 			$(editBtn).html("Edit");
-			$(editBtn).attr("onclick", "showModal($('.edit-modal')); editItem(" + position.PositionID + ");");
+			$(editBtn).attr("onclick", "showModal($('.form-modal')); editItem(" + position.PositionID + ");");
 			editBtn = editBtn.outerHTML;
 
 

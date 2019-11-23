@@ -2,6 +2,60 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 	<link rel="stylesheet" href="../Content/Stylesheets/profile.css" />
 	<script type="text/javascript" src="../Content/Scripts/profile.js"></script>
+	<div class="form-modal-overlay">
+		<%--<div class="archive-alert">
+			<i class="far fa-question-circle"></i>
+			<p>Are you sure want to archive</p>
+			<span></span>
+			<asp:Button runat="server" ID="ArchiveBtn" OnClick="ArchiveBtn_Click" CssClass="button-control button-red" Text="Ok" />
+			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
+		</div>
+		<div class="retrieve-alert">
+			<i class="far fa-question-circle"></i>
+			<p>Are you sure want to retrieve</p>
+			<span></span>
+			<asp:Button runat="server" ID="RetrieveBtn" OnClick="RetrieveBtn_Click" CssClass="button-control button-red" Text="Ok" />
+			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
+		</div>--%>
+		<div class="form-modal">
+			<div class="modal-head">
+				<span>Edit</span>
+				<button type="button" onclick="hideModal()">×</button>
+			</div>
+			<div class="modal-cont">
+				<div>
+					<p>Title</p>
+					<input require runat="server" id="editTitleTxt" class="input-text-control editTitleTxt" />
+					<span></span>
+				</div>
+				<div>
+					<p>Alias</p>
+					<input require runat="server" id="editAliasTxt" type="text" class="input-text-control editAliasTxt" />
+					<span></span>
+				</div>
+				<div>
+					<p>College</p>
+                    <select class="select-control" id="editCollegeSel">
+				        <option selected disabled value="">Select College</option>
+			        </select>
+			        <span></span>
+				</div>
+				<div>
+					<p>Department</p>
+                    <select class="select-control" id="editDepartmentSel">
+				        <option selected disabled value="">Select Department First</option>
+			        </select>
+			        <span></span>
+					<input type="hidden" runat="server" id="editSelectedDepartmentTxt" class="editSelectedDepartmentTxt" />
+				</div>
+			</div>
+            <div class="modal-foot">
+				<button class="button-control button-transparent" type="button" onclick="hideModal()">Cancel</button>
+				<button class="button-control button-green updateBtn" type="button">Update</button>
+				<%--<asp:Button ID="EditBtn" runat="server" OnClick="EditBtn_Click" />--%>
+			</div>
+		</div>
+	</div>
 	<div class="profile container">
 		<p>Profile</p>
 		<div class="profile-body row">
@@ -137,23 +191,8 @@
 				</div>
 				<div class="form-body educ-tab tab-control">
 					<div class="educ-list">
-						<div>
-							<label>15/06/2012 - 19/11/2019</label>
-							<h5>Bachelors of Science in Information Technology</h5>
-							<p>Cavite State University</p>
-							<span>College</span>
-						</div>
-						<div>
-							<label>15/06/2012 - 19/11/2019</label>
-							<h5>Bachelors of Science in Information Technology</h5>
-							<p>Cavite State University</p>
-							<span>College</span>
-						</div>
-						<div>
-							<label>15/06/2012 - 19/11/2019</label>
-							<h5>Bachelors of Science in Information Technology</h5>
-							<p>Cavite State University</p>
-							<span>College</span>
+						<div onclick="addEducation()">
+							<h1>+ Add Edudcation</h1>
 						</div>
 					</div>
 				</div>
