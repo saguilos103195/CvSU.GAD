@@ -41,8 +41,8 @@
             <PropertyRef Name="DisaggregationID" />
           </Key>
           <Property Name="DisaggregationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PositionID" Type="int" Nullable="false" />
-          <Property Name="ProgramID" Type="int" Nullable="false" />
+          <Property Name="ReferenceID" Type="int" Nullable="false" />
+          <Property Name="IsStudent" Type="bit" Nullable="false" />
           <Property Name="MaleQuantity" Type="int" Nullable="false" />
           <Property Name="FemaleQuantity" Type="int" Nullable="false" />
           <Property Name="Semester" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -97,7 +97,7 @@
           <Key>
             <PropertyRef Name="ProgramID" />
           </Key>
-          <Property Name="ProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramID" Type="bit" Nullable="false" />
           <Property Name="DepartmentID" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Alias" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -137,27 +137,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Disaggregation_Position">
-          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+        <Association Name="FK_Disaggregation_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="Disaggregation" Type="Self.Disaggregation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Position">
-              <PropertyRef Name="PositionID" />
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
             </Principal>
             <Dependent Role="Disaggregation">
-              <PropertyRef Name="PositionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Disaggregation_Program">
-          <End Role="Program" Type="Self.Program" Multiplicity="1" />
-          <End Role="Disaggregation" Type="Self.Disaggregation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Program">
-              <PropertyRef Name="ProgramID" />
-            </Principal>
-            <Dependent Role="Disaggregation">
-              <PropertyRef Name="ProgramID" />
+              <PropertyRef Name="DepartmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -227,12 +215,8 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="Disaggregation" EntitySet="Disaggregation" />
           </AssociationSet>
-          <AssociationSet Name="FK_Disaggregation_Position" Association="Self.FK_Disaggregation_Position">
-            <End Role="Position" EntitySet="Position" />
-            <End Role="Disaggregation" EntitySet="Disaggregation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disaggregation_Program" Association="Self.FK_Disaggregation_Program">
-            <End Role="Program" EntitySet="Program" />
+          <AssociationSet Name="FK_Disaggregation_Department" Association="Self.FK_Disaggregation_Department">
+            <End Role="Department" EntitySet="Department" />
             <End Role="Disaggregation" EntitySet="Disaggregation" />
           </AssociationSet>
           <AssociationSet Name="FK_Education_Profile" Association="Self.FK_Education_Profile">
@@ -278,17 +262,13 @@
             <End Role="College" EntitySet="Colleges" />
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
+          <AssociationSet Name="FK_Disaggregation_Department" Association="CVSUGADModel.FK_Disaggregation_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Disaggregation" EntitySet="Disaggregations" />
+          </AssociationSet>
           <AssociationSet Name="FK_Program_Department" Association="CVSUGADModel.FK_Program_Department">
             <End Role="Department" EntitySet="Departments" />
             <End Role="Program" EntitySet="Programs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disaggregation_Position" Association="CVSUGADModel.FK_Disaggregation_Position">
-            <End Role="Position" EntitySet="Positions" />
-            <End Role="Disaggregation" EntitySet="Disaggregations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disaggregation_Program" Association="CVSUGADModel.FK_Disaggregation_Program">
-            <End Role="Program" EntitySet="Programs" />
-            <End Role="Disaggregation" EntitySet="Disaggregations" />
           </AssociationSet>
           <AssociationSet Name="FK_Education_Profile" Association="CVSUGADModel.FK_Education_Profile">
             <End Role="Profile" EntitySet="Profiles" />
@@ -333,6 +313,7 @@
           <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsArchived" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="College" Relationship="CVSUGADModel.FK_Department_College" FromRole="Department" ToRole="College" />
+          <NavigationProperty Name="Disaggregations" Relationship="CVSUGADModel.FK_Disaggregation_Department" FromRole="Department" ToRole="Disaggregation" />
           <NavigationProperty Name="Programs" Relationship="CVSUGADModel.FK_Program_Department" FromRole="Department" ToRole="Program" />
         </EntityType>
         <EntityType Name="Disaggregation">
@@ -340,8 +321,8 @@
             <PropertyRef Name="DisaggregationID" />
           </Key>
           <Property Name="DisaggregationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PositionID" Type="Int32" Nullable="false" />
-          <Property Name="ProgramID" Type="Int32" Nullable="false" />
+          <Property Name="ReferenceID" Type="Int32" Nullable="false" />
+          <Property Name="IsStudent" Type="Boolean" Nullable="false" />
           <Property Name="MaleQuantity" Type="Int32" Nullable="false" />
           <Property Name="FemaleQuantity" Type="Int32" Nullable="false" />
           <Property Name="Semester" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -349,8 +330,7 @@
           <Property Name="AccountID" Type="Int32" Nullable="false" />
           <Property Name="DepartmentID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Disaggregation_Account" FromRole="Disaggregation" ToRole="Account" />
-          <NavigationProperty Name="Position" Relationship="CVSUGADModel.FK_Disaggregation_Position" FromRole="Disaggregation" ToRole="Position" />
-          <NavigationProperty Name="Program" Relationship="CVSUGADModel.FK_Disaggregation_Program" FromRole="Disaggregation" ToRole="Program" />
+          <NavigationProperty Name="Department" Relationship="CVSUGADModel.FK_Disaggregation_Department" FromRole="Disaggregation" ToRole="Department" />
         </EntityType>
         <EntityType Name="Education">
           <Key>
@@ -373,7 +353,6 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IsFaculty" Type="Boolean" Nullable="false" />
           <Property Name="IsArchived" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Disaggregations" Relationship="CVSUGADModel.FK_Disaggregation_Position" FromRole="Position" ToRole="Disaggregation" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -404,13 +383,12 @@
           <Key>
             <PropertyRef Name="ProgramID" />
           </Key>
-          <Property Name="ProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramID" Type="Boolean" Nullable="false" />
           <Property Name="DepartmentID" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsArchived" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="CVSUGADModel.FK_Program_Department" FromRole="Program" ToRole="Department" />
-          <NavigationProperty Name="Disaggregations" Relationship="CVSUGADModel.FK_Disaggregation_Program" FromRole="Program" ToRole="Disaggregation" />
         </EntityType>
         <EntityType Name="Seminar">
           <Key>
@@ -420,8 +398,8 @@
           <Property Name="ProfileID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Seminar" ToRole="Profile" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Seminar" ToRole="Profile" />
         </EntityType>
         <Association Name="FK_Disaggregation_Account">
           <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
@@ -459,6 +437,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Disaggregation_Department">
+          <End Type="CVSUGADModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="CVSUGADModel.Disaggregation" Role="Disaggregation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="Disaggregation">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Program_Department">
           <End Type="CVSUGADModel.Department" Role="Department" Multiplicity="1" />
           <End Type="CVSUGADModel.Program" Role="Program" Multiplicity="*" />
@@ -468,30 +458,6 @@
             </Principal>
             <Dependent Role="Program">
               <PropertyRef Name="DepartmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Disaggregation_Position">
-          <End Type="CVSUGADModel.Position" Role="Position" Multiplicity="1" />
-          <End Type="CVSUGADModel.Disaggregation" Role="Disaggregation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Position">
-              <PropertyRef Name="PositionID" />
-            </Principal>
-            <Dependent Role="Disaggregation">
-              <PropertyRef Name="PositionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Disaggregation_Program">
-          <End Type="CVSUGADModel.Program" Role="Program" Multiplicity="1" />
-          <End Type="CVSUGADModel.Disaggregation" Role="Disaggregation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Program">
-              <PropertyRef Name="ProgramID" />
-            </Principal>
-            <Dependent Role="Disaggregation">
-              <PropertyRef Name="ProgramID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -568,8 +534,8 @@
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
                 <ScalarProperty Name="FemaleQuantity" ColumnName="FemaleQuantity" />
                 <ScalarProperty Name="MaleQuantity" ColumnName="MaleQuantity" />
-                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
-                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="IsStudent" ColumnName="IsStudent" />
+                <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
                 <ScalarProperty Name="DisaggregationID" ColumnName="DisaggregationID" />
               </MappingFragment>
             </EntityTypeMapping>

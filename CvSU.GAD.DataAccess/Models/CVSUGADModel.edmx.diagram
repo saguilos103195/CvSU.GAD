@@ -5,21 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="83473ffe11ba4dc0b5724d1cc26627e9" Name="Diagram1" ZoomLevel="79">
-        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="1.5" PointY="18.25" />
-        <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="1.5" PointY="14.125" />
-        <EntityTypeShape EntityType="CVSUGADModel.Disaggregation" Width="1.5" PointX="3" PointY="3.25" />
-        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="10.125" />
-        <EntityTypeShape EntityType="CVSUGADModel.Position" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="7.625" />
-        <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="0.75" PointY="8.125" />
-        <EntityTypeShape EntityType="CVSUGADModel.Seminar" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="1.5" PointY="14.75" />
+        <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="CVSUGADModel.Disaggregation" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="CVSUGADModel.Position" Width="1.5" PointX="5.75" PointY="1.625" />
+        <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="CVSUGADModel.Seminar" Width="1.5" PointX="5.25" PointY="8" />
         <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Account" />
         <AssociationConnector Association="CVSUGADModel.FK_Profile_Account" />
         <AssociationConnector Association="CVSUGADModel.FK_Department_College" />
+        <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Department" />
         <AssociationConnector Association="CVSUGADModel.FK_Program_Department" />
-        <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Position" />
-        <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Program" />
         <AssociationConnector Association="CVSUGADModel.FK_Education_Profile" />
         <AssociationConnector Association="CVSUGADModel.FK_Seminar_Profile" />
       </Diagram>
