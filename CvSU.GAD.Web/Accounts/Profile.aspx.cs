@@ -42,12 +42,12 @@ namespace CvSU.GAD.Web.Accounts
 			{
 				AccountID = CurrentAccount.AccountID,
 				Address = addressTxt.Value,
-				Birthdate = DateTime.Parse(bdateTxt.Value),
+				Birthdate = DateTime.ParseExact(bdateTxt.Value, "dd/MM/yyyy", null),
 				CellphoneNumber = cellphoneTxt.Value,
 				Designation = designationTxt.Value,
 				EmailAddress = emailTxt.Value,
-				EngagedFrom = DateTime.Parse(engagedFromTxt.Value),
-				EngagedTo = DateTime.Parse(engagedToTxt.Value),
+				EngagedFrom = DateTime.ParseExact(engagedFromTxt.Value, "dd/MM/yyyy", null),
+				EngagedTo = DateTime.ParseExact(engagedToTxt.Value, "dd/MM/yyyy", null),
 				Firstname = fnameTxt.Value,
 				Lastname = lnameTxt.Value,
 				Middlename = mnameTxt.Value,
@@ -89,7 +89,29 @@ namespace CvSU.GAD.Web.Accounts
 
 		protected void UpdateEducBtn_Click(object sender, EventArgs e)
 		{
+			Education updatedEducation = new Education {
 
+				EducationID = int.Parse(selectedID.Value),
+				Course = educCourseTxt.Value,
+				DateFrom = DateTime.ParseExact(educDateFromTxt.Value, "dd/MM/yyyy", null),
+				DateTo = DateTime.ParseExact(educDateToTxt.Value, "dd/MM/yyyy", null),
+				EducationalLevel = educTypeSel.Value,
+				SchoolName = educSchoolNameTxt.Value
+
+			};
+
+			string message = AccountConnector.UpdateEducation(updatedEducation);
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Education successfully updated!', 'OK', '#009efb', 'profile.aspx');  </script>";
+
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
 		}
 	}
 }

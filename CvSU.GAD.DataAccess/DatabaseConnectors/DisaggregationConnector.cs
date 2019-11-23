@@ -33,20 +33,21 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 						try
 						{
-							Disaggregation dbDisaggregation = context.Disaggregations.FirstOrDefault(d => (
-							((d.PositionID == 0 && d.ProgramID == newDisaggregation.ProgramID) || 
-							(d.ProgramID == 0 && d.PositionID == newDisaggregation.PositionID)) && 
-							d.Semester == newDisaggregation.Semester && d.SchoolYear == newDisaggregation.SchoolYear));
+							//Disaggregation dbDisaggregation = context.Disaggregations.FirstOrDefault(d => (
+							//((d.
+							//PositionID == 0 && d.ProgramID == newDisaggregation.ProgramID) || 
+							//(d.ProgramID == 0 && d.PositionID == newDisaggregation.PositionID)) && 
+							//d.Semester == newDisaggregation.Semester && d.SchoolYear == newDisaggregation.SchoolYear));
 
-							if (dbDisaggregation == null)
-							{
-								context.Disaggregations.Add(newDisaggregation);
-								isSaved = context.SaveChanges() > 0;
-							}
-							else
-							{
-								message = "Disaggregation data already exist for this period. ";
-							}
+							//if (dbDisaggregation == null)
+							//{
+							//	context.Disaggregations.Add(newDisaggregation);
+							//	isSaved = context.SaveChanges() > 0;
+							//}
+							//else
+							//{
+							//	message = "Disaggregation data already exist for this period. ";
+							//}
 
 						}
 						catch (DbEntityValidationException ex)
@@ -92,10 +93,10 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 			try
 			{
-				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
-				{
-					disaggregation = ctx.Disaggregations.Include(d => d.Program).Where(d => d.PositionID == 0).ToList();
-				}
+				//using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
+				//{
+				//	disaggregation = ctx.Disaggregations.Include(d => d.Program).Where(d => d.PositionID == 0).ToList();
+				//}
 			}
 			catch (Exception ex)
 			{
@@ -111,10 +112,10 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 			try
 			{
-				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
-				{
-					disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d => d.ProgramID == 0 && d.Position.IsFaculty).ToList();
-				}
+				//using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
+				//{
+				//	disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d => d.ProgramID == 0 && d.Position.IsFaculty).ToList();
+				//}
 			}
 			catch (Exception ex)
 			{
@@ -130,10 +131,10 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 			try
 			{
-				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
-				{
-					disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d => d.ProgramID == 0 && !d.Position.IsFaculty).ToList();
-				}
+				//using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
+				//{
+				//	disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d => d.ProgramID == 0 && !d.Position.IsFaculty).ToList();
+				//}
 			}
 			catch (Exception ex)
 			{

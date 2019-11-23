@@ -80,14 +80,14 @@ namespace CvSU.GAD.Web.Disaggregation
 		{
 			DataAccess.Models.Disaggregation newDisaggregation = new DataAccess.Models.Disaggregation
 			{
-				AccountID = CurrentAccount.AccountID,
-				DepartmentID = int.Parse(selectedDepartmentTxt.Value),
-				PositionID = int.Parse(selectedPositionTxt.Value),
-				ProgramID = 0,
-				MaleQuantity = int.Parse(maleQTxt.Value),
-				FemaleQuantity = int.Parse(femaleQTxt.Value),
-				Semester = semesterSel.Value,
-				SchoolYear = schoolYearTxt.Value
+				//AccountID = CurrentAccount.AccountID,
+				//DepartmentID = int.Parse(selectedDepartmentTxt.Value),
+				//PositionID = int.Parse(selectedPositionTxt.Value),
+				//ProgramID = 0,
+				//MaleQuantity = int.Parse(maleQTxt.Value),
+				//FemaleQuantity = int.Parse(femaleQTxt.Value),
+				//Semester = semesterSel.Value,
+				//SchoolYear = schoolYearTxt.Value
 			};
 
 			string message = DisaggregationConnector.AddDisaggregation(newDisaggregation);
