@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using CvSU.GAD.DataAccess.Models;
 using Newtonsoft.Json;
+using CvSU.GAD.DataAccess.DatabaseContexts;
 
 namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 {
@@ -301,7 +302,6 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
                                 {
                                     resultMessage = "No changes found.";
                                 }
-
                             }
                             else
                             {
@@ -342,43 +342,68 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
             return resultMessage;
         }
 
-		//public string AddEducation(Education education)
-		//{
-		//	string resultMessage = string.Empty;
+		public string AddEducation(Education education)
+		{
+			string resultMessage = "Failed to approve the seminar. ";
 
-		//	try
-		//	{
-		//		if (education != null)
-		//		{
-		//			using (var context = _dataAccessFactory.GetCVSUGADDBContext())
-		//			{
-		//				using (var transaction = context.Database.BeginTransaction())
-		//				{
-		//					bool isSaved = false;
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
 
-		//					try
-		//					{
-		//						dbProfile = 
-		//					}
-		//					catch (Exception)
-		//					{
+						try
+						{
+							var dbProfile = context.Profiles.FirstOrDefault(p => p.ProfileID == education.ProfileID);
 
-		//						throw;
-		//					}
-		//				}
-		//			}
-		//		}
-		//	}
-		//	catch (Exception)
-		//	{
+							if (dbProfile != null)
+							{
+								context.Educations.Add(education);
+								isSaved = context.SaveChanges() > 0;
+							}
+							else
+							{
+								resultMessage += "Profile doesn't exist in the database.";
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							resultMessage += "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							resultMessage += "Please contact the support. ";
+						}
 
-		//		throw;
-		//	}
+						if (isSaved)
+						{
+							transaction.Commit();
+							resultMessage = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+							resultMessage += "Please contact the support. ";
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				resultMessage += "Please contact the support. ";
+			}
 
-		//	return resultMessage;
-		//}
+			return resultMessage;
+		}
 
-        public string UpdateEducation(Education education)
+		public string UpdateEducation(Education education)
         {
             string resultMessage = string.Empty;
 

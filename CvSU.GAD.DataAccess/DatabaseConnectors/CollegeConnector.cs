@@ -72,7 +72,6 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 							LogInfo($"New College {newCollege.Title} is failed to save.");
 							message = "Please contact the support. ";
 						}
-
 					}
 				}
 			}

@@ -79,9 +79,9 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return resultMessage;
 		}
 
-		public string AddSeminar(Seminar seminar)
+		public string ApproveSeminar(int seminarId)
 		{
-			string resultMessage = "Failed to add new seminar. ";
+			string resultMessage = "Failed to approve the seminar. ";
 
 			try
 			{
@@ -93,8 +93,127 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 						try
 						{
-							context.Seminars.Add(seminar);
-							isSaved = context.SaveChanges() > 0;
+							var dbSeminar = context.Seminars.FirstOrDefault(s => s.SeminarID == seminarId);
+
+							if (dbSeminar != null)
+							{
+								dbSeminar.Status = _seminarApproved;
+								isSaved = context.SaveChanges() > 0;
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							resultMessage += "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							resultMessage += "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							resultMessage = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+							resultMessage += "Please contact the support. ";
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				resultMessage += "Please contact the support. ";
+			}
+
+			return resultMessage;
+		}
+
+		public string RejectSeminar(int seminarId)
+		{
+			string resultMessage = "Failed to approve the seminar. ";
+
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							var dbSeminar = context.Seminars.FirstOrDefault(s => s.SeminarID == seminarId);
+
+							if (dbSeminar != null)
+							{
+								dbSeminar.Status = _seminarRejected;
+								isSaved = context.SaveChanges() > 0;
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							resultMessage += "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							resultMessage += "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							resultMessage = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+							resultMessage += "Please contact the support. ";
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				resultMessage += "Please contact the support. ";
+			}
+
+			return resultMessage;
+		}
+
+		public string CancelSeminar(int seminarId)
+		{
+			string resultMessage = "Failed to approve the seminar. ";
+
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							var dbSeminar = context.Seminars.FirstOrDefault(s => s.SeminarID == seminarId);
+
+							if (dbSeminar != null)
+							{
+								dbSeminar.Status = _seminarCancelled;
+								isSaved = context.SaveChanges() > 0;
+							}
 						}
 						catch (DbEntityValidationException ex)
 						{
