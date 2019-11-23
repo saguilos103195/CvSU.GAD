@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -47,7 +48,7 @@ namespace CvSU.GAD.Web.Accounts
 			newProfile.Middlename = mnameTxt.Value;
 			newProfile.Lastname = lnameTxt.Value;
 			newProfile.Gender = genderSel.Value;
-			newProfile.Birthdate = DateTime.Parse(birthDateTxt.Value);
+			newProfile.Birthdate = DateTime.ParseExact(birthDateTxt.Value, "dd/MM/yyyy", null);
 			newProfile.Address = addressTxt.Value;
 			newProfile.EmailAddress = emailTxt.Value;
 			newProfile.CellphoneNumber = cellphoneTxt.Value;
@@ -55,8 +56,8 @@ namespace CvSU.GAD.Web.Accounts
 			newProfile.Religion = religionTxt.Value;
 			newProfile.Designation = designationTxt.Value;
 			newProfile.OfficeAddress = officeAddressTxt.Value;
-			newProfile.EngagedFrom = DateTime.Parse(engageFromTxt.Value);
-			newProfile.EngagedTo = DateTime.Parse(engageToTxt.Value);
+			newProfile.EngagedFrom = DateTime.ParseExact(engageFromTxt.Value, "dd/MM/yyyy", null);
+			newProfile.EngagedTo = DateTime.ParseExact(engageToTxt.Value, "dd/MM/yyyy", null);
 			newProfile.WillTravel = willingChkBox.Checked;
 			newProfile.Educations = JsonConvert.DeserializeObject<List<Education>>(educListTxt.Value, new IsoDateTimeConverter() { DateTimeFormat = "dd/MM/yyyy" } );
 			

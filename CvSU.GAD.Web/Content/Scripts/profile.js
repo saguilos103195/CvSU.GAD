@@ -13,6 +13,15 @@
 
 	$(".educModalBtn").click(function () {
 
+		console.log("input[type=submit]:contains('" + $(this).html() + "')");
+
+		if (isFormValid($(".educ-modal")))
+		{
+			//$(this).css("pointer-events", "none");
+			//$(this).css("opacity", ".9");
+			
+			$("input[type=submit]:contains('" + $(this).html() + "')").click();
+		}
 
 
 	});
@@ -99,7 +108,7 @@
 function loadProfile()
 {
 	console.log(profileJSON);
-
+	$(".profileID").val(profileJSON.ProfileID);
 	$(".fnameTxt").val(profileJSON.Firstname);
 	$(".mnameTxt").val(profileJSON.Middlename);
 	$(".lnameTxt").val(profileJSON.Lastname);
@@ -149,11 +158,12 @@ function updateEducation(educationID)
 
 	var education = profileJSON.Educations.find(e => e.EducationID == educationID);
 
+	$(".selectedID").val(education.EducationID);
 	$(".educSchoolNameTxt").val(education.SchoolName);
 	$(".educCourseTxt").val(education.Course);
 	$(".educTypeSel").val(education.EducationalLevel);
 	$(".educTypeSel").selectmenu("refresh");
-	$(".inclusiveDateFromTxt").val(education.DateFrom);
-	$(".inclusiveDateToTxt").val(education.DateTo);
+	$(".educDateFromTxt").val(moment(education.DateFrom).format("DD/MM/YYYY"));
+	$(".educDateToTxt").val(moment(education.DateTo).format("DD/MM/YYYY"));
 	
 }

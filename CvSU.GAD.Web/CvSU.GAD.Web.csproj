@@ -1868,6 +1868,7 @@
     <Compile Include="Content\Classes\CustomPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Content\Classes\FIleManager.cs" />
     <Compile Include="Disaggregation\Faculty.aspx.cs">
       <DependentUpon>Faculty.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

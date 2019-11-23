@@ -2,6 +2,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 	<link rel="stylesheet" href="../Content/Stylesheets/profile.css" />
 	<script type="text/javascript" src="../Content/Scripts/profile.js"></script>
+	<input type="hidden" runat="server" id="profileID" class="profileID" />
+	<input type="hidden" runat="server" id="selectedID" class="selectedID" />
 	<div class="form-modal-overlay">
 		<%--<div class="archive-alert">
 			<i class="far fa-question-circle"></i>
@@ -33,7 +35,7 @@
 				<div class="form-col-1">
 					<div>
 						<p>Course</p>
-						<input require type="password" class="input-text-control educCourseTxt" id="educCourseTxt" runat="server" />
+						<input require type="text" class="input-text-control educCourseTxt" id="educCourseTxt" runat="server" />
 						<span></span>
 					</div>
 				</div>
