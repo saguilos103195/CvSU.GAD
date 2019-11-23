@@ -14,20 +14,12 @@ namespace CvSU.GAD.DataAccess.Models
     
     public partial class Program
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Program()
-        {
-            this.Disaggregations = new HashSet<Disaggregation>();
-        }
-    
-        public int ProgramID { get; set; }
+        public bool ProgramID { get; set; }
         public int DepartmentID { get; set; }
         public string Title { get; set; }
         public string Alias { get; set; }
         public bool IsArchived { get; set; }
     
         public virtual Department Department { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Disaggregation> Disaggregations { get; set; }
     }
 }

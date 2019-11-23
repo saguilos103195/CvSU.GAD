@@ -17,6 +17,7 @@ namespace CvSU.GAD.DataAccess.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
+            this.Disaggregations = new HashSet<Disaggregation>();
             this.Programs = new HashSet<Program>();
         }
     
@@ -27,6 +28,8 @@ namespace CvSU.GAD.DataAccess.Models
         public bool IsArchived { get; set; }
     
         public virtual College College { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Disaggregation> Disaggregations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Program> Programs { get; set; }
     }

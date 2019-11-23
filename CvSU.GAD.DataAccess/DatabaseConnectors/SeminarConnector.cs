@@ -79,7 +79,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return resultMessage;
 		}
 
-		public string AddSeminar(Seminar seminar)
+		public string AddSeminar1(Seminar seminar)
 		{
 			string resultMessage = "Failed to add new seminar. ";
 
