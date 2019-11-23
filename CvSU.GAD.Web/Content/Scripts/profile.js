@@ -1,9 +1,5 @@
 ﻿$(document).ready(function() {
 
-	loadAdminTemplateInfo();
-	loadProfile();
-	switchTab(0);
-
 	$(".profile-tab > button").click(function () {
 
 		if (isFormValid($(".profile-tab")))
@@ -15,7 +11,17 @@
 
 	});
 
-	$(".bdateTxt").datepicker({ dateFormat: 'dd/mm/yy' });
+	$(".educModalBtn").click(function () {
+
+
+
+	});
+
+	$(".bdateTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
+		changeMonth: true,
+		changeYear: true
+	});
 	$('.bdateTxt').on("cut copy paste", function (e) {
 		e.preventDefault();
 	});
@@ -25,7 +31,12 @@
 		}
 	});
 
-	$(".engagedFromTxt").datepicker({ dateFormat: 'dd/mm/yy' });
+	$(".engagedFromTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function (date) { $(".engagedToTxt").datepicker("option", "minDate", date); }
+	});
 	$('.engagedFromTxt').on("cut copy paste", function (e) {
 		e.preventDefault();
 	});
@@ -35,7 +46,11 @@
 		}
 	});
 
-	$(".engagedToTxt").datepicker({ dateFormat: 'dd/mm/yy' });
+	$(".engagedToTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
+		changeMonth: true,
+		changeYear: true
+	});
 	$('.engagedToTxt').on("cut copy paste", function (e) {
 		e.preventDefault();
 	});
@@ -44,6 +59,41 @@
 			e.preventDefault();
 		}
 	});
+
+	$(".educDateFromTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
+		changeMonth: true,
+		changeYear: true,
+		onSelect: function (date) { $(".educDateToTxt").datepicker("option", "minDate", date); }
+	});
+	$('.educDateFromTxt').on("cut copy paste", function (e) {
+		e.preventDefault();
+	});
+	$('.educDateFromTxt').on("keydown", function (e) {
+		if (e.keyCode !== 8) {
+			e.preventDefault();
+		}
+	});
+
+	$(".educDateToTxt").datepicker({
+		dateFormat: 'dd/mm/yy',
+		changeMonth: true,
+		changeYear: true
+	});
+	$('.educDateToTxt').on("cut copy paste", function (e) {
+		e.preventDefault();
+	});
+	$('.educDateToTxt').on("keydown", function (e) {
+		if (e.keyCode !== 8) {
+			e.preventDefault();
+		}
+	});
+
+	loadAdminTemplateInfo();
+	loadProfile();
+	switchTab(0);
+	$(".select-control").selectmenu();
+
 });
 
 function loadProfile()
@@ -68,20 +118,42 @@ function loadProfile()
 
 	if (profileJSON.Educations.length > 0 && profileJSON.Educations != null)
 	{
-		jQuery.each(profileJSON.Educations, function (index, education) {
-
-			$(".educ-list").append("<div>" +
-										"<label>" + moment(education.DateFrom).format("DD/MM/YYYY") + " - " +  moment(education.DateTo).format("DD/MM/YYYY") + "</label>" +
-										"<h5>" + education.Course + "</h5>" +
-										"<p>" + education.SchoolName + "</p>" +
-										"<span>" + education.EducationalLevel + "</span>" +
-									"</div>");
-
-		});
+		loadEducation();
 	}
 }
 
 function loadEducation()
 {
+	jQuery.each(profileJSON.Educations, function (index, education) {
 
+		$(".educ-list").append("<div onclick='showModal(\".educ-modal\"); updateEducation(" + education.EducationID + ");'>" +
+									"<label>" + moment(education.DateFrom).format("DD/MM/YYYY") + " - " +  moment(education.DateTo).format("DD/MM/YYYY") + "</label>" +
+									"<h5>" + education.Course + "</h5>" +
+									"<p>" + education.SchoolName + "</p>" +
+									"<span>" + education.EducationalLevel + "</span>" +
+								"</div>");
+
+	});
+}
+
+function addEducation()
+{
+	$(".modal-head > span").html("Add Education");
+	$(".educModalBtn").html("Add");
+}
+
+function updateEducation(educationID)
+{
+	$(".modal-head > span").html("Update Education");
+	$(".educModalBtn").html("Update");
+
+	var education = profileJSON.Educations.find(e => e.EducationID == educationID);
+
+	$(".educSchoolNameTxt").val(education.SchoolName);
+	$(".educCourseTxt").val(education.Course);
+	$(".educTypeSel").val(education.EducationalLevel);
+	$(".educTypeSel").selectmenu("refresh");
+	$(".inclusiveDateFromTxt").val(education.DateFrom);
+	$(".inclusiveDateToTxt").val(education.DateTo);
+	
 }

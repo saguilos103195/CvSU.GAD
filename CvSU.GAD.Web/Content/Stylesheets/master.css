@@ -436,86 +436,6 @@
 	width: 100px;
 }
 
-.form-modal
-{
-	width: 1000px;
-	min-height: 350px;
-	background-color: #FFFFFF;
-	margin: auto;
-	margin-top: calc((100vh - 430px)/2);
-	border-radius: 5px;
-	text-align: left;
-	overflow: hidden;
-	display: none;
-}
-
-.modal-head
-{
-	border-bottom: 1px solid #dee2e6;
-	height: 60px;
-}
-
-.modal-head > button
-{
-	float: right;
-	background: none;
-	border: none;
-	font-weight: 700;
-	font-family: Arial;
-	font-size: 30px;
-	padding: 7px 15px;
-	outline: none;
-}
-
-.modal-head > span
-{
-	font-size: 18px;
-	padding: 16px;
-	display: inline-block;
-}
-
-.modal-head > button:hover
-{
-	color: #627077;
-}
-
-.modal-cont
-{
-	padding: 15px;
-	max-height: 330px;
-	overflow: scroll;
-	overflow-x: hidden;
-	overflow: auto;
-}
-
-.modal-cont > div:not(:last-child)
-{
-	height: 110px;
-}
-
-.modal-cont > div > p
-{
-	margin-bottom: 10px;
-}
-
-.modal-cont > div > span:not(.ui-selectmenu-button)
-{
-	font-size: 13px;
-	display: none;
-}
-
-.modal-foot
-{
-	text-align: right;
-	padding: 12px;
-	border-top: 1px solid #dee2e6;
-}
-
-.modal-foot > input[type=submit]
-{
-	display: none;
-}
-
 .form > p
 {
 	font-size: 21px;
@@ -663,6 +583,103 @@
 .form-tabs ~ div
 {
 	padding-top: 25px;
+}
+
+.form-modal
+{
+	width: 1000px;
+	min-height: 350px;
+	background-color: #FFFFFF;
+	margin: auto;
+	margin-top: calc((100vh - 430px)/2);
+	border-radius: 5px;
+	text-align: left;
+	overflow: hidden;
+	display: none;
+}
+
+.modal-head
+{
+	border-bottom: 1px solid #dee2e6;
+	height: 60px;
+}
+
+.modal-head > button
+{
+	float: right;
+	background: none;
+	border: none;
+	font-weight: 700;
+	font-family: Arial;
+	font-size: 30px;
+	padding: 7px 15px;
+	outline: none;
+}
+
+.modal-head > span
+{
+	font-size: 18px;
+	padding: 16px;
+	display: inline-block;
+}
+
+.modal-head > button:hover
+{
+	color: #627077;
+}
+
+.modal-cont
+{
+	padding: 15px 0px;
+	max-height: 330px;
+	overflow: scroll;
+	overflow-x: hidden;
+	overflow: auto;
+}
+
+.modal-cont > div:not(:last-child)
+{
+	height: 110px;
+}
+
+.modal-cont > div > p
+{
+	margin-bottom: 10px;
+}
+
+.modal-cont > div > span:not(.ui-selectmenu-button)
+{
+	font-size: 13px;
+	display: none;
+}
+
+.modal-foot
+{
+	text-align: right;
+	padding: 12px;
+	border-top: 1px solid #dee2e6;
+}
+
+.modal-foot > input[type=submit]
+{
+	display: none;
+}
+
+.form-modal .form-col-1 > *, form-modal .form-col-2 > *, form-modal .form-col-3 > *, form-modal .form-col-4 > *
+{
+	height: 110px;
+}
+
+.form-modal .form-col-1 > div > p, form-modal .form-col-2 > div > p, form-modal .form-col-3 > div > p, form-modal .form-col-4 > div > p
+{
+	padding-bottom: 0px;
+	margin-bottom: 10px;
+}
+
+.form-modal .form-col-1 > div > span:last-child, form-modal .form-col-2 > div > span:last-child, form-modal .form-col-3 > div > span:last-child, form-modal .form-col-4 > div > span:last-child
+{
+	font-size: 13px;
+	display: none;
 }
 
 @-webkit-keyframes blow 

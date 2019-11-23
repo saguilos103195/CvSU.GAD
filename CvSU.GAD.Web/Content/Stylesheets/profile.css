@@ -36,30 +36,30 @@
 	color: #90a4ae;
 }
 
-.form-col-1 > div, .form-col-2 > div , .form-col-3 > div, .form-col-4 > div
+.profile-tab .form-col-1 > div, .profile-tab .form-col-2 > div , .profile-tab .form-col-3 > div, .profile-tab .form-col-4 > div
 {
 	height: 65px;
 	text-align: left;
 }
 
-.form-col-1 > div > p, .form-col-2 > div > p, .form-col-3 > div > p, .form-col-4 > div > p
+.profile-tab .form-col-1 > div > p, .profile-tab .form-col-2 > div > p, .profile-tab .form-col-3 > div > p, .profile-tab .form-col-4 > div > p
 {
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 	font-size: 12px;
 }
 
-.form-col-1 > div > span:not(.ui-selectmenu-button), 
-.form-col-2 > div > span:not(.ui-selectmenu-button), 
-.form-col-3 > div > span:not(.ui-selectmenu-button), 
-.form-col-4 > div > span:not(.ui-selectmenu-button)
+.profile-tab .form-col-1 > div > span:not(.ui-selectmenu-button), 
+.profile-tab .form-col-2 > div > span:not(.ui-selectmenu-button), 
+.profile-tab .form-col-3 > div > span:not(.ui-selectmenu-button), 
+.profile-tab .form-col-4 > div > span:not(.ui-selectmenu-button)
 {
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 	font-size: 10px;
 }
 
-.input-text-control
+.profile-tab .input-text-control
 {
 	border: none;
 	border-bottom: 1px solid #ced4da;
@@ -67,7 +67,7 @@
 	padding: 4px 0px;
 }
 
-.input-text-control:focus
+.profile-tab .input-text-control:focus
 {
 	border: none;
 	border-bottom: 2px solid #51d487;

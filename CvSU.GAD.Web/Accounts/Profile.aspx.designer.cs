@@ -13,31 +13,67 @@ namespace CvSU.GAD.Web.Accounts {
     public partial class Profile {
         
         /// <summary>
-        /// editTitleTxt control.
+        /// educSchoolNameTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText editTitleTxt;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText educSchoolNameTxt;
         
         /// <summary>
-        /// editAliasTxt control.
+        /// educCourseTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText editAliasTxt;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword educCourseTxt;
         
         /// <summary>
-        /// editSelectedDepartmentTxt control.
+        /// educTypeSel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden editSelectedDepartmentTxt;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect educTypeSel;
+        
+        /// <summary>
+        /// educDateFromTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText educDateFromTxt;
+        
+        /// <summary>
+        /// educDateToTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText educDateToTxt;
+        
+        /// <summary>
+        /// AddEducBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddEducBtn;
+        
+        /// <summary>
+        /// UpdateEducBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button UpdateEducBtn;
         
         /// <summary>
         /// fnameTxt control.
