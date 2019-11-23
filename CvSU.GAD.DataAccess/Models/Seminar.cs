@@ -18,6 +18,7 @@ namespace CvSU.GAD.DataAccess.Models
         public int ProfileID { get; set; }
         public string Name { get; set; }
         public string Year { get; set; }
+        public string Status { get; set; }
     
         public virtual Profile Profile { get; set; }
     }

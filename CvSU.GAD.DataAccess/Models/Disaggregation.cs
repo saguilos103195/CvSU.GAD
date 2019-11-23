@@ -15,8 +15,8 @@ namespace CvSU.GAD.DataAccess.Models
     public partial class Disaggregation
     {
         public int DisaggregationID { get; set; }
-        public int PositionID { get; set; }
-        public int ProgramID { get; set; }
+        public int ReferenceID { get; set; }
+        public bool IsStudent { get; set; }
         public int MaleQuantity { get; set; }
         public int FemaleQuantity { get; set; }
         public string Semester { get; set; }
@@ -25,7 +25,6 @@ namespace CvSU.GAD.DataAccess.Models
         public int DepartmentID { get; set; }
     
         public virtual Account Account { get; set; }
-        public virtual Position Position { get; set; }
-        public virtual Program Program { get; set; }
+        public virtual Department Department { get; set; }
     }
 }
