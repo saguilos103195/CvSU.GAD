@@ -17,42 +17,54 @@
 			<asp:Button runat="server" ID="RetrieveBtn" OnClick="RetrieveBtn_Click" CssClass="button-control button-red" Text="Ok" />
 			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
 		</div>--%>
-		<div class="form-modal">
+		<div class="form-modal educ-modal">
 			<div class="modal-head">
-				<span>Edit</span>
+				<span></span>
 				<button type="button" onclick="hideModal()">×</button>
 			</div>
 			<div class="modal-cont">
-				<div>
-					<p>Title</p>
-					<input require runat="server" id="editTitleTxt" class="input-text-control editTitleTxt" />
-					<span></span>
+				<div class="form-col-1">
+					<div>
+						<p>Name of School</p>
+						<input require type="text" class="input-text-control educSchoolNameTxt" id="educSchoolNameTxt" runat="server" />
+						<span></span>
+					</div>
 				</div>
-				<div>
-					<p>Alias</p>
-					<input require runat="server" id="editAliasTxt" type="text" class="input-text-control editAliasTxt" />
-					<span></span>
+				<div class="form-col-1">
+					<div>
+						<p>Course</p>
+						<input require type="password" class="input-text-control educCourseTxt" id="educCourseTxt" runat="server" />
+						<span></span>
+					</div>
 				</div>
-				<div>
-					<p>College</p>
-                    <select class="select-control" id="editCollegeSel">
-				        <option selected disabled value="">Select College</option>
-			        </select>
-			        <span></span>
-				</div>
-				<div>
-					<p>Department</p>
-                    <select class="select-control" id="editDepartmentSel">
-				        <option selected disabled value="">Select Department First</option>
-			        </select>
-			        <span></span>
-					<input type="hidden" runat="server" id="editSelectedDepartmentTxt" class="editSelectedDepartmentTxt" />
+				<div class="form-col-3">
+					<div>
+						<p>Type</p>
+						<select require class="select-control educTypeSel" id="educTypeSel" runat="server" >
+							<option selected disabled value="">Select Level</option>
+							<option>College</option>
+							<option>Post Graduate</option>
+							<option>Vocational</option>
+						</select>
+						<span></span>
+					</div>
+					<div>
+						<p>Inclusive Date From</p>
+						<input require type="text" class="input-text-control educDateFromTxt" id="educDateFromTxt" runat="server" />
+						<span></span>
+					</div>
+					<div>
+						<p>Inclusive Date To</p>
+						<input require type="text" class="input-text-control educDateToTxt" id="educDateToTxt" runat="server" />
+						<span></span>
+					</div>
 				</div>
 			</div>
             <div class="modal-foot">
 				<button class="button-control button-transparent" type="button" onclick="hideModal()">Cancel</button>
-				<button class="button-control button-green updateBtn" type="button">Update</button>
-				<%--<asp:Button ID="EditBtn" runat="server" OnClick="EditBtn_Click" />--%>
+				<button class="button-control button-green educModalBtn" type="button"></button>
+				<asp:Button ID="AddEducBtn" runat="server" OnClick="AddEducBtn_Click" Text="Add" />
+				<asp:Button ID="UpdateEducBtn" runat="server" OnClick="UpdateEducBtn_Click" Text="Update" />
 			</div>
 		</div>
 	</div>
@@ -191,7 +203,7 @@
 				</div>
 				<div class="form-body educ-tab tab-control">
 					<div class="educ-list">
-						<div onclick="addEducation()">
+						<div onclick="showModal('.educ-modal'); addEducation();">
 							<h1>+ Add Edudcation</h1>
 						</div>
 					</div>

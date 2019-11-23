@@ -24,18 +24,22 @@
 				<button type="button" onclick="hideModal()">×</button>
 			</div>
 			<div class="modal-cont">
-				<div>
-					<p>Title</p>
-					<input require runat="server" id="editTitleTxt" class="input-text-control editTitleTxt" />
-					<span></span>
-				</div>
-				<div>
+				<div class="form-col-1">
 					<div>
-						<label class="check-control">
-							<p>Faculty</p>
-							<input runat="server" id="editTypeChkBx" class="editTypeChkBx" value="true" type="checkbox">
-							<span class="checkmark"></span>
-						</label>
+						<p>Title</p>
+						<input require runat="server" id="editTitleTxt" class="input-text-control editTitleTxt" />
+						<span></span>
+					</div>
+				</div>
+				<div class="form-col-1">
+					<div>
+						<div>
+							<label class="check-control">
+								<p>Faculty</p>
+								<input runat="server" id="editTypeChkBx" class="editTypeChkBx" value="true" type="checkbox">
+								<span class="checkmark"></span>
+							</label>
+						</div>
 					</div>
 				</div>
 			</div>

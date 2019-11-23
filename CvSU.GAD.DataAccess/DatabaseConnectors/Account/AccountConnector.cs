@@ -342,6 +342,42 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
             return resultMessage;
         }
 
+		//public string AddEducation(Education education)
+		//{
+		//	string resultMessage = string.Empty;
+
+		//	try
+		//	{
+		//		if (education != null)
+		//		{
+		//			using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+		//			{
+		//				using (var transaction = context.Database.BeginTransaction())
+		//				{
+		//					bool isSaved = false;
+
+		//					try
+		//					{
+		//						dbProfile = 
+		//					}
+		//					catch (Exception)
+		//					{
+
+		//						throw;
+		//					}
+		//				}
+		//			}
+		//		}
+		//	}
+		//	catch (Exception)
+		//	{
+
+		//		throw;
+		//	}
+
+		//	return resultMessage;
+		//}
+
         public string UpdateEducation(Education education)
         {
             string resultMessage = string.Empty;

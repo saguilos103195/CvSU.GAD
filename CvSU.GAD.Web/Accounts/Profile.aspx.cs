@@ -70,5 +70,26 @@ namespace CvSU.GAD.Web.Accounts
 			}
 			LoadJavaSript("showAlert", showAlert);
 		}
+
+		protected void AddEducBtn_Click(object sender, EventArgs e)
+		{
+			//string message = AccountConnector.(updatedProfile);
+			//string showAlert;
+			//if (string.IsNullOrEmpty(message))
+			//{
+			//	showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Profile successfully updated!', 'OK', '#009efb', 'profile.aspx');  </script>";
+
+			//}
+			//else
+			//{
+			//	showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			//}
+			//LoadJavaSript("showAlert", showAlert);
+		}
+
+		protected void UpdateEducBtn_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

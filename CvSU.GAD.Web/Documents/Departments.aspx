@@ -25,23 +25,29 @@
 				<button type="button" onclick="hideModal()">×</button>
 			</div>
 			<div class="modal-cont">
-				<div>
-					<p>Title</p>
-					<input require runat="server" id="editTitleTxt" class="input-text-control editTitleTxt" />
-					<span></span>
+				<div class="form-col-1">
+					<div>
+						<p>Title</p>
+						<input require runat="server" id="editTitleTxt" class="input-text-control editTitleTxt" />
+						<span></span>
+					</div>
 				</div>
-				<div>
-					<p>Alias</p>
-					<input require runat="server" id="editAliasTxt" type="text" class="input-text-control editAliasTxt" />
-					<span></span>
+				<div class="form-col-1">
+					<div>
+						<p>Alias</p>
+						<input require runat="server" id="editAliasTxt" type="text" class="input-text-control editAliasTxt" />
+						<span></span>
+					</div>
 				</div>
-				<div>
-					<p>College</p>
-                    <select require class="select-control" id="editCollegeSel">
-				        <option selected disabled value="">Select College</option>
-			        </select>
-			        <span></span>
-					<input type="hidden" runat="server" id="editSelectedCollegeTxt" class="editSelectedCollegeTxt" />
+				<div class="form-col-1">
+					<div>
+						<p>College</p>
+						<select require class="select-control" id="editCollegeSel">
+							<option selected disabled value="">Select College</option>
+						</select>
+						<span></span>
+						<input type="hidden" runat="server" id="editSelectedCollegeTxt" class="editSelectedCollegeTxt" />
+					</div>
 				</div>
 			</div>
             <div class="modal-foot">
