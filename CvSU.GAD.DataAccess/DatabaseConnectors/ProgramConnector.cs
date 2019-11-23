@@ -79,7 +79,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					programs = context.Programs.ToList();
+					programs = context.Programs.Where(p => p.ProgramID != 0).ToList();
 				}
 			}
 			catch (DbEntityValidationException ex)

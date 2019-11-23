@@ -99,7 +99,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					departments = context.Departments.ToList();
+					departments = context.Departments.Where(d => d.DepartmentID != 0).ToList();
 				}
 			}
 			catch (Exception ex)

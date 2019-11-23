@@ -163,6 +163,7 @@
     <Content Include="Content\Scripts\datatables\datatables.min.css" />
     <Content Include="Content\Scripts\datatables\datatables.min.js" />
     <Content Include="Content\Scripts\departments.js" />
+    <Content Include="Content\Scripts\faculty.js" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\less\brands.less" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\less\fontawesome.less" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\less\regular.less" />
@@ -1807,9 +1808,11 @@
     <Content Include="Content\Scripts\jquery.steps.min.js" />
     <Content Include="Content\Scripts\master.js" />
     <Content Include="Content\Scripts\moment.js" />
+    <Content Include="Content\Scripts\positions.js" />
     <Content Include="Content\Scripts\profile.js" />
     <Content Include="Content\Scripts\programs.js" />
     <Content Include="Content\Scripts\setup.js" />
+    <Content Include="Content\Scripts\student.js" />
     <Content Include="Content\Stylesheets\animate.css" />
     <Content Include="Content\Stylesheets\bootstrap-grid.css" />
     <Content Include="Content\Stylesheets\bootstrap-grid.min.css" />
@@ -1822,8 +1825,12 @@
     <Content Include="Content\Stylesheets\profile.css" />
     <Content Include="Content\Stylesheets\setup.css" />
     <Content Include="Content\Stylesheets\ui.css" />
+    <Content Include="Disaggregation\Faculty.aspx" />
+    <Content Include="Disaggregation\Nonfaculty.aspx" />
+    <Content Include="Disaggregation\Student.aspx" />
     <Content Include="Documents\Colleges.aspx" />
     <Content Include="Documents\Departments.aspx" />
+    <Content Include="Documents\Positions.aspx" />
     <Content Include="Documents\Programs.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Test.aspx" />
@@ -1861,6 +1868,27 @@
     <Compile Include="Content\Classes\CustomPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Disaggregation\Faculty.aspx.cs">
+      <DependentUpon>Faculty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Disaggregation\Faculty.aspx.designer.cs">
+      <DependentUpon>Faculty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Disaggregation\Nonfaculty.aspx.cs">
+      <DependentUpon>Nonfaculty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Disaggregation\Nonfaculty.aspx.designer.cs">
+      <DependentUpon>Nonfaculty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Disaggregation\Student.aspx.cs">
+      <DependentUpon>Student.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Disaggregation\Student.aspx.designer.cs">
+      <DependentUpon>Student.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Documents\Colleges.aspx.cs">
       <DependentUpon>Colleges.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1874,6 +1902,13 @@
     </Compile>
     <Compile Include="Documents\Departments.aspx.designer.cs">
       <DependentUpon>Departments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\Positions.aspx.cs">
+      <DependentUpon>Positions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documents\Positions.aspx.designer.cs">
+      <DependentUpon>Positions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documents\Programs.aspx.cs">
       <DependentUpon>Programs.aspx</DependentUpon>

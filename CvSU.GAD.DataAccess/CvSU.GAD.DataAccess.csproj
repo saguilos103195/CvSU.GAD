@@ -68,6 +68,8 @@
     <Compile Include="DatabaseConnectors\Account\AdminConnector.cs" />
     <Compile Include="DatabaseConnectors\CollegeConnector.cs" />
     <Compile Include="DatabaseConnectors\Account\CoordinatorConnector.cs" />
+    <Compile Include="DatabaseConnectors\DisaggregationConnector.cs" />
+    <Compile Include="DatabaseConnectors\PositionConnector.cs" />
     <Compile Include="DatabaseConnectors\ProgramConnector.cs" />
     <Compile Include="DatabaseConnectors\DatabaseConnector.cs" />
     <Compile Include="DatabaseConnectors\DepartmentConnector.cs" />
@@ -96,13 +98,22 @@
     <Compile Include="Models\Department.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Disaggregation.cs">
+      <DependentUpon>CVSUGADModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Education.cs">
+      <DependentUpon>CVSUGADModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Position.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Profile.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Program.cs">
+      <DependentUpon>CVSUGADModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Seminar.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

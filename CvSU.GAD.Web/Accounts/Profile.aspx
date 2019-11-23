@@ -40,86 +40,86 @@
 					<div class="form-col-1">
 						<div>
 							<p>First Name</p>
-							<input runat="server" id="fnameTxt" type="text" class="input-text-control fnameTxt" />
+							<input require runat="server" id="fnameTxt" type="text" class="input-text-control fnameTxt" />
 							<span></span>
 						</div>					</div>
 					<div class="form-col-1">
 						<div>
 							<p>Middle Name</p>
-							<input runat="server" id="mnameTxt" type="text" class="input-text-control mnameTxt" />
+							<input require runat="server" id="mnameTxt" type="text" class="input-text-control mnameTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-1">
 						<div>
 							<p>Last Name</p>
-							<input runat="server" id="lnameTxt" type="text" class="input-text-control lnameTxt" />
+							<input require runat="server" id="lnameTxt" type="text" class="input-text-control lnameTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-1">
 						<div>
 							<p>Birthdate</p>
-							<input runat="server" id="bdateTxt" type="text" class="input-text-control bdateTxt" />
+							<input require runat="server" id="bdateTxt" type="text" class="input-text-control bdateTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-1">
 						<div>
 							<p>Religion</p>
-							<input runat="server" id="religionTxt" type="text" class="input-text-control religionTxt" />
+							<input require runat="server" id="religionTxt" type="text" class="input-text-control religionTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-2">
 						<div>
 							<p>Cellphone Number</p>
-							<input runat="server" id="cellphoneTxt" type="text" class="input-text-control cellphoneTxt" />
+							<input require runat="server" id="cellphoneTxt" type="text" class="input-text-control cellphoneTxt" />
 							<span></span>
 						</div>
 						<div>
 							<p>Telephone Number</p>
-							<input runat="server" id="telephoneTxt" type="text" class="input-text-control telephoneTxt" />
+							<input require runat="server" id="telephoneTxt" type="text" class="input-text-control telephoneTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-1">
 						<div>
 							<p>Email Address</p>
-							<input runat="server" id="emailTxt" type="text" class="input-text-control emailTxt" />
+							<input require runat="server" id="emailTxt" type="text" class="input-text-control emailTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-1">
 						<div>
 							<p>Permanent Address</p>
-							<input runat="server" id="addressTxt" type="text" class="input-text-control addressTxt" />
+							<input require runat="server" id="addressTxt" type="text" class="input-text-control addressTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-1">
 						<div>
 							<p>Designation</p>
-							<input runat="server" id="designationTxt" type="text" class="input-text-control designationTxt" />
+							<input require runat="server" id="designationTxt" type="text" class="input-text-control designationTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-1">
 						<div>
 							<p>Office Address</p>
-							<input runat="server" id="officeAddressTxt" type="text" class="input-text-control officeAddressTxt" />
+							<input require runat="server" id="officeAddressTxt" type="text" class="input-text-control officeAddressTxt" />
 							<span></span>
 						</div>
 					</div>
 					<div class="form-col-2">
 						<div>
 							<p>Engaged in GAD From</p>
-							<input runat="server" id="engagedFromTxt" type="text" class="input-text-control engagedFromTxt" />
+							<input require runat="server" id="engagedFromTxt" type="text" class="input-text-control engagedFromTxt" />
 							<span></span>
 						</div>
 						<div>
 							<p>Engaged in GAD To</p>
-							<input runat="server" id="engagedToTxt" type="text" class="input-text-control engagedToTxt" />
+							<input require runat="server" id="engagedToTxt" type="text" class="input-text-control engagedToTxt" />
 							<span></span>
 						</div>
 					</div>
@@ -132,30 +132,28 @@
 							</label>
 						</div>
 					</div>
-					<button type="button" >Update Profile</button>
+					<button class="button-control button-green" type="button" >Update Profile</button>
+					<asp:Button runat="server" ID="UpdateProfileBtn" OnClick="UpdateProfileBtn_Click" />
 				</div>
-				<div class="form-body tab-control">
-					<div class="form-col-1">
+				<div class="form-body educ-tab tab-control">
+					<div class="educ-list">
 						<div>
-							<p>Title</p>
-							<input require runat="server" id="Text1" type="text" class="input-text-control" />
-							<span></span>
+							<label>15/06/2012 - 19/11/2019</label>
+							<h5>Bachelors of Science in Information Technology</h5>
+							<p>Cavite State University</p>
+							<span>College</span>
 						</div>
-					</div>
-					<div class="form-col-1">
 						<div>
-							<p>Alias</p>
-							<input require runat="server" id="Text2" type="text" class="input-text-control" />
-							<span></span>
+							<label>15/06/2012 - 19/11/2019</label>
+							<h5>Bachelors of Science in Information Technology</h5>
+							<p>Cavite State University</p>
+							<span>College</span>
 						</div>
-					</div>
-					<div class="form-col-1">
 						<div>
-							<label class="check-control">
-								<p>Main Campus</p>
-								<input runat="server" id="Checkbox1" value="true" type="checkbox">
-								<span class="checkmark"></span>
-							</label>
+							<label>15/06/2012 - 19/11/2019</label>
+							<h5>Bachelors of Science in Information Technology</h5>
+							<p>Cavite State University</p>
+							<span>College</span>
 						</div>
 					</div>
 				</div>

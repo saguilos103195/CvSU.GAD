@@ -200,5 +200,251 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 
 			return resultMessage;
 		}
-	}
+
+        public string UpdateProfile(Profile profile)
+        {
+            string resultMessage = string.Empty;
+
+            try
+            {
+                using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+                {
+                    using (var transaction = context.Database.BeginTransaction())
+                    {
+                        bool isUpdated = false;
+
+                        try
+                        {
+                            Profile dbProfile = context.Profiles.FirstOrDefault(p => p.AccountID == profile.AccountID);
+
+                            if (dbProfile != null)
+                            {
+                                int numberOfChanges = 0;
+
+                                if (dbProfile.Address != profile.Address)
+                                {
+                                    dbProfile.Address = profile.Address;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.Birthdate != profile.Birthdate)
+                                {
+                                    dbProfile.Birthdate = profile.Birthdate;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.CellphoneNumber != profile.CellphoneNumber)
+                                {
+                                    dbProfile.CellphoneNumber = profile.CellphoneNumber;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.Designation != profile.Designation)
+                                {
+                                    dbProfile.Designation = profile.Designation;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.EmailAddress != profile.EmailAddress)
+                                {
+                                    dbProfile.EmailAddress = profile.EmailAddress;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.Firstname != profile.Firstname)
+                                {
+                                    dbProfile.Firstname = profile.Firstname;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.Lastname != profile.Lastname)
+                                {
+                                    dbProfile.Lastname = profile.Lastname;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.Middlename != profile.Middlename)
+                                {
+                                    dbProfile.Middlename = profile.Middlename;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.OfficeAddress != profile.OfficeAddress)
+                                {
+                                    dbProfile.OfficeAddress = profile.OfficeAddress;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.Religion != profile.Religion)
+                                {
+                                    dbProfile.Religion = profile.Religion;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.TelephoneNumber != profile.TelephoneNumber)
+                                {
+                                    dbProfile.TelephoneNumber = profile.TelephoneNumber;
+                                    numberOfChanges++;
+                                }
+
+                                if (dbProfile.WillTravel != profile.WillTravel)
+                                {
+                                    dbProfile.WillTravel = profile.WillTravel;
+                                    numberOfChanges++;
+                                }
+
+                                if (numberOfChanges > 0)
+                                {
+                                    isUpdated = context.SaveChanges() > 0;
+                                }
+                                else
+                                {
+                                    resultMessage = "No changes found.";
+                                }
+
+                            }
+                            else
+                            {
+                                resultMessage = "Profile doesn't exist in the database.";
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogException(ex);
+                            resultMessage = "Please contact the support. ";
+                        }
+
+                        if (isUpdated)
+                        {
+                            transaction.Commit();
+                            LogInfo($"Account '{profile.AccountID}' is successfully updated.");
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            LogWarn($"Account '{profile.AccountID}' failed to updated.");
+                            resultMessage = "Failed to update. ";
+                        }
+                    }
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                LogDbEntityValidationException(ex);
+                resultMessage = "Please contact the support. ";
+            }
+            catch (Exception ex)
+            {
+                LogException(ex);
+                resultMessage = "Please contact the support. ";
+            }
+
+            return resultMessage;
+        }
+
+        public string UpdateEducation(Education education)
+        {
+            string resultMessage = string.Empty;
+
+            try
+            {
+                if (education != null)
+                {
+                    using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+                    {
+                        using (var transaction = context.Database.BeginTransaction())
+                        {
+                            bool isUpdated = false;
+
+                            try
+                            {
+                                Education dbEducation = context.Educations.FirstOrDefault(p => p.EducationID == education.EducationID);
+
+                                if (dbEducation != null)
+                                {
+                                    int numberOfChanges = 0;
+
+                                    if (dbEducation.Course != education.Course)
+                                    {
+                                        dbEducation.Course = education.Course;
+                                        numberOfChanges++;
+                                    }
+
+                                    if (dbEducation.DateFrom != education.DateFrom)
+                                    {
+                                        dbEducation.DateFrom = education.DateFrom;
+                                        numberOfChanges++;
+                                    }
+
+                                    if (dbEducation.DateTo != education.DateTo)
+                                    {
+                                        dbEducation.DateTo = education.DateTo;
+                                        numberOfChanges++;
+                                    }
+
+                                    if (dbEducation.EducationalLevel != education.EducationalLevel)
+                                    {
+                                        dbEducation.EducationalLevel = education.EducationalLevel;
+                                        numberOfChanges++;
+                                    }
+
+                                    if (dbEducation.SchoolName != education.SchoolName)
+                                    {
+                                        dbEducation.SchoolName = education.SchoolName;
+                                        numberOfChanges++;
+                                    }
+
+                                    if (numberOfChanges > 0)
+                                    {
+                                        isUpdated = context.SaveChanges() > 0;
+                                    }
+                                    else
+                                    {
+                                        resultMessage = "No changes found.";
+                                    }
+                                }
+                                else
+                                {
+                                    resultMessage = "Profile doesn't exist in the database.";
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                LogException(ex);
+                                resultMessage = "Please contact the support. ";
+                            }
+
+                            if (isUpdated)
+                            {
+                                transaction.Commit();
+                                LogInfo($"Account '{education.EducationID}' is successfully updated.");
+                            }
+                            else
+                            {
+                                transaction.Rollback();
+                                LogWarn($"Account '{education.EducationID}' failed to updated.");
+                                resultMessage = "Failed to update. ";
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    resultMessage = "Invalid education";
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                LogDbEntityValidationException(ex);
+                resultMessage = "Please contact the support. ";
+            }
+            catch (Exception ex)
+            {
+                LogException(ex);
+                resultMessage = "Please contact the support. ";
+            }
+
+            return resultMessage;
+        }
+    }
 }

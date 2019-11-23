@@ -12,28 +12,20 @@ namespace CvSU.GAD.DataAccess.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class Position
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Account()
+        public Position()
         {
             this.Disaggregations = new HashSet<Disaggregation>();
-            this.Profiles = new HashSet<Profile>();
-            this.Seminars = new HashSet<Seminar>();
         }
     
-        public int AccountID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Status { get; set; }
-        public string Type { get; set; }
-        public Nullable<int> CollegeID { get; set; }
+        public int PositionID { get; set; }
+        public string Title { get; set; }
+        public bool IsFaculty { get; set; }
+        public bool IsArchived { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disaggregation> Disaggregations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profile> Profiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Seminar> Seminars { get; set; }
     }
 }

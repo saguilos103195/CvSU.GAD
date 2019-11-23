@@ -34,5 +34,40 @@ namespace CvSU.GAD.Web.Accounts
 			}
 			LoadJSProfile();
 		}
+
+		protected void UpdateProfileBtn_Click(object sender, EventArgs e)
+		{
+			DataAccess.Models.Profile updatedProfile = new DataAccess.Models.Profile
+			{
+				AccountID = CurrentAccount.AccountID,
+				Address = addressTxt.Value,
+				Birthdate = DateTime.Parse(bdateTxt.Value),
+				CellphoneNumber = cellphoneTxt.Value,
+				Designation = designationTxt.Value,
+				EmailAddress = emailTxt.Value,
+				EngagedFrom = DateTime.Parse(engagedFromTxt.Value),
+				EngagedTo = DateTime.Parse(engagedToTxt.Value),
+				Firstname = fnameTxt.Value,
+				Lastname = lnameTxt.Value,
+				Middlename = mnameTxt.Value,
+				OfficeAddress = officeAddressTxt.Value,
+				Religion = religionTxt.Value,
+				TelephoneNumber = telephoneTxt.Value,
+				WillTravel = willingChkBox.Checked
+			};
+
+			string message = AccountConnector.UpdateProfile(updatedProfile);
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Program successfully archived!', 'OK', '#009efb', 'profile.aspx');  </script>";
+				
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
+		}
 	}
 }

@@ -65,9 +65,9 @@
 					<div class="master-sidebar-menuitem">
 						<p><label class="fas fa-venus-mars"></label><span>Sex Disaggregation</span><i class="fas fa-chevron-left"></i></p>
 						<div>
-							<a href="#">Student</a>
-							<a href="#">Faculty</a>
-							<a href="#">Non-faculty</a>
+							<a href="../disaggregation/student.aspx">Student</a>
+							<a href="../disaggregation/faculty.aspx">Faculty</a>
+							<a href="../disaggregation/nonfaculty.aspx">Non-faculty</a>
 						</div>
 					</div>
 					<div class="master-sidebar-menuitem">
@@ -83,6 +83,7 @@
 							<a href="../documents/colleges.aspx">Colleges</a>
 							<a href="../documents/departments.aspx">Departments</a>
 							<a href="../documents/programs.aspx">Programs</a>
+							<a href="../documents/positions.aspx">Position</a>
 						</div>
 					</div>
 				</div>

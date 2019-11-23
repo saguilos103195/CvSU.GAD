@@ -53,6 +53,8 @@ $(document).ready(function () {
 
 function isFormValid(form)
 {
+	console.log(1);
+
 	var isValid = true;
 	var gotFocus = false;
 
