@@ -73,6 +73,7 @@
     <Compile Include="DatabaseConnectors\ProgramConnector.cs" />
     <Compile Include="DatabaseConnectors\DatabaseConnector.cs" />
     <Compile Include="DatabaseConnectors\DepartmentConnector.cs" />
+    <Compile Include="DatabaseConnectors\SeminarConnector.cs" />
     <Compile Include="DatabaseContexts\CVSUGADDBContext.cs" />
     <Compile Include="Models\Account.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>

@@ -111,6 +111,7 @@
           <Property Name="ProfileID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Year" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Department_College">
           <End Role="College" Type="Self.College" Multiplicity="1" />
@@ -420,6 +421,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Year" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Seminar" ToRole="Profile" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Disaggregation_Account">
           <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
@@ -632,6 +634,7 @@
           <EntitySetMapping Name="Seminars">
             <EntityTypeMapping TypeName="CVSUGADModel.Seminar">
               <MappingFragment StoreEntitySet="Seminar">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
