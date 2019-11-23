@@ -14,7 +14,7 @@ namespace CvSU.GAD.DataAccess.Models
     
     public partial class Program
     {
-        public bool ProgramID { get; set; }
+        public int ProgramID { get; set; }
         public int DepartmentID { get; set; }
         public string Title { get; set; }
         public string Alias { get; set; }

@@ -23,6 +23,7 @@ namespace CvSU.GAD.Web.Accounts
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			UpdateSession();
 			CurrentAccount = GetAccountSession();
 			if (CurrentAccount == null)
 			{

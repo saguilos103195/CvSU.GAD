@@ -202,6 +202,30 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			return resultMessage;
 		}
 
+		public string GetAccount(int accountId)
+		{
+			string resultMessage = string.Empty;
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					Models.Account dbAccount = context.Accounts.FirstOrDefault(a => a.AccountID == accountId);
+
+					if (dbAccount != null)
+					{
+						resultMessage = JsonConvert.SerializeObject(dbAccount);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+			return resultMessage;
+		}
+
+
         public string UpdateProfile(Profile profile)
         {
             string resultMessage = string.Empty;

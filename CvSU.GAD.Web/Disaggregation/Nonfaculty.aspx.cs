@@ -82,8 +82,8 @@ namespace CvSU.GAD.Web.Disaggregation
 			{
 				AccountID = CurrentAccount.AccountID,
 				DepartmentID = int.Parse(selectedDepartmentTxt.Value),
-				PositionID = int.Parse(selectedPositionTxt.Value),
-				ProgramID = 0,
+				IsStudent = false,
+				ReferenceID = int.Parse(selectedPositionTxt.Value),
 				MaleQuantity = int.Parse(maleQTxt.Value),
 				FemaleQuantity = int.Parse(femaleQTxt.Value),
 				Semester = semesterSel.Value,

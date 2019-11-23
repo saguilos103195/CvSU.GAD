@@ -105,6 +105,7 @@
     <Compile Include="Models\Education.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Helper\DisaggregationModel.cs" />
     <Compile Include="Models\Position.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>

@@ -25,7 +25,10 @@ namespace CvSU.GAD.Web.Accounts
 
         protected void Page_Load(object sender, EventArgs e)
         {
+			UpdateSession();
+
 			CurrentAccount = GetAccountSession();
+
 			if (CurrentAccount == null)
 			{
 				Response.Redirect("../index.aspx", true);
@@ -61,7 +64,7 @@ namespace CvSU.GAD.Web.Accounts
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Account Setup Complete!', 'OK', '#009efb', '../documents/colleges.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Account Setup Complete!', 'OK', '#009efb', '../accounts/profile.aspx');  </script>";
 			}
 			else
 			{

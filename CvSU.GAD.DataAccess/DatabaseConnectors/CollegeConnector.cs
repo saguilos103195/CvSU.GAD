@@ -212,7 +212,6 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 						{
 							transaction.Rollback();
 							LogInfo($"{collegeToArchive.Title} is failed to retrieve.");
-							message = "Please contact the support. ";
 						}
 					}
 				}

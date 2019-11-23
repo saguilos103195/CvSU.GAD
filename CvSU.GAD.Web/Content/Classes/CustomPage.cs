@@ -23,6 +23,15 @@ namespace CvSU.GAD.Web.Content.Classes
 		{
 			ScriptManager.RegisterStartupScript(this, typeof(Page), key, script, false);
 		}
+
+		protected void UpdateSession()
+		{
+			if (HttpContext.Current.Session["AccountJSON"] != null)
+			{
+				Account sessionAccount = JsonConvert.DeserializeObject<Account>(HttpContext.Current.Session["AccountJSON"].ToString());
+				HttpContext.Current.Session["AccountJSON"] = AccountConnector.GetAccount(sessionAccount.AccountID);
+			}
+		}
 		
 		protected DataAccess.Models.Account GetAccountSession()
 		{
@@ -30,7 +39,7 @@ namespace CvSU.GAD.Web.Content.Classes
 
 			if (HttpContext.Current.Session["AccountJSON"] != null)
 			{
-				SessionAccount = JsonConvert.DeserializeObject<DataAccess.Models.Account>(HttpContext.Current.Session["AccountJSON"].ToString());
+				SessionAccount = JsonConvert.DeserializeObject<Account>(HttpContext.Current.Session["AccountJSON"].ToString());
 			}
 
 			return SessionAccount;

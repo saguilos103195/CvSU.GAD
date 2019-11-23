@@ -97,7 +97,7 @@
           <Key>
             <PropertyRef Name="ProgramID" />
           </Key>
-          <Property Name="ProgramID" Type="bit" Nullable="false" />
+          <Property Name="ProgramID" Type="int" Nullable="false" />
           <Property Name="DepartmentID" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Alias" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -383,7 +383,7 @@
           <Key>
             <PropertyRef Name="ProgramID" />
           </Key>
-          <Property Name="ProgramID" Type="Boolean" Nullable="false" />
+          <Property Name="ProgramID" Type="Int32" Nullable="false" />
           <Property Name="DepartmentID" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Alias" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />

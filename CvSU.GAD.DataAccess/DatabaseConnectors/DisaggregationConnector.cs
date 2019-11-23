@@ -1,5 +1,6 @@
 ﻿using CvSU.GAD.DataAccess.DatabaseContexts;
 using CvSU.GAD.DataAccess.Models;
+using CvSU.GAD.DataAccess.Models.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -33,10 +34,11 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 						try
 						{
-							Disaggregation dbDisaggregation = context.Disaggregations.FirstOrDefault(d => (
-							((d.PositionID == 0 && d.ProgramID == newDisaggregation.ProgramID) || 
-							(d.ProgramID == 0 && d.PositionID == newDisaggregation.PositionID)) && 
-							d.Semester == newDisaggregation.Semester && d.SchoolYear == newDisaggregation.SchoolYear));
+							var dbDisaggregation = context.Disaggregations
+								.FirstOrDefault(d => d.IsStudent == newDisaggregation.IsStudent 
+									&& d.ReferenceID == newDisaggregation.ReferenceID 
+									&& d.SchoolYear == newDisaggregation.SchoolYear
+									&& d.Semester == newDisaggregation.Semester);
 
 							if (dbDisaggregation == null)
 							{
@@ -47,7 +49,6 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 							{
 								message = "Disaggregation data already exist for this period. ";
 							}
-
 						}
 						catch (DbEntityValidationException ex)
 						{
@@ -86,15 +87,39 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return message;
 		}
 
-		public List<Disaggregation> GetStudentDisaggregation()
+		public List<DisaggregationModel> GetStudentDisaggregation()
 		{
-			List<Disaggregation> disaggregation = new List<Disaggregation>();
+			List<DisaggregationModel> disaggregations = new List<DisaggregationModel>();
 
 			try
 			{
+				List<Disaggregation> dbDisaggregations = null;
+
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					disaggregation = ctx.Disaggregations.Include(d => d.Program).Where(d => d.PositionID == 0).ToList();
+					dbDisaggregations = ctx.Disaggregations.Include(d => d.Department.Programs).Where(d => d.IsStudent).ToList();
+
+					if (dbDisaggregations != null && dbDisaggregations.Count > 0)
+					{
+						foreach (var dbDisaggregation in dbDisaggregations)
+						{
+							var dbProgram = ctx.Programs.FirstOrDefault(p => p.ProgramID == dbDisaggregation.ReferenceID);
+
+							if (dbProgram != null)
+							{
+								disaggregations.Add(new DisaggregationModel
+								{
+									DisaggregationID = dbDisaggregation.DisaggregationID,
+									Department = dbDisaggregation.Department.Alias,
+									FemaleQuantity = dbDisaggregation.FemaleQuantity,
+									MaleQuantity = dbDisaggregation.MaleQuantity,
+									ProgramTitle = dbProgram.Title,
+									SchoolYear = dbDisaggregation.SchoolYear,
+									Semester = dbDisaggregation.Semester
+								});
+							}
+						}
+					}
 				}
 			}
 			catch (Exception ex)
@@ -102,18 +127,53 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 				LogException(ex);
 			}
 
-			return disaggregation;
+			return disaggregations;
 		}
 
-		public List<Disaggregation> GetFacultyDisaggregation()
+		public List<DisaggregationModel> GetFacultyDisaggregation()
 		{
-			List<Disaggregation> disaggregation = new List<Disaggregation>();
+			List<DisaggregationModel> disaggregations = null;
 
 			try
 			{
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d => d.ProgramID == 0 && d.Position.IsFaculty).ToList();
+					//disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d.Position.IsFaculty).ToList();
+					var dbDisaggregations = ctx.Disaggregations.Include(d => d.Department).Where(d => d.IsStudent == false).ToList();
+
+					if (dbDisaggregations != null && dbDisaggregations.Count > 0)
+					{
+						disaggregations = new List<DisaggregationModel>();
+
+						foreach (var dbDisaggregation in dbDisaggregations)
+						{
+							var dbPosition = ctx.Positions.FirstOrDefault(p => p.PositionID == dbDisaggregation.ReferenceID);
+
+							if (dbPosition != null)
+							{
+								if (dbPosition.IsFaculty)
+								{
+									disaggregations.Add(new DisaggregationModel
+									{
+										Department = dbDisaggregation.Department.Title,
+										FemaleQuantity = dbDisaggregation.FemaleQuantity,
+										MaleQuantity = dbDisaggregation.MaleQuantity,
+										PositionTitle = dbPosition.Title,
+										Semester = dbDisaggregation.Semester,
+										SchoolYear = dbDisaggregation.SchoolYear
+									});
+								}
+								else
+								{
+
+								}
+							}
+							else
+							{
+								Log($"Disaggregation id '{dbDisaggregation.DisaggregationID}' Position id '{dbDisaggregation.ReferenceID}' doesn't exist in the database.");
+							}
+						}
+					}
 				}
 			}
 			catch (Exception ex)
@@ -121,18 +181,52 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 				LogException(ex);
 			}
 
-			return disaggregation;
+			return disaggregations;
 		}
 
-		public List<Disaggregation> GetNonFacultyDisaggregation()
+		public List<DisaggregationModel> GetNonFacultyDisaggregation()
 		{
-			List<Disaggregation> disaggregation = new List<Disaggregation>();
+			List<DisaggregationModel> disaggregations = null;
 
 			try
 			{
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					disaggregation = ctx.Disaggregations.Include(d => d.Position).Where(d => d.ProgramID == 0 && !d.Position.IsFaculty).ToList();
+					var dbDisaggregations = ctx.Disaggregations.Include(d => d.Department).Where(d => d.IsStudent == false).ToList();
+
+					if (dbDisaggregations != null && dbDisaggregations.Count > 0)
+					{
+						disaggregations = new List<DisaggregationModel>();
+
+						foreach (var dbDisaggregation in dbDisaggregations)
+						{
+							var dbPosition = ctx.Positions.FirstOrDefault(p => p.PositionID == dbDisaggregation.ReferenceID);
+
+							if (dbPosition != null)
+							{
+								if (!dbPosition.IsFaculty)
+								{
+									disaggregations.Add(new DisaggregationModel
+									{
+										Department = dbDisaggregation.Department.Title,
+										FemaleQuantity = dbDisaggregation.FemaleQuantity,
+										MaleQuantity = dbDisaggregation.MaleQuantity,
+										PositionTitle = dbPosition.Title,
+										Semester = dbDisaggregation.Semester,
+										SchoolYear = dbDisaggregation.SchoolYear
+									});
+								}
+								else
+								{
+
+								}
+							}
+							else
+							{
+								Log($"Disaggregation id '{dbDisaggregation.DisaggregationID}' Position id '{dbDisaggregation.ReferenceID}' doesn't exist in the database.");
+							}
+						}
+					}
 				}
 			}
 			catch (Exception ex)
@@ -140,7 +234,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 				LogException(ex);
 			}
 
-			return disaggregation;
+			return disaggregations;
 		}
 
 		public string DeleteDisaggregation(int disaggregationID)

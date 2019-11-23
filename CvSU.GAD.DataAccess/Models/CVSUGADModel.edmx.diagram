@@ -9,11 +9,11 @@
         <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="1.5" PointY="14.75" />
         <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="CVSUGADModel.Disaggregation" Width="1.5" PointX="3" PointY="4.25" />
-        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="8" />
         <EntityTypeShape EntityType="CVSUGADModel.Position" Width="1.5" PointX="5.75" PointY="1.625" />
         <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="8.25" />
         <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="CVSUGADModel.Seminar" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="CVSUGADModel.Seminar" Width="1.5" PointX="5.25" PointY="11.25" />
         <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Account" />
         <AssociationConnector Association="CVSUGADModel.FK_Profile_Account" />
         <AssociationConnector Association="CVSUGADModel.FK_Department_College" />

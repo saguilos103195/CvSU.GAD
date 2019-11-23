@@ -69,8 +69,8 @@ function loadSDDAta()
 		deleteBtn = deleteBtn.outerHTML;
 
 		$('#viewTable').dataTable().fnAddData([
-			(programSelectJSON.find(d => d.ID == studentSD.ProgramID).Name),
-			(departmentSelectJSON.find(d => d.ID == studentSD.DepartmentID).Alias),
+			studentSD.ProgramTitle,
+			studentSD.Department,
 			studentSD.MaleQuantity,
 			studentSD.FemaleQuantity,
 			studentSD.Semester,
@@ -155,7 +155,7 @@ function deleteItem(disaggregationID)
 		if (disaggregationID == studentSD.DisaggregationID)
 		{
 			$(".selectedID").val(disaggregationID);
-			$(".archive-alert > span").html((programSelectJSON.find(p => p.ID == studentSD.ProgramID)).Alias + " " +
+			$(".archive-alert > span").html(studentSD.ProgramTitle + " " +
 				studentSD.Semester + " Semester SY " + studentSD.SchoolYear);
 		}
 

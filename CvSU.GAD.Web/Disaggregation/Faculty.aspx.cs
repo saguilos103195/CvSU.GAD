@@ -78,12 +78,12 @@ namespace CvSU.GAD.Web.Disaggregation
 
 		protected void CreateBtn_Click(object sender, EventArgs e)
 		{
-			DataAccess.Models.Disaggregation newDisaggregation = new DataAccess.Models.Disaggregation
+			var newDisaggregation = new DataAccess.Models.Disaggregation
 			{
 				AccountID = CurrentAccount.AccountID,
 				DepartmentID = int.Parse(selectedDepartmentTxt.Value),
-				PositionID = int.Parse(selectedPositionTxt.Value),
-				ProgramID = 0,
+				IsStudent = false,
+				ReferenceID = int.Parse(selectedPositionTxt.Value),
 				MaleQuantity = int.Parse(maleQTxt.Value),
 				FemaleQuantity = int.Parse(femaleQTxt.Value),
 				Semester = semesterSel.Value,
