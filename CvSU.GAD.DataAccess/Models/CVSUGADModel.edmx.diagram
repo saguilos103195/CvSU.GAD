@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="83473ffe11ba4dc0b5724d1cc26627e9" Name="Diagram1" ZoomLevel="79">
-        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="4.75" />
+      <Diagram DiagramId="83473ffe11ba4dc0b5724d1cc26627e9" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="7.375" PointY="3.75" />
         <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="1.5" PointY="18.25" />
         <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="1.5" PointY="14.125" />
         <EntityTypeShape EntityType="CVSUGADModel.Disaggregation" Width="1.5" PointX="3" PointY="3.25" />
@@ -19,7 +19,14 @@
         <AssociationConnector Association="CVSUGADModel.FK_Department_College" />
         <AssociationConnector Association="CVSUGADModel.FK_Program_Department" />
         <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Position" />
-        <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Program" />
+        <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Program" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="8.125" />
+          <ConnectorPoint PointX="2.25" PointY="8.00283553846154" />
+          <ConnectorPoint PointX="2.748154159575412" PointY="7.6259605384615394" />
+          <ConnectorPoint PointX="2.5389399117104339" PointY="7.6259605384615394" />
+          <ConnectorPoint PointX="2.5389399117104339" PointY="4.4253471210937487" />
+          <ConnectorPoint PointX="3" PointY="4.4253471210937487" />
+        </AssociationConnector>
         <AssociationConnector Association="CVSUGADModel.FK_Education_Profile" />
         <AssociationConnector Association="CVSUGADModel.FK_Seminar_Profile" />
       </Diagram>
