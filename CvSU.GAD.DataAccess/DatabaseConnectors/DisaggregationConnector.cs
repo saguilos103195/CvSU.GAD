@@ -34,27 +34,39 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 						try
 						{
-							var dbAccountId = context.Accounts.FirstOrDefault(a => a.AccountID == accountId);
+							var dbAccount = context.Accounts.FirstOrDefault(a => a.AccountID == accountId);
 
-							if (dbAccountId != null)
+							if (dbAccount != null)
 							{
+								bool canAdd = false;
 
-							}
+								if (dbAccount.Type == "Administrator")
+								{
+									canAdd = true;
+								}
+								else
+								{
+									canAdd = context.Departments.Where(d => d.CollegeID == dbAccount.CollegeID && d.DepartmentID == newDisaggregation.DepartmentID).Count() > 0;
+								}
 
-							var dbDisaggregation = context.Disaggregations
-								.FirstOrDefault(d => d.IsStudent == newDisaggregation.IsStudent 
-									&& d.ReferenceID == newDisaggregation.ReferenceID 
-									&& d.SchoolYear == newDisaggregation.SchoolYear
-									&& d.Semester == newDisaggregation.Semester);
+								if (canAdd)
+								{
+									var dbDisaggregation = context.Disaggregations
+										.FirstOrDefault(d => d.IsStudent == newDisaggregation.IsStudent
+											&& d.ReferenceID == newDisaggregation.ReferenceID
+											&& d.SchoolYear == newDisaggregation.SchoolYear
+											&& d.Semester == newDisaggregation.Semester);
 
-							if (dbDisaggregation == null)
-							{
-								context.Disaggregations.Add(newDisaggregation);
-								isSaved = context.SaveChanges() > 0;
-							}
-							else
-							{
-								message = "Disaggregation data already exist for this period. ";
+									if (dbDisaggregation == null)
+									{
+										context.Disaggregations.Add(newDisaggregation);
+										isSaved = context.SaveChanges() > 0;
+									}
+									else
+									{
+										message = "Disaggregation data already exist for this period. ";
+									}
+								}
 							}
 						}
 						catch (DbEntityValidationException ex)

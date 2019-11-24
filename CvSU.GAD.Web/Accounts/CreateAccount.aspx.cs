@@ -41,7 +41,15 @@ namespace CvSU.GAD.Web.Accounts
 
 		protected void CreateBtn_Click(object sender, EventArgs e)
 		{
-			Account newAccount = new Account { Username = usernameTxt.Value, Password = passwordTxt.Value, Status = AdminConnector._accountStatusNew, Type = accountTypeSel.Value };
+			Account newAccount = new Account
+			{
+				Username = usernameTxt.Value,
+				Password = passwordTxt.Value,
+				Status = AdminConnector._accountStatusNew,
+				Type = accountTypeSel.Value,
+				CollegeID = Convert.ToInt32(selectedCollegeTxt.Value)
+			};
+
 			string message = AdminConnector.AddAccount(newAccount);
 			string showAlert;
 			if (string.IsNullOrEmpty(message))

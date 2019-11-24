@@ -38,6 +38,7 @@ namespace CvSU.GAD.DataAccess.Models
         public System.DateTime EngagedFrom { get; set; }
         public System.DateTime EngagedTo { get; set; }
         public bool WillTravel { get; set; }
+        public string Image { get; set; }
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

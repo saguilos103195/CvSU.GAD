@@ -79,6 +79,80 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return resultMessage;
 		}
 
+		public string UpdateSeminar(Seminar seminar)
+		{
+			string resultMessage = "Failed to add new seminar. ";
+
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							var dbSeminar = context.Seminars.FirstOrDefault(s => s.SeminarID == seminar.SeminarID);
+
+							if (dbSeminar != null)
+							{
+								int count = 0;
+
+								if (dbSeminar.Name != seminar.Name)
+								{
+									dbSeminar.Name = seminar.Name;
+									count++;
+								}
+
+								if (dbSeminar.Year != seminar.Year)
+								{
+									dbSeminar.Year = seminar.Year;
+									count++;
+								}
+
+								if (count > 0)
+								{
+									dbSeminar.Status = _seminarPending;
+									isSaved = context.SaveChanges() > 0;
+								}
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							resultMessage += "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							resultMessage += "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							resultMessage = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+							resultMessage += "Please contact the support. ";
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				resultMessage += "Please contact the support. ";
+			}
+
+			return resultMessage;
+		}
+
 		public List<Seminar> GetSeminars()
 		{
 			List<Seminar> seminars = null;

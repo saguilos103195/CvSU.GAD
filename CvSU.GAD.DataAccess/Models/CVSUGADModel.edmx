@@ -15,6 +15,7 @@
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CollegeID" Type="int" />
+          <Property Name="IsArchived" Type="bit" />
         </EntityType>
         <EntityType Name="College">
           <Key>
@@ -92,6 +93,7 @@
           <Property Name="EngagedFrom" Type="datetime" Nullable="false" />
           <Property Name="EngagedTo" Type="datetime" Nullable="false" />
           <Property Name="WillTravel" Type="bit" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Program">
           <Key>
@@ -291,6 +293,7 @@
           <Property Name="CollegeID" Type="Int32" />
           <NavigationProperty Name="Disaggregations" Relationship="CVSUGADModel.FK_Disaggregation_Account" FromRole="Account" ToRole="Disaggregation" />
           <NavigationProperty Name="Profiles" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Account" ToRole="Profile" />
+          <Property Name="IsArchived" Type="Boolean" />
         </EntityType>
         <EntityType Name="College">
           <Key>
@@ -378,6 +381,7 @@
           <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Profile" ToRole="Account" />
           <NavigationProperty Name="Educations" Relationship="CVSUGADModel.FK_Education_Profile" FromRole="Profile" ToRole="Education" />
           <NavigationProperty Name="Seminars" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Profile" ToRole="Seminar" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Program">
           <Key>
@@ -494,6 +498,7 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="CVSUGADModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
                 <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -566,6 +571,7 @@
           <EntitySetMapping Name="Profiles">
             <EntityTypeMapping TypeName="CVSUGADModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="WillTravel" ColumnName="WillTravel" />
                 <ScalarProperty Name="EngagedTo" ColumnName="EngagedTo" />
                 <ScalarProperty Name="EngagedFrom" ColumnName="EngagedFrom" />
