@@ -99,7 +99,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					departments = context.Departments.Where(d => d.DepartmentID != 0).ToList();
+					departments = context.Departments.ToList();
 				}
 			}
 			catch (Exception ex)
@@ -172,10 +172,11 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 								dbDepartment.Title = department.Title;
 
 								isUpdated = context.SaveChanges() > 0;
+								if (!isUpdated) { resultMessage = "No changes found. "; }
 							}
 							else
 							{
-								resultMessage = "Department doesn't exist on the databaes.";
+								resultMessage = "Department doesn't exist on the database.";
 							}
 						}
 						catch (DbEntityValidationException ex)
@@ -193,10 +194,12 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 						{
 							transaction.Commit();
 							resultMessage = string.Empty;
+							LogInfo($"Department '{department.DepartmentID}' is successfully updated.");
 						}
 						else
 						{
 							transaction.Rollback();
+							LogWarn($"Department '{department.DepartmentID}' failed to update.");
 						}
 					}
 				}

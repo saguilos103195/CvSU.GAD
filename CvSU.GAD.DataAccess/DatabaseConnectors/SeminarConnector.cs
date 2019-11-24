@@ -79,6 +79,25 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return resultMessage;
 		}
 
+		public List<Seminar> GetSeminars()
+		{
+			List<Seminar> seminars = null;
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					seminars = context.Seminars.ToList();
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return seminars;
+		}
+
 		public string ApproveSeminar(int seminarId)
 		{
 			string resultMessage = "Failed to approve the seminar. ";

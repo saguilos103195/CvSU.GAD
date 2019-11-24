@@ -91,7 +91,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					colleges = ctx.Colleges.Where(c => c.CollegeID != 0).ToList();
+					colleges = ctx.Colleges.ToList();
 				}
 			}
 			catch (Exception ex)
@@ -101,6 +101,8 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 			return colleges;
 		}
+
+
 
 		public string ArchiveCollege(int collegeID)
 		{
@@ -227,7 +229,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 		public string UpdateCollege(College updatedCollege)
 		{
-			string message = "Failed to save.";
+			string message = "Failed to update.";
 			try
 			{
 				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
@@ -246,6 +248,8 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 								college.Alias = updatedCollege.Alias;
 								college.IsMain = updatedCollege.IsMain;
 								isSaved = context.SaveChanges() > 0;
+
+								if (!isSaved) { message = "No changes found. "; }
 							}
 							else
 							{
@@ -269,13 +273,12 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 						{
 							transaction.Commit();
 							message = string.Empty;
-							LogInfo($"{updatedCollege.Title} is successfully retrieved.");
+							LogInfo($"College '{updatedCollege.Title}' is successfully updated.");
 						}
 						else
 						{
 							transaction.Rollback();
-							LogInfo($"{updatedCollege.Title} is failed to retrieve.");
-							message = "Please contact the support. ";
+							LogInfo($"College '{updatedCollege.Title}' is failed to updated.");
 						}
 					}
 				}

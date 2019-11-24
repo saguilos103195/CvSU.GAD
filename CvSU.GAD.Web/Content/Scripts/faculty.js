@@ -69,8 +69,8 @@ function loadSDDAta()
 		deleteBtn = deleteBtn.outerHTML;
 
 		$('#viewTable').dataTable().fnAddData([
-			(positionSelectJSON.find(d => d.ID == facultySD.PositionID).Name),
-			(departmentSelectJSON.find(d => d.ID == facultySD.DepartmentID).Alias),
+			facultySD.PositionTitle,
+			facultySD.Department,
 			facultySD.MaleQuantity,
 			facultySD.FemaleQuantity,
 			facultySD.Semester,
@@ -145,13 +145,13 @@ function loadSchoolYear()
 
 function deleteItem(disaggregationID)
 {
-	jQuery.each(studentSDJSON, function (index, studentSD) {
+	jQuery.each(facultySDJSON, function (index, facultySD) {
 
-		if (disaggregationID == studentSD.DisaggregationID)
+		if (disaggregationID == facultySD.DisaggregationID)
 		{
 			$(".selectedID").val(disaggregationID);
-			$(".archive-alert > span").html((programSelectJSON.find(p => p.ID == studentSD.ProgramID)).Alias + " " +
-				studentSD.Semester + " Semester SY " + studentSD.SchoolYear);
+			$(".archive-alert > span").html(facultySD.PositionTitle + " " +
+				facultySD.Semester + " Semester SY " + facultySD.SchoolYear);
 		}
 
 	});

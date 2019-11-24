@@ -20,7 +20,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			_dataAccessFactory = new DataAccessFactory();
 		}
 
-		public string AddDisaggregation(Disaggregation newDisaggregation)
+		public string AddDisaggregation(int accountId, Disaggregation newDisaggregation)
 		{
 			string message = "Failed to save.";
 
@@ -34,6 +34,13 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 						try
 						{
+							var dbAccountId = context.Accounts.FirstOrDefault(a => a.AccountID == accountId);
+
+							if (dbAccountId != null)
+							{
+
+							}
+
 							var dbDisaggregation = context.Disaggregations
 								.FirstOrDefault(d => d.IsStudent == newDisaggregation.IsStudent 
 									&& d.ReferenceID == newDisaggregation.ReferenceID 
@@ -155,6 +162,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 								{
 									disaggregations.Add(new DisaggregationModel
 									{
+										DisaggregationID = dbDisaggregation.DisaggregationID,
 										Department = dbDisaggregation.Department.Title,
 										FemaleQuantity = dbDisaggregation.FemaleQuantity,
 										MaleQuantity = dbDisaggregation.MaleQuantity,
@@ -208,6 +216,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 								{
 									disaggregations.Add(new DisaggregationModel
 									{
+										DisaggregationID = dbDisaggregation.DisaggregationID,
 										Department = dbDisaggregation.Department.Title,
 										FemaleQuantity = dbDisaggregation.FemaleQuantity,
 										MaleQuantity = dbDisaggregation.MaleQuantity,

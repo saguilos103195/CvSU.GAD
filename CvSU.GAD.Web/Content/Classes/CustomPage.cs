@@ -55,7 +55,12 @@ namespace CvSU.GAD.Web.Content.Classes
 				string loadProfile = $"<script type=\"text/javascript\"> var profileJSON = {JsonConvert.SerializeObject(profile, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })}; </script>";
 				LoadJavaSript("loadProfile", loadProfile);
 			}
-			
 		}
+
+		protected void ClearSession()
+		{
+			HttpContext.Current.Session["AccountJSON"] = null;
+		}
+
 	}
 }
