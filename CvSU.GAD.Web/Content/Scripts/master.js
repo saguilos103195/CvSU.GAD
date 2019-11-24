@@ -1,4 +1,37 @@
-﻿function toggleMasterAlert(icon, iconColor, title, message, btnMessage, btnColor, link)
+﻿$(document).ready(function () {
+
+	$(".master-sidebar-account > p").click(function () {
+
+		if ($(".master-sidebar-account-menu").css("display") == "none")
+		{
+			$(".master-sidebar-account-menu").css("display", "block");
+			$(".master-sidebar-account-menu").addClass("animated");
+			$(".master-sidebar-account-menu").addClass("flipInY");
+		}
+		else
+		{
+			$(".master-sidebar-account-menu").css("display", "none");
+		}
+		
+	});
+
+	$(window).keydown(function (event) {
+		if (event.keyCode == 13) {
+			event.preventDefault();
+			return false;
+		}
+	});
+
+	$(window).keydown(function (event) {
+		if (event.keyCode == 27) {
+
+			hideModal();
+
+		}
+	});
+});
+
+function toggleMasterAlert(icon, iconColor, title, message, btnMessage, btnColor, link)
 {
 	$(".master-alert").css("display", "block");
 	$(".master-alert > div > p").html(title);

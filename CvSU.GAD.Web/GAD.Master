@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="Content/Scripts/jquery-ui-1.12.1/jquery-ui.min.css" />
 	<link rel="stylesheet" href="Content/Scripts/fontawesome-free-5.8.2-web/css/all.css" />
 	<link rel="stylesheet" href="Content/Scripts/datatables/datatables.min.css" />
+	<link rel="stylesheet" href="Content/Stylesheets/animate.css" />
 	<link rel="stylesheet" href="Content/Stylesheets/bootstrap.css" />
 	<link rel="stylesheet" href="Content/Stylesheets/master.css" />
 	<link rel="stylesheet" href="Content/Stylesheets/ui.css" />
@@ -50,7 +51,7 @@
 						<label class="fas fa-sort-down"></label>
 					</p>
 					<div class="master-sidebar-account-menu">
-						<a><span class="fas fa-user"></span><p>Profile</p></a>
+						<a href="../accounts/profile.aspx"><span class="fas fa-user"></span><p>Profile</p></a>
 						<a><span class="fas fa-sign-out-alt"></span><p>Logout</p></a>
 					</div>
 				</div>
@@ -71,10 +72,17 @@
 						</div>
 					</div>
 					<div class="master-sidebar-menuitem">
-						<p><label class="fas fa-user-cog"></label><span>GAD Resource Pool</span><i class="fas fa-chevron-left"></i></p>
+						<p><label class="fas fa-users"></label><span>GAD Resource Pool</span><i class="fas fa-chevron-left"></i></p>
 						<div>
 							<a href="#">View</a>
 							<a href="#">Edit</a>
+						</div>
+					</div>
+					<div class="master-sidebar-menuitem">
+						<p><label class="fas fa-file"></label><span>GAD Extension Projects</span><i class="fas fa-chevron-left"></i></p>
+						<div>
+							<a href="#">Apply</a>
+							<a href="#">View</a>
 						</div>
 					</div>
 					<div class="master-sidebar-menuitem">

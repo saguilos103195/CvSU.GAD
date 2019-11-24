@@ -77,8 +77,8 @@
 			<div class="modal-cont">
 				<div class="form-col-1">
 					<div>
-						<p>Title</p>
-						<input require type="text" class="input-text-control seminarTitleTxt" id="seminarTitleTxt" runat="server" />
+						<p>Name</p>
+						<input require type="text" class="input-text-control seminarNameTxt" id="seminarNameTxt" runat="server" />
 						<span></span>
 					</div>
 				</div>
@@ -238,9 +238,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-body tab-control">
+				<div class="form-body seminar-tab tab-control">
 					<div class="profile-list seminarList">
-						<div onclick="showModal('.educ-modal'); addEducation();">
+						<div onclick="showModal('.seminar-modal'); addSeminar();">
 							<h1>+ Add Seminar</h1>
 						</div>
 					</div>

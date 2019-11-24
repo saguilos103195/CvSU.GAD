@@ -19,8 +19,16 @@
 			$(this).css("opacity", ".9");
 			$(".educ-modal .modal-foot > input[value='" + $(this).html() + "']").click();
 		}
+	});
 
+	$(".seminarModalBtn").click(function () {
 
+		if (isFormValid($(".seminar-modal")))
+		{
+			$(this).css("pointer-events", "none");
+			$(this).css("opacity", ".9");
+			$(".seminar-modal .modal-foot > input[value='" + $(this).html() + "']").click();
+		}
 	});
 
 	$(".bdateTxt").datepicker({
@@ -104,6 +112,7 @@
 
 function loadProfile()
 {
+	console.log(profileJSON);
 	$(".profileID").val(profileJSON.ProfileID);
 	$(".fnameTxt").val(profileJSON.Firstname);
 	$(".mnameTxt").val(profileJSON.Middlename);
@@ -143,13 +152,13 @@ function loadEducation()
 
 function addEducation()
 {
-	$(".modal-head > span").html("Add Education");
+	$(".educ-modal .modal-head > span").html("Add Education");
 	$(".educModalBtn").html("Add");
 }
 
 function updateEducation(educationID)
 {
-	$(".modal-head > span").html("Update Education");
+	$(".educ-modal .modal-head > span").html("Update Education");
 	$(".educModalBtn").html("Update");
 
 	var education = profileJSON.Educations.find(e => e.EducationID == educationID);
@@ -162,4 +171,10 @@ function updateEducation(educationID)
 	$(".educDateFromTxt").val(moment(education.DateFrom).format("DD/MM/YYYY"));
 	$(".educDateToTxt").val(moment(education.DateTo).format("DD/MM/YYYY"));
 	
+}
+
+function addSeminar()
+{
+	$(".seminar-modal .modal-head > span").html("Add Seminar");
+	$(".seminarModalBtn").html("Add");
 }

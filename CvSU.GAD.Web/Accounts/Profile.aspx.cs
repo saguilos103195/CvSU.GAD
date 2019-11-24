@@ -1,4 +1,5 @@
-﻿using CvSU.GAD.DataAccess.DatabaseConnectors.Account;
+﻿using CvSU.GAD.DataAccess.DatabaseConnectors;
+using CvSU.GAD.DataAccess.DatabaseConnectors.Account;
 using CvSU.GAD.DataAccess.Models;
 using CvSU.GAD.Web.Content.Classes;
 using System;
@@ -14,11 +15,13 @@ namespace CvSU.GAD.Web.Accounts
 	{
 		private Account CurrentAccount { get; set; }
 		private AccountConnector AccountConnector { get; }
+		private SeminarConnector SeminarConnector { get; }
 
 		public Profile()
 		{
 			CurrentAccount = new Account();
 			AccountConnector = new AccountConnector();
+			SeminarConnector = new SeminarConnector();
 		}
 
 		protected void Page_Load(object sender, EventArgs e)
@@ -128,8 +131,27 @@ namespace CvSU.GAD.Web.Accounts
 
 		protected void AddSeminarBtn_Click(object sender, EventArgs e)
 		{
+			Seminar newSeminar = new Seminar
+			{
+				Name = seminarNameTxt.Value,
+				ProfileID = int.Parse(profileID.Value),
+				Year = seminarYearTxt.Value
+			};
 
+			string message = SeminarConnector.AddSeminar(newSeminar);
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Seminar successfully added!', 'OK', '#009efb', 'profile.aspx');  </script>";
+
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
 		}
+
 
 		protected void UpdateSeminarBtn_Click(object sender, EventArgs e)
 		{
