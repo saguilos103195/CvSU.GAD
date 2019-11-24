@@ -164,6 +164,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 								dbProgram.Title = program.Title;
 
 								isUpdated = context.SaveChanges() > 0;
+								if (!isUpdated) { resultMessage = "No changes found. "; }
 							}
 							else
 							{

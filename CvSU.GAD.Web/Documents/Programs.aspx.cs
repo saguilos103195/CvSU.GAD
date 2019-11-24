@@ -77,7 +77,13 @@ namespace CvSU.GAD.Web.Documents
 
 		protected void EditBtn_Click(object sender, EventArgs e)
 		{
-			Program updateProgram = new Program { ProgramID = int.Parse(selectedID.Value), Title = editTitleTxt.Value, Alias = editAliasTxt.Value, DepartmentID = int.Parse(editSelectedDepartmentTxt.Value), IsArchived = false };
+			Program updateProgram = new Program
+			{
+				ProgramID = int.Parse(selectedID.Value),
+				Title = editTitleTxt.Value, Alias = editAliasTxt.Value,
+				DepartmentID = int.Parse(editSelectedDepartmentTxt.Value),
+				IsArchived = false
+			};
 
 			string message = ProgramConnector.UpdateProgram(updateProgram);
 			string showAlert;

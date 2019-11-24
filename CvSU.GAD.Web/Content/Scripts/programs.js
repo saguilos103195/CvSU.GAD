@@ -221,11 +221,9 @@ function editItem(programID)
 
 			$("#editDepartmentSel").val(department.ID);
 			$("#editDepartmentSel").selectmenu("refresh");
-			
-			$(".editSelectedDepartmentTxt").val(department.DepartmentID);
 
+			$(".editSelectedDepartmentTxt").val(department.ID);
 		}
-
 	});
 }
 

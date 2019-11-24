@@ -120,6 +120,60 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			return messageResult;
 		}
 
+		public string UpdateAccount(Models.Account account)
+		{
+			string messageResult = "Failed to update.";
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isUpdated = false;
+
+						try
+						{
+							var dbAccount = context.Accounts.FirstOrDefault(a => a.AccountID == account.AccountID);
+
+							if (dbAccount != null)
+							{
+								dbAccount.CollegeID = account.CollegeID;
+								dbAccount.Type = account.Type;
+								isUpdated = context.SaveChanges() > 0;
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							LogDbEntityValidationException(ex);
+							messageResult = "Please contact support.";
+						}
+						catch (Exception ex)
+						{
+							LogException(ex);
+							messageResult = "Please contact support.";
+						}
+
+						if (isUpdated)
+						{
+							transaction.Commit();
+							messageResult = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return messageResult;
+		}
+
 		public Profile GetProfile(int accountId)
 		{
 			Profile profile = null;
@@ -128,7 +182,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					profile = context.Profiles.Include(p => p.Educations).FirstOrDefault(p => p.AccountID == accountId);
+					profile = context.Profiles.Include(p => p.Educations).Include(s => s.Seminars).FirstOrDefault(p => p.AccountID == accountId);
 				}
 			}
 			catch (DbEntityValidationException ex)
