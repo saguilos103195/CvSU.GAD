@@ -27,6 +27,7 @@ namespace CvSU.GAD.DataAccess.Models
         public string Status { get; set; }
         public string Type { get; set; }
         public Nullable<int> CollegeID { get; set; }
+        public Nullable<bool> IsArchived { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disaggregation> Disaggregations { get; set; }

@@ -69,6 +69,64 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			return resultMessage;
 		}
 
+
+		public string ArchiveAccount(int accountId)
+		{
+			string resultMessage = "Failed to archive.";
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isArchived = false;
+
+						try
+						{
+							var dbAccount = context.Accounts.FirstOrDefault(a => a.AccountID == accountId);
+
+							if (dbAccount != null)
+							{
+								dbAccount.IsArchived = true;
+								isArchived = context.SaveChanges() > 0;
+							}
+							else
+							{
+								resultMessage = "Account doesn't exist in the database.";
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							LogDbEntityValidationException(ex);
+							resultMessage = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							LogException(ex);
+							resultMessage = "Please contact the support. ";
+						}
+
+						if (isArchived)
+						{
+							transaction.Commit();
+							resultMessage = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return resultMessage;
+		}
+
 		public List<Models.Account> GetAccounts(int accountId)
 		{
 			List<Models.Account> accounts = null;
