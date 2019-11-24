@@ -75,7 +75,7 @@ namespace CvSU.GAD.Web.Disaggregation
 				SchoolYear = schoolYearTxt.Value
 			};
 
-			string message = DisaggregationConnector.AddDisaggregation(newDisaggregation);
+			string message = DisaggregationConnector.AddDisaggregation(CurrentAccount.AccountID, newDisaggregation);
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{

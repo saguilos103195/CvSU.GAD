@@ -134,6 +134,24 @@ function loadProfile()
 	{
 		loadEducation();
 	}
+
+	if (profileJSON.Seminars.length > 0 && profileJSON.Seminars != null)
+	{
+		loadSeminar();
+	}
+}
+
+function loadSeminar()
+{
+	jQuery.each(profileJSON.Seminars, function (index, seminar) {
+
+		$(".seminarList").append("<div onclick='showModal(\".seminar-modal\"); updateSeminar(" + seminar.SeminarID + ");'>" +
+			"<label>" + seminar.Year + "</label>" +
+			"<h5>" + seminar.Name + "</h5>" +
+			"<p class='seminar-" + seminar.Status.toLowerCase() + "'>" + seminar.Status + "</p>" +
+			"</div>");
+
+	});
 }
 
 function loadEducation()
@@ -177,4 +195,17 @@ function addSeminar()
 {
 	$(".seminar-modal .modal-head > span").html("Add Seminar");
 	$(".seminarModalBtn").html("Add");
+}
+
+function updateSeminar(seminarID)
+{
+	$(".seminar-modal .modal-head > span").html("Update Education");
+	$(".seminarModalBtn").html("Update");
+
+	var seminar = profileJSON.Seminars.find(s => s.SeminarID == seminarID);
+	console.log(Seminars);
+	$(".selectedID").val(seminar.SeminarID);
+	$(".seminarNameTxt").val(seminar.SchoolName);
+	$(".seminarYearTxt").val(seminar.Course);
+	
 }
