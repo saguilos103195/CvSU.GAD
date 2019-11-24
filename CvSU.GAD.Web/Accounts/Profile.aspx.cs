@@ -74,24 +74,35 @@ namespace CvSU.GAD.Web.Accounts
 
 		protected void AddEducBtn_Click(object sender, EventArgs e)
 		{
-			//string message = AccountConnector.(updatedProfile);
-			//string showAlert;
-			//if (string.IsNullOrEmpty(message))
-			//{
-			//	showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Profile successfully updated!', 'OK', '#009efb', 'profile.aspx');  </script>";
+			Education newEducation = new Education
+			{
+				ProfileID = int.Parse(profileID.Value),
+				Course = educCourseTxt.Value,
+				DateFrom = DateTime.ParseExact(educDateFromTxt.Value, "dd/MM/yyyy", null),
+				DateTo = DateTime.ParseExact(educDateToTxt.Value, "dd/MM/yyyy", null),
+				EducationalLevel = educTypeSel.Value,
+				SchoolName = educSchoolNameTxt.Value
 
-			//}
-			//else
-			//{
-			//	showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
-			//}
-			//LoadJavaSript("showAlert", showAlert);
+			};
+
+			string message = AccountConnector.AddEducation(newEducation);
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Education successfully added!', 'OK', '#009efb', 'profile.aspx');  </script>";
+
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
 		}
 
 		protected void UpdateEducBtn_Click(object sender, EventArgs e)
 		{
-			Education updatedEducation = new Education {
-
+			Education updatedEducation = new Education
+			{
 				EducationID = int.Parse(selectedID.Value),
 				Course = educCourseTxt.Value,
 				DateFrom = DateTime.ParseExact(educDateFromTxt.Value, "dd/MM/yyyy", null),
@@ -113,6 +124,16 @@ namespace CvSU.GAD.Web.Accounts
 				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
 			}
 			LoadJavaSript("showAlert", showAlert);
+		}
+
+		protected void AddSeminarBtn_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		protected void UpdateSeminarBtn_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

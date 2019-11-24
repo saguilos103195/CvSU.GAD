@@ -89,13 +89,13 @@
 	display: none;
 }
 
-.educ-list
+.profile-list
 {
 	padding: 0px 16px;
 	padding-bottom: 20px;
 }
 
-.educ-list > div
+.profile-list > div
 {
 	padding: 15px;
 	border-bottom: 1px solid rgba(120, 130, 140, 0.13);
@@ -103,32 +103,32 @@
 	cursor: pointer;
 }
 
-.educ-list > div:hover
+.profile-list > div:hover
 {
 	background-color: #f2f7f8;
 }
 
-.educ-list > div > h1
+.profile-list > div > h1
 {
 	text-align: center;
 	font-size: 12px;
 	margin-bottom: 0px;
 }
 
-.educ-list > div > h5
+.profile-list > div > h5
 {
 	font-size: 16px;
 	margin-bottom: 0px;
 	padding-top: 20px;
 }
 
-.educ-list > div > p
+.profile-list > div > p
 {
 	font-size: 12px;
 	margin-bottom: 0px;
 }
 
-.educ-list > div > span
+.profile-list > div > span
 {
 	display: block;
 	font-size: 12px;
@@ -136,7 +136,7 @@
 	color: #90a4ae;
 }
 
-.educ-list > div > label
+.profile-list > div > label
 {
 	display: block;
 	font-size: 12px;

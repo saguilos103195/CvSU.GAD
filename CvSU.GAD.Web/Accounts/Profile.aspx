@@ -69,6 +69,34 @@
 				<asp:Button ID="UpdateEducBtn" runat="server" OnClick="UpdateEducBtn_Click" Text="Update" />
 			</div>
 		</div>
+		<div class="form-modal seminar-modal">
+			<div class="modal-head">
+				<span></span>
+				<button type="button" onclick="hideModal()">×</button>
+			</div>
+			<div class="modal-cont">
+				<div class="form-col-1">
+					<div>
+						<p>Title</p>
+						<input require type="text" class="input-text-control seminarTitleTxt" id="seminarTitleTxt" runat="server" />
+						<span></span>
+					</div>
+				</div>
+				<div class="form-col-3">
+					<div>
+						<p>Year</p>
+						<input require type="text" class="input-text-control seminarYearTxt" id="seminarYearTxt" runat="server" />
+						<span></span>
+					</div>
+				</div>
+			</div>
+            <div class="modal-foot">
+				<button class="button-control button-transparent" type="button" onclick="hideModal()">Cancel</button>
+				<button class="button-control button-green seminarModalBtn" type="button"></button>
+				<asp:Button ID="AddSeminarBtn" runat="server" OnClick="AddSeminarBtn_Click" Text="Add" />
+				<asp:Button ID="UpdateSeminarBtn" runat="server" OnClick="UpdateSeminarBtn_Click" Text="Update" />
+			</div>
+		</div>
 	</div>
 	<div class="profile container">
 		<p>Profile</p>
@@ -204,27 +232,16 @@
 					<asp:Button runat="server" ID="UpdateProfileBtn" OnClick="UpdateProfileBtn_Click" />
 				</div>
 				<div class="form-body educ-tab tab-control">
-					<div class="educ-list">
+					<div class="profile-list educList">
 						<div onclick="showModal('.educ-modal'); addEducation();">
 							<h1>+ Add Edudcation</h1>
 						</div>
 					</div>
 				</div>
 				<div class="form-body tab-control">
-					<div class="form-col-1">
-						<div>
-							<p>Alias</p>
-							<input require runat="server" id="Text4" type="text" class="input-text-control" />
-							<span></span>
-						</div>
-					</div>
-					<div class="form-col-1">
-						<div>
-							<label class="check-control">
-								<p>Main Campus</p>
-								<input runat="server" id="Checkbox2" value="true" type="checkbox">
-								<span class="checkmark"></span>
-							</label>
+					<div class="profile-list seminarList">
+						<div onclick="showModal('.educ-modal'); addEducation();">
+							<h1>+ Add Seminar</h1>
 						</div>
 					</div>
 				</div>

@@ -13,14 +13,11 @@
 
 	$(".educModalBtn").click(function () {
 
-		console.log("input[type=submit]:contains('" + $(this).html() + "')");
-
 		if (isFormValid($(".educ-modal")))
 		{
-			//$(this).css("pointer-events", "none");
-			//$(this).css("opacity", ".9");
-			
-			$("input[type=submit]:contains('" + $(this).html() + "')").click();
+			$(this).css("pointer-events", "none");
+			$(this).css("opacity", ".9");
+			$(".educ-modal .modal-foot > input[value='" + $(this).html() + "']").click();
 		}
 
 
@@ -107,7 +104,6 @@
 
 function loadProfile()
 {
-	console.log(profileJSON);
 	$(".profileID").val(profileJSON.ProfileID);
 	$(".fnameTxt").val(profileJSON.Firstname);
 	$(".mnameTxt").val(profileJSON.Middlename);
@@ -135,7 +131,7 @@ function loadEducation()
 {
 	jQuery.each(profileJSON.Educations, function (index, education) {
 
-		$(".educ-list").append("<div onclick='showModal(\".educ-modal\"); updateEducation(" + education.EducationID + ");'>" +
+		$(".educList").append("<div onclick='showModal(\".educ-modal\"); updateEducation(" + education.EducationID + ");'>" +
 									"<label>" + moment(education.DateFrom).format("DD/MM/YYYY") + " - " +  moment(education.DateTo).format("DD/MM/YYYY") + "</label>" +
 									"<h5>" + education.Course + "</h5>" +
 									"<p>" + education.SchoolName + "</p>" +
