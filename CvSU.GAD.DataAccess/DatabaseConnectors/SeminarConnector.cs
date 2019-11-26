@@ -1,7 +1,9 @@
 ﻿using CvSU.GAD.DataAccess.DatabaseContexts;
 using CvSU.GAD.DataAccess.Models;
+using CvSU.GAD.DataAccess.Models.Helper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -152,16 +154,25 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 
 			return resultMessage;
 		}
-
-		public List<Seminar> GetSeminars()
+		 
+		public List<SeminarModel> GetSeminars()
 		{
-			List<Seminar> seminars = null;
+			List<SeminarModel> seminars = null;
 
 			try
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					seminars = context.Seminars.ToList();
+					seminars = context.Seminars.Include(s => s.Profile).Select(s => 
+					new SeminarModel
+					{
+						Name = s.Name,
+						ProfileName = s.Profile.Firstname + " " + s.Profile.Middlename.Substring(0, 1) + ". " + s.Profile.Lastname,
+						SeminarID = s.SeminarID,
+						Status = s.Status,
+						Year = s.Year
+					})
+					.ToList();
 				}
 			}
 			catch (Exception ex)

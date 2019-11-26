@@ -16,7 +16,12 @@
 	});
 
 	$(window).keydown(function (event) {
-		if (event.keyCode == 13) {
+		if (event.keyCode == 13)
+		{
+			if ($(".master-alert").css("display") == "block")
+			{
+				location.replace($(".master-alert > div > a").attr("href"));
+			}
 			event.preventDefault();
 			return false;
 		}

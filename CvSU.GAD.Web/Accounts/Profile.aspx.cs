@@ -155,7 +155,25 @@ namespace CvSU.GAD.Web.Accounts
 
 		protected void UpdateSeminarBtn_Click(object sender, EventArgs e)
 		{
+			Seminar updatedSeminar = new Seminar
+			{
+				SeminarID = int.Parse(selectedID.Value),
+				Name = seminarNameTxt.Value,
+				Year = seminarYearTxt.Value
+			};
 
+			string message = SeminarConnector.UpdateSeminar(updatedSeminar);
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Seminar successfully updated!', 'OK', '#009efb', 'profile.aspx');  </script>";
+
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
 		}
 	}
 }

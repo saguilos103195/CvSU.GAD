@@ -17,14 +17,14 @@
 			<div class="form-col-1">
 				<div>
 					<p>Password</p>
-					<input require type="password" class="input-text-control" id="passwordTxt" runat="server" />
+					<input require type="password" class="input-text-control passwordTxt" id="passwordTxt" runat="server" />
 					<span></span>
 				</div>
 			</div>
 			<div class="form-col-1">
 				<div>
 					<p>Confirm Password</p>
-					<input require type="password" class="input-text-control" id="confirmPasswordTxt" runat="server" />
+					<input require type="password" class="input-text-control confirmPasswordTxt" id="confirmPasswordTxt" runat="server" />
 					<span></span>
 				</div>
 			</div>

@@ -16,7 +16,7 @@
 			<i class="far fa-question-circle"></i>
 			<p>Are you sure want to retrieve</p>
 			<span></span>
-			<asp:Button runat="server" ID="RetrieveBtn" OnClick="RetrieveBtn_Click" CssClass="button-control button-red" Text="Ok" />
+			<asp:Button runat="server" ID="RetrieveBtn" OnClick="RetrieveBtn_Click" CssClass="button-control button-green" Text="Ok" />
 			<button type="button" class="button-control button-blue" onclick="hideModal()">Cancel</button>
 		</div>
 		<div class="form-modal">

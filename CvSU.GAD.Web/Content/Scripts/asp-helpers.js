@@ -53,8 +53,6 @@ $(document).ready(function () {
 
 function isFormValid(form)
 {
-	console.log(1);
-
 	var isValid = true;
 	var gotFocus = false;
 
@@ -84,6 +82,8 @@ function isFormValid(form)
 		}
 		else
 		{
+			console.log("valid");
+
 			if ($(this).val() === "")
 			{
 				$(this).css("border-color", "#f62d51");
@@ -107,4 +107,51 @@ function isFormValid(form)
 	});
 
 	return isValid;
+}
+
+function isMatched(input1, input2, message)
+{
+	var isMatched = true;
+
+	if (input1.val() != input2.val())
+	{
+		console.log("unmatch");
+
+		input1.css("border-color", "#f62d51");
+		input2.css("border-color", "#f62d51");
+		input1.next().css("display", "block");
+		input1.next().html(message);
+		input1.next().css("color", "#f62d51");
+
+		$("html, body").scrollTop(input1.next().offset().top - 50);
+
+		isMatched = false;
+	}
+
+	return isMatched;
+}
+
+function compareValues(key, order = 'asc')
+{
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      // property doesn't exist on either object
+      return 0;
+    }
+
+    const varA = (typeof a[key] === 'string')
+      ? a[key].toUpperCase() : a[key];
+    const varB = (typeof b[key] === 'string')
+      ? b[key].toUpperCase() : b[key];
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return (
+      (order === 'desc') ? (comparison * -1) : comparison
+    );
+  };
 }

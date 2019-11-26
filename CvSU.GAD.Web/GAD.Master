@@ -60,7 +60,7 @@
 						<p><label class="fas fa-user-cog"></label><span>Accounts</span><i class="fas fa-chevron-left"></i></p>
 						<div>
 							<a href="../accounts/createaccount.aspx">Create Accounts</a>
-							<a href="#">View Accounts</a>
+							<a href="../accounts/manageaccounts.aspx">View Accounts</a>
 						</div>
 					</div>
 					<div class="master-sidebar-menuitem">
@@ -74,8 +74,8 @@
 					<div class="master-sidebar-menuitem">
 						<p><label class="fas fa-users"></label><span>GAD Resource Pool</span><i class="fas fa-chevron-left"></i></p>
 						<div>
-							<a href="#">View</a>
-							<a href="#">Edit</a>
+							<a href="../resourcepool/view.aspx">View</a>
+							<a href="../resourcepool/approvals.aspx">Approvals</a>
 						</div>
 					</div>
 					<div class="master-sidebar-menuitem">

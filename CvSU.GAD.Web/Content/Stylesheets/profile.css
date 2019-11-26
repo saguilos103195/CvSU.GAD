@@ -147,5 +147,15 @@
 
 .seminar-pending
 {
+	color: #ffbc34;
+}
 
+.seminar-approved
+{
+	color: #55ce63;
+}
+
+.seminar-rejected
+{
+	color: #f62d51;
 }

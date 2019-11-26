@@ -143,7 +143,7 @@ function loadProfile()
 
 function loadSeminar()
 {
-	jQuery.each(profileJSON.Seminars, function (index, seminar) {
+	jQuery.each(profileJSON.Seminars.sort(compareValues('Status')), function (index, seminar) {
 
 		$(".seminarList").append("<div onclick='showModal(\".seminar-modal\"); updateSeminar(" + seminar.SeminarID + ");'>" +
 			"<label>" + seminar.Year + "</label>" +
@@ -203,9 +203,8 @@ function updateSeminar(seminarID)
 	$(".seminarModalBtn").html("Update");
 
 	var seminar = profileJSON.Seminars.find(s => s.SeminarID == seminarID);
-	console.log(Seminars);
 	$(".selectedID").val(seminar.SeminarID);
-	$(".seminarNameTxt").val(seminar.SchoolName);
-	$(".seminarYearTxt").val(seminar.Course);
+	$(".seminarNameTxt").val(seminar.Name);
+	$(".seminarYearTxt").val(seminar.Year);
 	
 }
