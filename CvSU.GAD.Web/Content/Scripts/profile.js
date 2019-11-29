@@ -11,6 +11,17 @@
 
 	});
 
+	$(".settings-tab > button").click(function () {
+
+		if (isFormValid($(".settings-tab")) & isMatched($(".passwordTxt"), $(".confirmPasswordTxt"), "Password did not match."))
+		{
+			$(this).css("pointer-events", "none");
+			$(this).css("opacity", ".9");
+			$(".settings-tab > input[type=submit]").click();
+		}
+
+	});
+
 	$(".educModalBtn").click(function () {
 
 		if (isFormValid($(".educ-modal")))

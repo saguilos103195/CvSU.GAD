@@ -132,7 +132,7 @@
 					<span onclick="switchTab(2)">Seminars</span>
 					<span onclick="switchTab(3)">Settings</span>
 				</div>
-				<div class="form-body profile-tab tab-control">
+				<div class="form-body form-tab profile-tab tab-control">
 					<div class="form-col-1">
 						<div>
 							<p>First Name</p>
@@ -245,9 +245,24 @@
 						</div>
 					</div>
 				</div>
-				<%--<div class="card">
-
-				</div>--%>
+				<div class="form-body form-tab settings-tab tab-control">
+					<div class="form-col-1">
+						<div>
+							<p>Password</p>
+							<input require type="password" class="input-text-control passwordTxt" id="passwordTxt" runat="server" />
+							<span></span>
+						</div>
+					</div>
+					<div class="form-col-1">
+						<div>
+							<p>Confirm Password</p>
+							<input require type="password" class="input-text-control confirmPasswordTxt" id="confirmPasswordTxt" runat="server" />
+							<span></span>
+						</div>
+					</div>
+					<button class="button-control button-green" type="button" >Update Password</button>
+					<asp:Button runat="server" ID="UpdatePasswordBtn" OnClick="UpdatePasswordBtn_Click" />
+				</div>
 			</div>
 		</div>
 	</div>

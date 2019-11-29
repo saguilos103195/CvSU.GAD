@@ -175,5 +175,21 @@ namespace CvSU.GAD.Web.Accounts
 			}
 			LoadJavaSript("showAlert", showAlert);
 		}
+
+		protected void UpdatePasswordBtn_Click(object sender, EventArgs e)
+		{
+			string message = AccountConnector.UpdatePassword(int.Parse(profileID.Value), passwordTxt.Value);
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Password successfully updated!', 'OK', '#009efb', 'profile.aspx');  </script>";
+
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
+		}
 	}
 }

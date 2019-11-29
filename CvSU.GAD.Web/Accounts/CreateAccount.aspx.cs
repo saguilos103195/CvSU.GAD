@@ -47,8 +47,12 @@ namespace CvSU.GAD.Web.Accounts
 				Password = passwordTxt.Value,
 				Status = AdminConnector._accountStatusNew,
 				Type = accountTypeSel.Value,
-				CollegeID = Convert.ToInt32(selectedCollegeTxt.Value)
 			};
+
+			if (newAccount.Type == "Coordinator")
+			{
+				newAccount.CollegeID = Convert.ToInt32(selectedCollegeTxt.Value);
+			}
 
 			string message = AdminConnector.AddAccount(newAccount);
 			string showAlert;
