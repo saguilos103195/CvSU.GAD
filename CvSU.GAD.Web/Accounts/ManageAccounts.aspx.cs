@@ -1,4 +1,5 @@
 ﻿using CvSU.GAD.DataAccess.DatabaseConnectors.Account;
+using CvSU.GAD.DataAccess.Models;
 using CvSU.GAD.Web.Content.Classes;
 using Newtonsoft.Json;
 using System;
@@ -12,23 +13,38 @@ namespace CvSU.GAD.Web.Accounts
 {
 	public partial class ManageAccounts : CustomPage
 	{
-        AdminConnector AdminConnector = new AdminConnector();
+		private Account CurrentAccount { get; set; }
+		private AdminConnector AdminConnector = new AdminConnector();
 
         public ManageAccounts()
         {
-            AdminConnector = new AdminConnector();
+			CurrentAccount = new Account();
+			AdminConnector = new AdminConnector();
         }
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			UpdateSession();
+			CurrentAccount = GetAccountSession();
+			if (CurrentAccount == null)
+			{
+				Response.Redirect("../index.aspx", true);
+			}
+			else if (CurrentAccount.Status.ToLower().Equals("new"))
+			{
+				Response.Redirect("accounts/setup.aspx");
+			}
 
+			LoadJSData();
 		}
 
-        private void GetAccounts()
-        {
-            string JSONAccounts = JsonConvert.SerializeObject(AdminConnector.GetAccounts(1));
-            string getAccounts = "<script type=\"text/javascript\"> var accountsJSON = " + JSONAccounts + " </script>";
-            LoadJavaSript("getAccounts", getAccounts);
-        }
+		private void LoadJSData()
+		{
+			string accountsJSON = JsonConvert.SerializeObject(AdminConnector.GetAccounts(CurrentAccount.AccountID));
+			string loadJSData = $"<script type=\"text/javascript\">" + Environment.NewLine +
+									$"var accountsJSON = {accountsJSON}; " + Environment.NewLine +
+								$"</script>";
+			LoadJavaSript("loadJSData", loadJSData);
+		}
     }
 }

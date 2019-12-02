@@ -83,6 +83,14 @@
 	border: none;
 }
 
+.ui-menu
+{
+	max-height: 220px;
+	overflow: scroll;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
 .button-control
 {
 	border: 1px solid;

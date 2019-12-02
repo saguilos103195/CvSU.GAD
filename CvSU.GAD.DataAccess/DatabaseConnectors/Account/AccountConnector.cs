@@ -26,7 +26,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			_accountStatusNew = "New";
 			_accountStatusActive = "Active";
 			_accountStatusArchive = "Archive";
-			_accountTypeAdmin = "Admin";
+			_accountTypeAdmin = "Administrator";
 			_accountTypeCoordinator = "Coordinator";
 		}
 
