@@ -39,7 +39,7 @@ namespace CvSU.GAD.Web.Content.Classes
 
 			if (HttpContext.Current.Session["AccountJSON"] != null)
 			{
-				SessionAccount = JsonConvert.DeserializeObject<Account>(HttpContext.Current.Session["AccountJSON"].ToString());
+				SessionAccount = JsonConvert.DeserializeObject<Account>(HttpContext.Current.Session["AccountJSON"].ToString(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
 			}
 
 			return SessionAccount;

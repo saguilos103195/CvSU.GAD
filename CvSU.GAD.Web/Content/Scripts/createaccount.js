@@ -13,28 +13,6 @@
 
 	});
 
-	$("#viewTable").DataTable({
-
-		columns: [
-			{ title: "Title" },
-			{ title: "Alias" },
-			{ title: "Department" },
-			{ title: "Action" }
-		],
-
-	});
-
-	$("#archiveTable").DataTable({
-
-		columns: [
-			{ title: "Title" },
-			{ title: "Alias" },
-			{ title: "Department" },
-			{ title: "Action" }
-		],
-
-	});
-
 	$("#collegeSel").parent().parent().css("display", "none");
 	$("#collegeSel").removeAttr("require");
 

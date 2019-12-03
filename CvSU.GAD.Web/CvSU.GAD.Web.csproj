@@ -126,7 +126,7 @@
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.ttf" />
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.woff" />
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.woff2" />
-    <Content Include="Content\Scripts\accounts.js" />
+    <Content Include="Content\Scripts\createaccount.js" />
     <Content Include="Content\Scripts\approvals.js" />
     <Content Include="Content\Scripts\asp-helpers.js" />
     <Content Include="Content\Scripts\colleges.js" />
@@ -1807,6 +1807,7 @@
     <Content Include="Content\Scripts\jquery-ui-1.12.1\jquery-ui.theme.min.css" />
     <Content Include="Content\Scripts\jquery-ui-1.12.1\LICENSE.txt" />
     <Content Include="Content\Scripts\jquery.steps.min.js" />
+    <Content Include="Content\Scripts\manageaccounts.js" />
     <Content Include="Content\Scripts\master.js" />
     <Content Include="Content\Scripts\moment.js" />
     <Content Include="Content\Scripts\positions.js" />

@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GAD.Master" AutoEventWireup="true" CodeBehind="ManageAccounts.aspx.cs" Inherits="CvSU.GAD.Web.Accounts.ManageAccounts" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-	<script type="text/javascript" src="../Content/Scripts/accounts.js"></script>
+	<script type="text/javascript" src="../Content/Scripts/manageaccounts.js"></script>
     <script type="text/javascript">
         switchTab(0);
     </script>

@@ -14,18 +14,30 @@ namespace CvSU.GAD.Web.Accounts
 {
 	public partial class CreateAccount : CustomPage
 	{
-        AdminConnector AdminConnector { get; }
-		CollegeConnector CollegeConnector { get; }
-
+		private Account CurrentAccount { get; set; }
+		private AdminConnector AdminConnector { get; }
+		private CollegeConnector CollegeConnector { get; }
 
 		public CreateAccount()
 		{
-            AdminConnector = new AdminConnector();
+			CurrentAccount = new Account();
+			AdminConnector = new AdminConnector();
 			CollegeConnector = new CollegeConnector();
         }
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			UpdateSession();
+			CurrentAccount = GetAccountSession();
+			if (CurrentAccount == null)
+			{
+				Response.Redirect("../index.aspx", true);
+			}
+			else if (CurrentAccount.Status.ToLower().Equals("new"))
+			{
+				Response.Redirect("accounts/setup.aspx");
+			}
+
 			LoadJSData();
 		}
 
@@ -47,6 +59,7 @@ namespace CvSU.GAD.Web.Accounts
 				Password = passwordTxt.Value,
 				Status = AdminConnector._accountStatusNew,
 				Type = accountTypeSel.Value,
+				CreatedByID = CurrentAccount.AccountID,
 			};
 
 			if (newAccount.Type == "Coordinator")

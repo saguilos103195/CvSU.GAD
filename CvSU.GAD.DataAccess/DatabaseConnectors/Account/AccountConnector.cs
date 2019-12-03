@@ -59,7 +59,10 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 				messageResult = "Please contact support.";
 			}
 
-			return Tuple.Create(messageResult == "", messageResult == "" ? JsonConvert.SerializeObject(dbAccount) : messageResult);
+			return Tuple.Create(messageResult == "", messageResult == "" ? 
+				JsonConvert.SerializeObject(dbAccount, 
+				new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }) 
+				: messageResult);
 		}
 
 		public string UpdatePassword(int accountId, string newPassword)
@@ -268,7 +271,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 
 					if (dbAccount != null)
 					{
-						resultMessage = JsonConvert.SerializeObject(dbAccount);
+						resultMessage = JsonConvert.SerializeObject(dbAccount, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
 					}
 				}
 			}

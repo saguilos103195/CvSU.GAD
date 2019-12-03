@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-	<script type="text/javascript" src="../Content/Scripts/accounts.js"></script>
+	<script type="text/javascript" src="../Content/Scripts/createaccount.js"></script>
 	<div class="form">
 		<p>Accounts</p>
 		<div class="form-body">

@@ -15,7 +15,8 @@
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CollegeID" Type="int" />
-          <Property Name="IsArchived" Type="bit" />
+          <Property Name="IsArchived" Type="bit" Nullable="false" />
+          <Property Name="CreatedByID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="College">
           <Key>
@@ -115,6 +116,18 @@
           <Property Name="Year" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Account_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account1" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountID" />
+            </Principal>
+            <Dependent Role="Account1">
+              <PropertyRef Name="CreatedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Department_College">
           <End Role="College" Type="Self.College" Multiplicity="1" />
           <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -209,6 +222,10 @@
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seminar" EntityType="Self.Seminar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_Account" Association="Self.FK_Account_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account1" EntitySet="Account" />
+          </AssociationSet>
           <AssociationSet Name="FK_Department_College" Association="Self.FK_Department_College">
             <End Role="College" EntitySet="College" />
             <End Role="Department" EntitySet="Department" />
@@ -252,6 +269,10 @@
           <EntitySet Name="Profiles" EntityType="CVSUGADModel.Profile" />
           <EntitySet Name="Programs" EntityType="CVSUGADModel.Program" />
           <EntitySet Name="Seminars" EntityType="CVSUGADModel.Seminar" />
+          <AssociationSet Name="FK_Account_Account" Association="CVSUGADModel.FK_Account_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Account1" EntitySet="Accounts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Disaggregation_Account" Association="CVSUGADModel.FK_Disaggregation_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Disaggregation" EntitySet="Disaggregations" />
@@ -291,9 +312,12 @@
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CollegeID" Type="Int32" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedByID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account" ToRole="Account1" />
+          <NavigationProperty Name="CreatedBy" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account1" ToRole="Account" />
           <NavigationProperty Name="Disaggregations" Relationship="CVSUGADModel.FK_Disaggregation_Account" FromRole="Account" ToRole="Disaggregation" />
           <NavigationProperty Name="Profiles" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Account" ToRole="Profile" />
-          <Property Name="IsArchived" Type="Boolean" />
         </EntityType>
         <EntityType Name="College">
           <Key>
@@ -378,10 +402,10 @@
           <Property Name="EngagedFrom" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EngagedTo" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="WillTravel" Type="Boolean" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Profile" ToRole="Account" />
           <NavigationProperty Name="Educations" Relationship="CVSUGADModel.FK_Education_Profile" FromRole="Profile" ToRole="Education" />
           <NavigationProperty Name="Seminars" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Profile" ToRole="Seminar" />
-          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Program">
           <Key>
@@ -405,6 +429,18 @@
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Seminar" ToRole="Profile" />
         </EntityType>
+        <Association Name="FK_Account_Account">
+          <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="CVSUGADModel.Account" Role="Account1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountID" />
+            </Principal>
+            <Dependent Role="Account1">
+              <PropertyRef Name="CreatedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Disaggregation_Account">
           <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
           <End Type="CVSUGADModel.Disaggregation" Role="Disaggregation" Multiplicity="*" />
@@ -498,6 +534,7 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="CVSUGADModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
                 <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
                 <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
