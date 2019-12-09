@@ -40,7 +40,7 @@ namespace CvSU.GAD.Web.Accounts
 
 		private void LoadJSData()
 		{
-			string accountsJSON = JsonConvert.SerializeObject(AdminConnector.GetAccounts(CurrentAccount.AccountID));
+			string accountsJSON = JsonConvert.SerializeObject(AdminConnector.GetAccounts(CurrentAccount.AccountID), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
 			string loadJSData = $"<script type=\"text/javascript\">" + Environment.NewLine +
 									$"var accountsJSON = {accountsJSON}; " + Environment.NewLine +
 								$"</script>";

@@ -2,9 +2,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 	<script type="text/javascript" src="../Content/Scripts/manageaccounts.js"></script>
-    <script type="text/javascript">
-        switchTab(0);
-    </script>
 	<div class="form">
 		<p>Manage Accounts</p>
 		<div class="form-tabs">

@@ -129,23 +129,56 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 
 		public List<Models.Account> GetAccounts(int accountId)
 		{
-			List<Models.Account> accounts = null;
+			List<Models.Account> accounts = new List<Models.Account>();
 
 			try
 			{
+				Models.Account adminAccount = new Models.Account();
+				List<Models.Account> allAccounts = new List<Models.Account>();
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					var adminAccount = context.Accounts
+					adminAccount = context.Accounts
 						.FirstOrDefault(a => a.AccountID == accountId && a.Type == _accountTypeAdmin);
 
-					if (adminAccount != null)
-					{
-						accounts = context.Accounts.Where(a => a.Type != _accountTypeAdmin).ToList();
-					}
-					else
-					{
-						_log.Warn($"Unauthozired account id '{accountId}'.");
-					}
+					allAccounts = context.Accounts.Where(a => a.Type == "Administrator").ToList();
+					accounts.AddRange(context.Accounts.Where(a => a.Type == "Coordinator").ToList());
+				}
+
+				if (adminAccount != null && allAccounts.Count != 0)
+				{
+					accounts.AddRange(GetCreatedAccounts(adminAccount.AccountID, allAccounts));
+				}
+				else
+				{
+					_log.Warn($"Unauthozired account id '{accountId}'.");
+				}
+			}
+			catch (DbEntityValidationException ex)
+			{
+				LogDbEntityValidationException(ex);
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+			}
+
+			return accounts;
+		}
+
+		public List<Models.Account> GetCreatedAccounts(int accountID, List<Models.Account> allAccounts)
+		{
+			List<Models.Account> accounts = new List<Models.Account>();
+
+			try
+			{
+				allAccounts.Remove(allAccounts.FirstOrDefault(a => a.AccountID == accountID));
+
+				List<Models.Account> filteredAccount = allAccounts.Where(a => a.CreatedByID == accountID).ToList();
+
+				foreach (Models.Account account in filteredAccount)
+				{
+					accounts.Add(account);
+					accounts.AddRange(GetCreatedAccounts(account.AccountID, allAccounts));
 				}
 			}
 			catch (DbEntityValidationException ex)
