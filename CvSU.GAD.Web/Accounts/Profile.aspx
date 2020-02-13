@@ -105,7 +105,13 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="text-center mt-4">
-							<img class="profile-pic" src="../Content/Images/NC.jpg" />
+							<p id="profilePicture" class="profile-pic">
+								<span>
+									Upload Picture
+									<asp:FileUpload runat="server" ID="ProfilePicFile" onchange="uploadProfilePicture()" />
+								</span>
+								<asp:Button runat="server" ID="UpdateProfilePicBtn" OnClick="UpdateProfilePicBtn_Click" />
+							</p>
 							<h4 class="profile-name mt-2">Samuel Marvin Aguilos</h4>
 							<h6 class="profile-position">Administrator</h6>
 						</div>

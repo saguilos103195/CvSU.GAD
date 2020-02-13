@@ -22,10 +22,6 @@ namespace CvSU.GAD.Web
 		protected void Page_Load(object sender, EventArgs e)
 		{
 
-            FIleManager p = new FIleManager();
-
-            p.Upload("", "");
-
         }
 
 		protected void LoginBtn_Click(object sender, EventArgs e)

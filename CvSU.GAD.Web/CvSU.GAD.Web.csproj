@@ -126,6 +126,8 @@
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.ttf" />
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.woff" />
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.woff2" />
+    <Content Include="Content\Images\female.png" />
+    <Content Include="Content\Images\male.png" />
     <Content Include="Content\Scripts\createaccount.js" />
     <Content Include="Content\Scripts\approvals.js" />
     <Content Include="Content\Scripts\asp-helpers.js" />
@@ -231,7 +233,6 @@
     <Content Include="Content\Fonts\OpenSans\SemiboldItalic\OpenSans-SemiboldItalic.svg" />
     <Content Include="Content\Fonts\OpenSans\Semibold\OpenSans-Semibold.svg" />
     <Content Include="Content\Images\cvsu-logo.png" />
-    <Content Include="Content\Images\NC.jpg" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\css\all.css" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\css\all.min.css" />
     <Content Include="Content\Scripts\fontawesome-free-5.8.2-web\css\brands.css" />

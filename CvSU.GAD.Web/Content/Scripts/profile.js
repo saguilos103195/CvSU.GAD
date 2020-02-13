@@ -121,9 +121,15 @@
 
 });
 
+function uploadProfilePicture()
+{
+	$(".profile-pic > input[type=submit]").click();
+}
+
 function loadProfile()
 {
 	console.log(profileJSON);
+	$("#profilePicture").css("background", "url(" + (profileJSON.Image != null ? profileJSON.Image : profileJSON.Gender == "Male" ? "../Content/Images/male.png" : "../Content/Images/female.png" ) + ")");
 	$(".profileID").val(profileJSON.ProfileID);
 	$(".fnameTxt").val(profileJSON.Firstname);
 	$(".mnameTxt").val(profileJSON.Middlename);

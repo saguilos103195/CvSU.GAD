@@ -4,6 +4,7 @@ using CvSU.GAD.DataAccess.Models;
 using CvSU.GAD.Web.Content.Classes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -190,6 +191,38 @@ namespace CvSU.GAD.Web.Accounts
 				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
 			}
 			LoadJavaSript("showAlert", showAlert);
+		}
+
+		protected void UpdateProfilePicBtn_Click(object sender, EventArgs e)
+		{
+			if (ProfilePicFile.HasFile)
+			{
+				Stream uploadFileStream = ProfilePicFile.PostedFile.InputStream;
+				BinaryReader uploadBinaryReader = new BinaryReader(uploadFileStream);
+				byte[] uploadBytes = uploadBinaryReader.ReadBytes((int)uploadFileStream.Length);
+				string uploadBase64 = Convert.ToBase64String(uploadBytes, 0, uploadBytes.Length);
+				string showAlert = "";
+				string guid = Guid.NewGuid().ToString();
+				if (new FileManager().Upload(uploadBase64, "pic-" + guid + ".jpg"))
+				{
+					string message = AccountConnector.UpdateProfilePicture(CurrentAccount.AccountID, "../Content/Images/Uploads/pic-" + guid + ".jpg");
+
+					if (string.IsNullOrEmpty(message))
+					{
+						showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Profile picture successfully updated!', 'OK', '#009efb', 'profile.aspx');  </script>";
+
+					}
+					else
+					{
+						showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+					}
+				}
+				else
+				{
+					showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', 'Upload Failed. Try Again.', 'OK', '#009efb', '#');  </script>";
+				}
+				LoadJavaSript("showAlert", showAlert);
+			}
 		}
 	}
 }

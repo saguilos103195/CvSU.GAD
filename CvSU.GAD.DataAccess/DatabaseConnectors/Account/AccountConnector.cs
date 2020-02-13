@@ -123,6 +123,59 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			return messageResult;
 		}
 
+		public string UpdateProfilePicture(int accountID, string imagePath)
+		{
+			string messageResult = "Failed to update.";
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isUpdated = false;
+
+						try
+						{
+							var dbProfile = context.Profiles.FirstOrDefault(p => p.AccountID == accountID);
+
+							if (dbProfile != null)
+							{
+								dbProfile.Image = imagePath;
+								isUpdated = context.SaveChanges() > 0;
+							}
+						}
+						catch (DbEntityValidationException ex)
+						{
+							LogDbEntityValidationException(ex);
+							messageResult = "Please contact support.";
+						}
+						catch (Exception ex)
+						{
+							LogException(ex);
+							messageResult = "Please contact support.";
+						}
+
+						if (isUpdated)
+						{
+							transaction.Commit();
+							messageResult = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				_log.Error(ex);
+			}
+
+			return messageResult;
+		}
+
 		public string UpdateAccount(Models.Account account)
 		{
 			string messageResult = "Failed to update.";

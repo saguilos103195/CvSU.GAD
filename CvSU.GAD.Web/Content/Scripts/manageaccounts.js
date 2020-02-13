@@ -56,7 +56,7 @@ function loadAccounts()
 				account.Username,
 				account.Type,
 				account.CreatedBy.Username,
-				account.
+				(account.CollegeID == null ? "N/A" : collegesJSON.find(c => c.CollegeID == account.CollegeID).Title),
 				archiveBtn +
 				editBtn
 			]);
