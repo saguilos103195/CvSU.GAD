@@ -17,7 +17,7 @@ namespace CvSU.GAD.DataAccess.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
-            this.Account1 = new HashSet<Account>();
+            this.Accounts = new HashSet<Account>();
             this.Disaggregations = new HashSet<Disaggregation>();
             this.Profiles = new HashSet<Profile>();
         }
@@ -25,15 +25,15 @@ namespace CvSU.GAD.DataAccess.Models
         public int AccountID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Status { get; set; }
         public string Type { get; set; }
         public Nullable<int> CollegeID { get; set; }
         public bool IsArchived { get; set; }
         public int CreatedByID { get; set; }
+        public bool IsNew { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Account1 { get; set; }
-        public virtual Account Account2 { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual Account CreatedBy { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disaggregation> Disaggregations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

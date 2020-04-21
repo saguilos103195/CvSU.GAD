@@ -14,42 +14,61 @@ namespace CvSU.GAD.Web.Accounts
 {
 	public partial class ManageAccounts : CustomPage
 	{
-		private Account CurrentAccount { get; set; }
 		private AdminConnector AdminConnector { get; set; }
 		private CollegeConnector CollegeConnector { get; set; }
 
 		public ManageAccounts()
         {
-			CurrentAccount = new Account();
 			AdminConnector = new AdminConnector();
 			CollegeConnector = new CollegeConnector();
         }
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			UpdateSession();
-			CurrentAccount = GetAccountSession();
-			if (CurrentAccount == null)
-			{
-				Response.Redirect("../index.aspx", true);
-			}
-			else if (CurrentAccount.Status.ToLower().Equals("new"))
-			{
-				Response.Redirect("accounts/setup.aspx");
-			}
-
 			LoadJSData();
 		}
 
 		private void LoadJSData()
 		{
-			string accountsJSON = JsonConvert.SerializeObject(AdminConnector.GetAccounts(CurrentAccount.AccountID), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+			string allAccountsJSON = JsonConvert.SerializeObject(AdminConnector.GetAllAccounts(CurrentAccount.AccountID), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+			string accessedAccountsJSON = JsonConvert.SerializeObject(AdminConnector.GetAccessedAccounts(CurrentAccount.AccountID), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
 			string collegesJSON = JsonConvert.SerializeObject(CollegeConnector.GetColleges());
 			string loadJSData = $"<script type=\"text/javascript\">" + Environment.NewLine +
-									$"var accountsJSON = {accountsJSON}; " + Environment.NewLine +
+									$"var allAccountsJSON = {allAccountsJSON}; " + Environment.NewLine +
+									$"var accessedAccountsJSON = {accessedAccountsJSON}; " + Environment.NewLine +
 									$"var collegesJSON = {collegesJSON}; " + Environment.NewLine +
 								$"</script>";
 			LoadJavaSript("loadJSData", loadJSData);
 		}
-    }
+
+		protected void ArchiveBtn_Click(object sender, EventArgs e)
+		{
+			string message = AdminConnector.ArchiveAccount(CurrentAccount.AccountID, int.Parse(selectedID.Value));
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Account successfully archived!', 'OK', '#009efb', 'manageaccounts.aspx');  </script>";
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
+		}
+
+		protected void RetrieveBtn_Click(object sender, EventArgs e)
+		{
+			string message = AdminConnector.RetrieveAccount(CurrentAccount.AccountID, int.Parse(selectedID.Value));
+			string showAlert;
+			if (string.IsNullOrEmpty(message))
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Account successfully retrieved!', 'OK', '#009efb', 'manageaccounts.aspx');  </script>";
+			}
+			else
+			{
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-times-circle', '#f27474', 'Oops...', '" + message + "', 'OK', '#009efb', '#');  </script>";
+			}
+			LoadJavaSript("showAlert", showAlert);
+		}
+	}
 }

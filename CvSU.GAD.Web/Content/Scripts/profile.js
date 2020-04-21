@@ -114,7 +114,6 @@
 		}
 	});
 
-	loadAdminTemplateInfo();
 	loadProfile();
 	switchTab(0);
 	$(".select-control").selectmenu();

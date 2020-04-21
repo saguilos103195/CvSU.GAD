@@ -34,7 +34,7 @@ namespace CvSU.GAD.Web
 			{
 				Account = JsonConvert.DeserializeObject<DataAccess.Models.Account>(response.Item2);
 				HttpContext.Current.Session["AccountJSON"] = JsonConvert.SerializeObject(Account);
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Account Login Verified!', 'OK', '#009efb', '" + (Account.Status.ToLower() == "new" ? "accounts/setup.aspx" : "accounts/profile.aspx") + "');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Account Login Verified!', 'OK', '#009efb', '" + (Account.IsNew ? "accounts/setup.aspx" : "accounts/profile.aspx") + "');  </script>";
 			}
 			else
 			{

@@ -14,18 +14,12 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 	public class AccountConnector : DatabaseConnector
 	{
 		internal DataAccessFactory _dataAccessFactory;
-		public string _accountStatusNew { get; }
-		public string _accountStatusActive { get; }
-		public string _accountStatusArchive { get; }
 		public string _accountTypeAdmin { get; }
 		public string _accountTypeCoordinator { get; }
 
 		public AccountConnector()
 		{
 			_dataAccessFactory = new DataAccessFactory();
-			_accountStatusNew = "New";
-			_accountStatusActive = "Active";
-			_accountStatusArchive = "Archive";
 			_accountTypeAdmin = "Administrator";
 			_accountTypeCoordinator = "Coordinator";
 		}
@@ -40,7 +34,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
 					dbAccount = context.Accounts
-						.FirstOrDefault(a => a.Username == username && a.Password == password && a.Status != _accountStatusArchive);
+						.FirstOrDefault(a => a.Username == username && a.Password == password && !a.IsArchived);
 
 					if (dbAccount != null)
 					{
@@ -272,7 +266,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 							if (dbAccount.Profiles.Count < 1)
 							{
 								context.Profiles.Add(profile);
-								dbAccount.Status = _accountStatusActive;
+								dbAccount.IsNew = false;
 								isSaved = context.SaveChanges() > 0;
 							}
 							else

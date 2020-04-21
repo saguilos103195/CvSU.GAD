@@ -14,31 +14,18 @@ namespace CvSU.GAD.Web.Accounts
 {
 	public partial class Profile : CustomPage
 	{
-		private Account CurrentAccount { get; set; }
 		private AccountConnector AccountConnector { get; }
 		private SeminarConnector SeminarConnector { get; }
 
 		public Profile()
 		{
-			CurrentAccount = new Account();
 			AccountConnector = new AccountConnector();
 			SeminarConnector = new SeminarConnector();
 		}
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			UpdateSession();
-			CurrentAccount = GetAccountSession();
-			if (CurrentAccount == null)
-			{
-				Response.Redirect("../index.aspx", true);
-			}
-			else if (CurrentAccount.Status.ToLower().Equals("new"))
-			{
-				Response.Redirect("accounts/setup.aspx");
-			}
-
-			LoadJSProfile();
+			
 		}
 
 		protected void UpdateProfileBtn_Click(object sender, EventArgs e)

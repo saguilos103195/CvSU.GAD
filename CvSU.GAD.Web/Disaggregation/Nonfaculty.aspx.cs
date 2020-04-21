@@ -17,7 +17,6 @@ namespace CvSU.GAD.Web.Disaggregation
 		private DepartmentConnector DepartmentConnector { get; }
 		private PositionConnector PositionConnector { get; }
 		private DisaggregationConnector DisaggregationConnector { get; }
-		private Account CurrentAccount { get; set; }
 
 		public Nonfaculty()
 		{
@@ -25,21 +24,10 @@ namespace CvSU.GAD.Web.Disaggregation
 			DepartmentConnector = new DepartmentConnector();
 			PositionConnector = new PositionConnector();
 			DisaggregationConnector = new DisaggregationConnector();
-			CurrentAccount = new Account();
 		}
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			CurrentAccount = GetAccountSession();
-			if (CurrentAccount == null)
-			{
-				Response.Redirect("../index.aspx", true);
-			}
-			else if (CurrentAccount.Status.ToLower().Equals("new"))
-			{
-				Response.Redirect("accounts/setup.aspx");
-			}
-			LoadJSProfile();
 			LoadJSData();
 		}
 

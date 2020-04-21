@@ -52,6 +52,7 @@ function loadAdminTemplateInfo()
 {
 	if (profileJSON != null)
 	{
+		$(".master-sidebar-picture > p").css("background", "url(" + (profileJSON.Image != null ? profileJSON.Image : profileJSON.Gender == "Male" ? "../Content/Images/male.png" : "../Content/Images/female.png") + ")");
 		$("#sidebarProfileName").html(profileJSON.Firstname + " " + profileJSON.Middlename.charAt(0) + ". " + profileJSON.Lastname);
 	}
 }
@@ -80,7 +81,7 @@ $(document).ready(function () {
 	$(".form-tabs > span:first-of-type").addClass("form-active-tab");
 	$(".tab-control").eq(0).removeAttr("style");
 
-	
+	loadAdminTemplateInfo();
 
 });
 

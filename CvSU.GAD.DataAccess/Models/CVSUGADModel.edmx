@@ -12,11 +12,11 @@
           <Property Name="AccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CollegeID" Type="int" />
           <Property Name="IsArchived" Type="bit" Nullable="false" />
           <Property Name="CreatedByID" Type="int" Nullable="false" />
+          <Property Name="IsNew" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="College">
           <Key>
@@ -309,13 +309,13 @@
           <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CollegeID" Type="Int32" />
           <Property Name="IsArchived" Type="Boolean" Nullable="false" />
           <Property Name="CreatedByID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account1" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account" ToRole="Account1" />
-          <NavigationProperty Name="Account2" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account1" ToRole="Account" />
+          <Property Name="IsNew" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account" ToRole="Account1" />
+          <NavigationProperty Name="CreatedBy" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account1" ToRole="Account" />
           <NavigationProperty Name="Disaggregations" Relationship="CVSUGADModel.FK_Disaggregation_Account" FromRole="Account" ToRole="Disaggregation" />
           <NavigationProperty Name="Profiles" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Account" ToRole="Profile" />
         </EntityType>
@@ -534,11 +534,11 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="CVSUGADModel.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
                 <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
                 <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
                 <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />

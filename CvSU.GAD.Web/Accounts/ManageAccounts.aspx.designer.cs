@@ -7,11 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CvSU.GAD.Web.Accounts
-{
-
-
-    public partial class ManageAccounts
-    {
+namespace CvSU.GAD.Web.Accounts {
+    
+    
+    public partial class ManageAccounts {
+        
+        /// <summary>
+        /// selectedID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden selectedID;
+        
+        /// <summary>
+        /// ArchiveBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ArchiveBtn;
+        
+        /// <summary>
+        /// RetrieveBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button RetrieveBtn;
     }
 }
