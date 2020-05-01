@@ -55,7 +55,7 @@ namespace CvSU.GAD.Web.Disaggregation
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Data successfully deleted!', 'OK', '#009efb', 'nonfaculty.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Data successfully deleted!', 'OK', '#009efb', '/disaggregation/nonfaculty.aspx');  </script>";
 			}
 			else
 			{
@@ -82,7 +82,7 @@ namespace CvSU.GAD.Web.Disaggregation
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Data successfully added!', 'OK', '#009efb', 'nonfaculty.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Data successfully added!', 'OK', '#009efb', '/disaggregation/nonfaculty.aspx');  </script>";
 			}
 			else
 			{

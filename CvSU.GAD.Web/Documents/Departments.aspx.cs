@@ -45,7 +45,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully archived!', 'OK', '#009efb', 'departments.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully archived!', 'OK', '#009efb', '/documents/departments.aspx');  </script>";
 			}
 			else
 			{
@@ -65,7 +65,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully added!', 'OK', '#009efb', 'departments.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully added!', 'OK', '#009efb', '/documents/departments.aspx');  </script>";
 			}
 			else
 			{
@@ -80,7 +80,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully retrieved!', 'OK', '#009efb', 'departments.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully retrieved!', 'OK', '#009efb', '/documents/departments.aspx');  </script>";
 			}
 			else
 			{
@@ -97,7 +97,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully updated!', 'OK', '#009efb', 'departments.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully updated!', 'OK', '#009efb', '/documents/departments.aspx');  </script>";
 			}
 			else
 			{

@@ -39,7 +39,7 @@ namespace CvSU.GAD.Web.ResourcePool
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Seminar successfully rejected!', 'OK', '#009efb', 'approvals.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Seminar successfully rejected!', 'OK', '#009efb', '/resourcepool/approvals.aspx');  </script>";
 			}
 			else
 			{
@@ -54,7 +54,7 @@ namespace CvSU.GAD.Web.ResourcePool
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Seminar successfully approved!', 'OK', '#009efb', 'approvals.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Seminar successfully approved!', 'OK', '#009efb', '/resourcepool/approvals.aspx');  </script>";
 			}
 			else
 			{

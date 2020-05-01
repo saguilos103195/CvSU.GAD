@@ -36,13 +36,13 @@ namespace CvSU.GAD.Web.Content.Classes
 
 				CurrentAccount = GetAccountSession();
 
-				if (CurrentAccount == null)
+				if (CurrentAccount == null && pageName.ToLower() != "index")
 				{
-					Response.Redirect("../index.aspx", true);
+					Response.Redirect("/index.aspx", true);
 				}
-				else if (CurrentAccount.IsNew)
+				else if (CurrentAccount.IsNew && pageName.ToLower() != "setup")
 				{
-					Response.Redirect("accounts/setup.aspx");
+					Response.Redirect("/accounts/setup.aspx");
 				}
 			}
 		}

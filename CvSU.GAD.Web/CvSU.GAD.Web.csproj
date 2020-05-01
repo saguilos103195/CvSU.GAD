@@ -1972,6 +1972,7 @@
     <Content Include="Content\Stylesheets\bootstrap.css.map" />
     <Content Include="Content\Stylesheets\bootstrap.min.css.map" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

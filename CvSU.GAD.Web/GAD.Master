@@ -51,7 +51,7 @@
 						<label class="fas fa-sort-down"></label>
 					</p>
 					<div class="master-sidebar-account-menu">
-						<a href="../accounts/profile.aspx"><span class="fas fa-user"></span><p>Profile</p></a>
+						<a href="/accounts/profile.aspx"><span class="fas fa-user"></span><p>Profile</p></a>
 						<a><span class="fas fa-sign-out-alt"></span><p>Logout</p></a>
 					</div>
 				</div>
@@ -59,23 +59,23 @@
 					<div class="master-sidebar-menuitem">
 						<p><label class="fas fa-user-cog"></label><span>Accounts</span><i class="fas fa-chevron-left"></i></p>
 						<div>
-							<a href="../accounts/createaccount.aspx">Create Accounts</a>
-							<a href="../accounts/manageaccounts.aspx">View Accounts</a>
+							<a href="/accounts/createaccount.aspx">Create Accounts</a>
+							<a href="/accounts/manageaccounts.aspx">View Accounts</a>
 						</div>
 					</div>
 					<div class="master-sidebar-menuitem">
 						<p><label class="fas fa-venus-mars"></label><span>Sex Disaggregation</span><i class="fas fa-chevron-left"></i></p>
 						<div>
-							<a href="../disaggregation/student.aspx">Student</a>
-							<a href="../disaggregation/faculty.aspx">Faculty</a>
-							<a href="../disaggregation/nonfaculty.aspx">Non-faculty</a>
+							<a href="/disaggregation/student.aspx">Student</a>
+							<a href="/disaggregation/faculty.aspx">Faculty</a>
+							<a href="/disaggregation/nonfaculty.aspx">Non-faculty</a>
 						</div>
 					</div>
 					<div class="master-sidebar-menuitem">
 						<p><label class="fas fa-users"></label><span>GAD Resource Pool</span><i class="fas fa-chevron-left"></i></p>
 						<div>
-							<a href="../resourcepool/view.aspx">View</a>
-							<a href="../resourcepool/approvals.aspx">Approvals</a>
+							<a href="/resourcepool/view.aspx">View</a>
+							<a href="/resourcepool/approvals.aspx">Approvals</a>
 						</div>
 					</div>
 					<div class="master-sidebar-menuitem">
@@ -88,10 +88,10 @@
 					<div class="master-sidebar-menuitem">
 						<p><label class="fas fa-book"></label><span>Documents</span><i class="fas fa-chevron-left"></i></p>
 						<div>
-							<a href="../documents/colleges.aspx">Colleges</a>
-							<a href="../documents/departments.aspx">Departments</a>
-							<a href="../documents/programs.aspx">Programs</a>
-							<a href="../documents/positions.aspx">Position</a>
+							<a href="/documents/colleges.aspx">Colleges</a>
+							<a href="/documents/departments.aspx">Departments</a>
+							<a href="/documents/programs.aspx">Programs</a>
+							<a href="/documents/positions.aspx">Position</a>
 						</div>
 					</div>
 				</div>

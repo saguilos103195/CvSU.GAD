@@ -42,7 +42,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully added!', 'OK', '#009efb', 'colleges.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully added!', 'OK', '#009efb', '/documents/colleges.aspx');  </script>";
 			}
 			else
 			{
@@ -57,7 +57,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully archived!', 'OK', '#009efb', 'colleges.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully archived!', 'OK', '#009efb', '/documents/colleges.aspx');  </script>";
 			}
 			else
 			{
@@ -72,7 +72,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully retrieved!', 'OK', '#009efb', 'colleges.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully retrieved!', 'OK', '#009efb', '/documents/colleges.aspx');  </script>";
 			}
 			else
 			{
@@ -89,7 +89,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully updated!', 'OK', '#009efb', 'colleges.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'College successfully updated!', 'OK', '#009efb', '/documents/colleges.aspx');  </script>";
 			}
 			else
 			{

@@ -51,7 +51,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Program successfully archived!', 'OK', '#009efb', 'programs.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Program successfully archived!', 'OK', '#009efb', '/documents/programs.aspx');  </script>";
 			}
 			else
 			{
@@ -66,7 +66,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Program successfully retrieved!', 'OK', '#009efb', 'programs.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Program successfully retrieved!', 'OK', '#009efb', '/documents/programs.aspx');  </script>";
 			}
 			else
 			{
@@ -89,7 +89,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully updated!', 'OK', '#009efb', 'programs.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Department successfully updated!', 'OK', '#009efb', '/documents/programs.aspx');  </script>";
 			}
 			else
 			{
@@ -108,7 +108,7 @@ namespace CvSU.GAD.Web.Documents
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Program successfully added!', 'OK', '#009efb', 'programs.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Program successfully added!', 'OK', '#009efb', '/documents/programs.aspx');  </script>";
 			}
 			else
 			{

@@ -52,7 +52,7 @@ namespace CvSU.GAD.Web.Accounts
 			string showAlert;
 			if (string.IsNullOrEmpty(message))
 			{
-				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Account Setup Complete!', 'OK', '#009efb', '../accounts/profile.aspx');  </script>";
+				showAlert = "<script type=\"text/javascript\"> toggleMasterAlert('far fa-check-circle', '#51d487', 'Success', 'Account Setup Complete!', 'OK', '#009efb', '/accounts/profile.aspx');  </script>";
 			}
 			else
 			{

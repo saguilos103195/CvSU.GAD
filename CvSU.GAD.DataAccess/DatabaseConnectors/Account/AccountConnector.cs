@@ -117,7 +117,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			return messageResult;
 		}
 
-		public string UpdateProfilePicture(int accountID, string imagePath)
+		public string UpdateProfilePicture(int accountID, string base64)
 		{
 			string messageResult = "Failed to update.";
 
@@ -135,7 +135,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 
 							if (dbProfile != null)
 							{
-								dbProfile.Image = imagePath;
+								dbProfile.Image = base64;
 								isUpdated = context.SaveChanges() > 0;
 							}
 						}
