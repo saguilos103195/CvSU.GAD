@@ -129,6 +129,21 @@ function loadProfile()
 {
 	console.log(profileJSON);
 	$("#profilePicture").css("background", "url(" + (profileJSON.Image != null ? "data:image/png;base64," + profileJSON.Image : profileJSON.Gender == "Male" ? "../Content/Images/male.png" : "../Content/Images/female.png" ) + ")");
+
+	var middleInitial = "";
+
+	if (profileJSON.Middlename != "" || profileJSON.Middlename != null)
+	{
+		middleInitial = profileJSON.Middlename.charAt(0) + ".";
+    }
+
+	$("#fullNameProfileTxt").html(profileJSON.Firstname + " " + middleInitial + " " + profileJSON.Lastname);
+	$("#positionProfileTxt").html(profileJSON.Account.Type);
+	$("#genderProfileTxt").html(profileJSON.Gender);
+	$("#emailProfileTxt").html(profileJSON.EmailAddress);
+	$("#cpNoProfileTxt").html(profileJSON.CellphoneNumber);
+	$("#addressProfileTxt").html(profileJSON.Address);
+
 	$(".profileID").val(profileJSON.ProfileID);
 	$(".fnameTxt").val(profileJSON.Firstname);
 	$(".mnameTxt").val(profileJSON.Middlename);

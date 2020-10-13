@@ -232,7 +232,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					profile = context.Profiles.Include(p => p.Educations).Include(s => s.Seminars).FirstOrDefault(p => p.AccountID == accountId);
+					profile = context.Profiles.Include(p => p.Account).Include(p => p.Educations).Include(s => s.Seminars).FirstOrDefault(p => p.AccountID == accountId);
 				}
 			}
 			catch (DbEntityValidationException ex)

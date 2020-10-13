@@ -1826,6 +1826,7 @@
     <Content Include="Content\Stylesheets\index.css" />
     <Content Include="Content\Stylesheets\master.css" />
     <Content Include="Content\Stylesheets\profile.css" />
+    <Content Include="Content\Stylesheets\resourcepool.css" />
     <Content Include="Content\Stylesheets\setup.css" />
     <Content Include="Content\Stylesheets\ui.css" />
     <Content Include="Disaggregation\Faculty.aspx" />

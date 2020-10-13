@@ -112,8 +112,8 @@
 								</span>
 								<asp:Button runat="server" ID="UpdateProfilePicBtn" OnClick="UpdateProfilePicBtn_Click" />
 							</p>
-							<h4 class="profile-name mt-2">Samuel Marvin Aguilos</h4>
-							<h6 class="profile-position">Administrator</h6>
+							<h4 class="profile-name mt-2" id="fullNameProfileTxt"></h4>
+							<h6 class="profile-position"  id="positionProfileTxt"></h6>
 						</div>
 					</div>
 					<div>
@@ -121,13 +121,13 @@
 					</div>
 					<div class="card-body">
 						<small class="text-muted">Gender</small>
-						<h6 class="profile-label">Male</h6>
+						<h6 class="profile-label" id="genderProfileTxt"></h6>
 						<small class="text-muted">Email address</small>
-						<h6 class="profile-label">samuel103195@gmail.com</h6>
+						<h6 class="profile-label" id="emailProfileTxt"></h6>
 						<small class="text-muted">Phone</small>
-						<h6 class="profile-label">09123456789</h6>
+						<h6 class="profile-label" id="cpNoProfileTxt"></h6>
 						<small class="text-muted">Address</small>
-						<h6 class="profile-label">Blk 8 Lot 35 Beverly Hills st. San Marino City, Salawag, Dasmarinas City, Cavite</h6>
+						<h6 class="profile-label" id="addressProfileTxt"></h6>
 					</div>
 				</div>
 			</div>

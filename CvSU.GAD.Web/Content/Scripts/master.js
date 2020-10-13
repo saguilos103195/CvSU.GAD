@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+	$(".select-control").selectmenu();
+
 	$(".master-sidebar-account > p").click(function () {
 
 		if ($(".master-sidebar-account-menu").css("display") == "none")

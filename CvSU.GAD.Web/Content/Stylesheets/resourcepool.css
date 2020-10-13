@@ -1,0 +1,11 @@
+﻿.resourse-pool > p
+{
+    color: #51d487;
+    font-size: 21px;
+}
+
+.resourse-pool-header
+{
+    display: flex;
+    flex: 1 1 0px;
+}
