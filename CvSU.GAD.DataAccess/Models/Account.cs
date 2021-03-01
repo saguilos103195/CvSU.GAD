@@ -17,9 +17,10 @@ namespace CvSU.GAD.DataAccess.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
-            this.Accounts = new HashSet<Account>();
+            this.Account1 = new HashSet<Account>();
             this.Disaggregations = new HashSet<Disaggregation>();
             this.Profiles = new HashSet<Profile>();
+            this.Documents = new HashSet<Document>();
         }
     
         public int AccountID { get; set; }
@@ -32,11 +33,13 @@ namespace CvSU.GAD.DataAccess.Models
         public bool IsNew { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
-        public virtual Account CreatedBy { get; set; }
+        public virtual ICollection<Account> Account1 { get; set; }
+        public virtual Account Account2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disaggregation> Disaggregations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profile> Profiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }

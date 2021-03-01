@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Management.Instrumentation;
+using CvSU.GAD.DataAccess.Models.Helper;
 
 namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 {
@@ -322,6 +324,139 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 			}
 
 			return messageResult;
+		}
+
+		public string ReassignPersonnel(int adminAccountId, int profileID, int collegeID)
+        {
+			string messageResult = "Failed to reassign account";
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (var transaction = context.Database.BeginTransaction())
+					{
+						bool isSuccess = false;
+
+						try
+						{
+							var dbAdmin = context.Accounts
+								.FirstOrDefault(a => a.AccountID == adminAccountId && a.Type == _accountTypeAdmin);
+
+							if (dbAdmin != null)
+							{
+								var dbAccount = context.Profiles.Include(p => p.Account).FirstOrDefault(p => p.ProfileID == profileID).Account;
+
+								if (dbAccount != null)
+								{
+									dbAccount.IsArchived = false;
+
+									if (collegeID != 0)
+									{
+										dbAccount.Type = "Coordinator";
+										dbAccount.CollegeID = collegeID;
+									}
+									else
+									{
+										dbAccount.Type = "Administrator";
+									}
+
+									int changes = context.SaveChanges();
+
+									if (changes > 0)
+									{
+										isSuccess = true;
+									}
+                                    else
+                                    {
+										messageResult = "No changes done.";
+									}
+								}
+								else
+								{
+									messageResult = "Account doesn't exist.";
+								}
+							}
+							else
+							{
+								messageResult = "Unauthorized.";
+							}
+						}
+						catch (Exception ex)
+						{
+							LogException(ex);
+							messageResult = "Please contact the support. ";
+						}
+
+						if (isSuccess)
+						{
+							transaction.Commit();
+							messageResult = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+						}
+					}
+				}
+			}
+			catch (DbEntityValidationException ex)
+			{
+				LogDbEntityValidationException(ex);
+				messageResult = "Please contact the support. ";
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				messageResult = "Please contact the support. ";
+			}
+
+			return messageResult;
+		}
+
+		public List<ResourcePoolModel> GetProfiles(int adminAccountID)
+        {
+			List<ResourcePoolModel> resourcePool = new List<ResourcePoolModel>();
+
+			try
+			{
+				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					var dbAdmin = context.Accounts
+							.FirstOrDefault(a => a.AccountID == adminAccountID && a.Type == _accountTypeAdmin);
+
+					if (dbAdmin != null)
+					{
+						var profiles = context.Profiles.Include(p => p.Account).Include(p => p.Educations).Include(p => p.Seminars);
+
+                        foreach (var profile in profiles)
+                        {
+							ResourcePoolModel resourcePoolModel = new ResourcePoolModel();
+							profile.Seminars = profile.Seminars.Where(s => s.Status == "Approved").ToList();
+							resourcePoolModel.Profile = profile;
+							resourcePoolModel.College = context.Colleges.FirstOrDefault(c => c.CollegeID == profile.Account.CollegeID);
+							resourcePool.Add(resourcePoolModel);
+						}
+
+					}
+					else
+					{
+						throw new Exception("Unauthorized.");
+					}
+				}
+			}
+			catch (DbEntityValidationException ex)
+			{
+				LogDbEntityValidationException(ex);
+				throw new Exception("Please contact the support. ");
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				throw new Exception("Please contact the support. ");
+			}
+
+			return resourcePool;
 		}
 	}
 }

@@ -54,7 +54,7 @@ function loadAdminTemplateInfo()
 {
 	if (profileJSON != null)
 	{
-		$(".master-sidebar-picture > p").css("background", "url(" + (profileJSON.Image != null ? "data:image/png;base64," +  profileJSON.Image : profileJSON.Gender == "Male" ? "../Content/Images/male.png" : "../Content/Images/female.png") + ")");
+		$(".master-sidebar-picture > p").css("background", "url(" +  + ")");
 		$("#sidebarProfileName").html(profileJSON.Firstname + " " + profileJSON.Middlename.charAt(0) + ". " + profileJSON.Lastname);
 	}
 }

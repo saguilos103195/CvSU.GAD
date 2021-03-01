@@ -28,7 +28,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
 		{
 			string messageResult = "Failed to login invalid username and password.";
 			Models.Account dbAccount = new Models.Account();
-
+			
 			try
 			{
 				using (var context = _dataAccessFactory.GetCVSUGADDBContext())
@@ -416,7 +416,19 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors.Account
                                     numberOfChanges++;
                                 }
 
-                                if (dbProfile.WillTravel != profile.WillTravel)
+								if (dbProfile.EngagedFrom != profile.EngagedFrom)
+								{
+									dbProfile.EngagedFrom = profile.EngagedFrom;
+									numberOfChanges++;
+								}
+
+								if (dbProfile.EngagedTo != profile.EngagedTo)
+								{
+									dbProfile.EngagedTo = profile.EngagedTo;
+									numberOfChanges++;
+								}
+
+								if (dbProfile.WillTravel != profile.WillTravel)
                                 {
                                     dbProfile.WillTravel = profile.WillTravel;
                                     numberOfChanges++;

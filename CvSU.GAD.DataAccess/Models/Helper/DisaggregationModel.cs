@@ -9,6 +9,7 @@ namespace CvSU.GAD.DataAccess.Models.Helper
 	public class DisaggregationModel
 	{
 		public int DisaggregationID { get; set; }
+		public int AccountID { get; set; }
 		public string PositionTitle { get; set; }
 		public string ProgramTitle { get; set; }
 		public string Department { get; set; }

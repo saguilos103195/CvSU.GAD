@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CvSU.GAD.Web", "CvSU.GAD.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CvSU.GAD.DataAccess", "CvSU.GAD.DataAccess\CvSU.GAD.DataAccess.csproj", "{42847C5D-40D9-4AE5-8A13-3C581B4512C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CvSU.GAD.WebForms", "CvSU.GAD.WebForms\CvSU.GAD.WebForms.csproj", "{2068E493-1BDD-4A19-A646-563CD96FB69C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{42847C5D-40D9-4AE5-8A13-3C581B4512C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42847C5D-40D9-4AE5-8A13-3C581B4512C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42847C5D-40D9-4AE5-8A13-3C581B4512C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2068E493-1BDD-4A19-A646-563CD96FB69C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2068E493-1BDD-4A19-A646-563CD96FB69C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2068E493-1BDD-4A19-A646-563CD96FB69C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2068E493-1BDD-4A19-A646-563CD96FB69C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

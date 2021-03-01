@@ -55,6 +55,8 @@
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,8 +75,10 @@
     <Compile Include="DatabaseConnectors\ProgramConnector.cs" />
     <Compile Include="DatabaseConnectors\DatabaseConnector.cs" />
     <Compile Include="DatabaseConnectors\DepartmentConnector.cs" />
+    <Compile Include="DatabaseConnectors\DocumentConnector.cs" />
     <Compile Include="DatabaseConnectors\SeminarConnector.cs" />
     <Compile Include="DatabaseContexts\CVSUGADDBContext.cs" />
+    <Compile Include="JavaScriptLogger.cs" />
     <Compile Include="Models\Account.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
@@ -102,10 +106,14 @@
     <Compile Include="Models\Disaggregation.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Document.cs">
+      <DependentUpon>CVSUGADModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Education.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Helper\DisaggregationModel.cs" />
+    <Compile Include="Models\Helper\ResourcePoolModel.cs" />
     <Compile Include="Models\Helper\SeminarModel.cs" />
     <Compile Include="Models\Position.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
@@ -117,6 +125,9 @@
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Seminar.cs">
+      <DependentUpon>CVSUGADModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>CVSUGADModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

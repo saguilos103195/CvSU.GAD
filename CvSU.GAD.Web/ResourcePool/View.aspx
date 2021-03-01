@@ -5,18 +5,27 @@
 		<link rel="stylesheet" href="../Content/Stylesheets/resourcepool.css" />
 		<p>GAD Resource Pool</p>
 		<div class="resourse-pool-header">
-			<select class="select-control">
-				<option>All</option>
-				<option>CAS</option>
-				<option>CEIT</option>
-				<option>CON</option>
-				<option>CEMDS</option>
-			</select>
-			<select class="select-control">
-				<option>Both</option>
-				<option>Male</option>
-				<option>Female</option>
-			</select>
+			<div>
+				<select class="select-control">
+					<option>All</option>
+					<option>CAS</option>
+					<option>CEIT</option>
+					<option>CON</option>
+					<option>CEMDS</option>
+				</select>
+			</div>
+			<div>
+				<select class="select-control">
+					<option>All</option>
+					<option>Male</option>
+					<option>Female</option>
+				</select>
+			</div>
+		</div>
+		<div class="resourse-pool-body">
+			<div class="resourse-pool-profile text-center mt-4">
+				<p style="background: red;"></p>
+			</div>
 		</div>
 	</div>
 </asp:Content>

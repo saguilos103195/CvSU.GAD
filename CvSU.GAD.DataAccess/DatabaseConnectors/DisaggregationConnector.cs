@@ -53,6 +53,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 								{
 									var dbDisaggregation = context.Disaggregations
 										.FirstOrDefault(d => d.IsStudent == newDisaggregation.IsStudent
+											&& d.DepartmentID == newDisaggregation.DepartmentID
 											&& d.ReferenceID == newDisaggregation.ReferenceID
 											&& d.SchoolYear == newDisaggregation.SchoolYear
 											&& d.Semester == newDisaggregation.Semester);
@@ -129,6 +130,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 								disaggregations.Add(new DisaggregationModel
 								{
 									DisaggregationID = dbDisaggregation.DisaggregationID,
+									AccountID = dbDisaggregation.AccountID,
 									Department = dbDisaggregation.Department.Alias,
 									FemaleQuantity = dbDisaggregation.FemaleQuantity,
 									MaleQuantity = dbDisaggregation.MaleQuantity,
@@ -175,6 +177,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 									disaggregations.Add(new DisaggregationModel
 									{
 										DisaggregationID = dbDisaggregation.DisaggregationID,
+										AccountID = dbDisaggregation.AccountID,
 										Department = dbDisaggregation.Department.Title,
 										FemaleQuantity = dbDisaggregation.FemaleQuantity,
 										MaleQuantity = dbDisaggregation.MaleQuantity,
@@ -229,6 +232,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 									disaggregations.Add(new DisaggregationModel
 									{
 										DisaggregationID = dbDisaggregation.DisaggregationID,
+										AccountID = dbDisaggregation.AccountID,
 										Department = dbDisaggregation.Department.Title,
 										FemaleQuantity = dbDisaggregation.FemaleQuantity,
 										MaleQuantity = dbDisaggregation.MaleQuantity,

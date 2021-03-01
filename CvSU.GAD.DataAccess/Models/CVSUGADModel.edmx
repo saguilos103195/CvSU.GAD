@@ -52,6 +52,18 @@
           <Property Name="AccountID" Type="int" Nullable="false" />
           <Property Name="DepartmentID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DocumentFile" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DocumentMimeType" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DocumentName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Education">
           <Key>
             <PropertyRef Name="EducationID" />
@@ -115,6 +127,16 @@
           <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Year" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Account_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
@@ -200,6 +222,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Project_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountID" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Seminar_Profile">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="Seminar" Type="Self.Seminar" Multiplicity="*" />
@@ -217,11 +251,13 @@
           <EntitySet Name="College" EntityType="Self.College" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disaggregation" EntityType="Self.Disaggregation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seminar" EntityType="Self.Seminar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Account_Account" Association="Self.FK_Account_Account">
             <End Role="Account" EntitySet="Account" />
             <End Role="Account1" EntitySet="Account" />
@@ -250,6 +286,10 @@
             <End Role="Department" EntitySet="Department" />
             <End Role="Program" EntitySet="Program" />
           </AssociationSet>
+          <AssociationSet Name="FK_Project_Account" Association="Self.FK_Project_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
           <AssociationSet Name="FK_Seminar_Profile" Association="Self.FK_Seminar_Profile">
             <End Role="Profile" EntitySet="Profile" />
             <End Role="Seminar" EntitySet="Seminar" />
@@ -264,11 +304,13 @@
           <EntitySet Name="Colleges" EntityType="CVSUGADModel.College" />
           <EntitySet Name="Departments" EntityType="CVSUGADModel.Department" />
           <EntitySet Name="Disaggregations" EntityType="CVSUGADModel.Disaggregation" />
+          <EntitySet Name="Documents" EntityType="CVSUGADModel.Document" />
           <EntitySet Name="Educations" EntityType="CVSUGADModel.Education" />
           <EntitySet Name="Positions" EntityType="CVSUGADModel.Position" />
           <EntitySet Name="Profiles" EntityType="CVSUGADModel.Profile" />
           <EntitySet Name="Programs" EntityType="CVSUGADModel.Program" />
           <EntitySet Name="Seminars" EntityType="CVSUGADModel.Seminar" />
+          <EntitySet Name="sysdiagrams" EntityType="CVSUGADModel.sysdiagram" />
           <AssociationSet Name="FK_Account_Account" Association="CVSUGADModel.FK_Account_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Account1" EntitySet="Accounts" />
@@ -280,6 +322,10 @@
           <AssociationSet Name="FK_Profile_Account" Association="CVSUGADModel.FK_Profile_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Account" Association="CVSUGADModel.FK_Project_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Document" EntitySet="Documents" />
           </AssociationSet>
           <AssociationSet Name="FK_Department_College" Association="CVSUGADModel.FK_Department_College">
             <End Role="College" EntitySet="Colleges" />
@@ -314,10 +360,11 @@
           <Property Name="IsArchived" Type="Boolean" Nullable="false" />
           <Property Name="CreatedByID" Type="Int32" Nullable="false" />
           <Property Name="IsNew" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account" ToRole="Account1" />
-          <NavigationProperty Name="CreatedBy" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account1" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account" ToRole="Account1" />
+          <NavigationProperty Name="Account2" Relationship="CVSUGADModel.FK_Account_Account" FromRole="Account1" ToRole="Account" />
           <NavigationProperty Name="Disaggregations" Relationship="CVSUGADModel.FK_Disaggregation_Account" FromRole="Account" ToRole="Disaggregation" />
           <NavigationProperty Name="Profiles" Relationship="CVSUGADModel.FK_Profile_Account" FromRole="Account" ToRole="Profile" />
+          <NavigationProperty Name="Documents" Relationship="CVSUGADModel.FK_Project_Account" FromRole="Account" ToRole="Document" />
         </EntityType>
         <EntityType Name="College">
           <Key>
@@ -358,6 +405,19 @@
           <Property Name="DepartmentID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Disaggregation_Account" FromRole="Disaggregation" ToRole="Account" />
           <NavigationProperty Name="Department" Relationship="CVSUGADModel.FK_Disaggregation_Department" FromRole="Disaggregation" ToRole="Department" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentFile" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentMimeType" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Project_Account" FromRole="Document" ToRole="Account" />
         </EntityType>
         <EntityType Name="Education">
           <Key>
@@ -429,6 +489,16 @@
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Profile" Relationship="CVSUGADModel.FK_Seminar_Profile" FromRole="Seminar" ToRole="Profile" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <Association Name="FK_Account_Account">
           <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
           <End Type="CVSUGADModel.Account" Role="Account1" Multiplicity="*" />
@@ -462,6 +532,18 @@
             </Principal>
             <Dependent Role="Profile">
               <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Account">
+          <End Type="CVSUGADModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="CVSUGADModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountID" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -582,6 +664,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="CVSUGADModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+                <ScalarProperty Name="DocumentMimeType" ColumnName="DocumentMimeType" />
+                <ScalarProperty Name="DocumentFile" ColumnName="DocumentFile" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Educations">
             <EntityTypeMapping TypeName="CVSUGADModel.Education">
               <MappingFragment StoreEntitySet="Education">
@@ -648,6 +743,17 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
                 <ScalarProperty Name="SeminarID" ColumnName="SeminarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CVSUGADModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
