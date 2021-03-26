@@ -76,7 +76,8 @@ namespace CvSU.GAD.WebForms.Documents
 						DocumentName = fileDocument.PostedFile.FileName,
 						DocumentMimeType = fileDocument.PostedFile.ContentType,
 						DocumentFile = uploadBase64,
-						CreatedBy = CurrentAccount.AccountID
+						CreatedBy = CurrentAccount.AccountID,
+						Status = "Pending"
 					};
 
 					string message = DocumentConnector.AddDocument(newAccomplishment);

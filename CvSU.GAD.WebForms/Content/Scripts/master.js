@@ -16,14 +16,63 @@
 		var table = $(this);
 		var tableHeaderCount = (table.find("tr:nth-child(1) th").length) / 2;
 
-		var tableOptions = {
-			'columnDefs': [
-				{
-					'searchable': false,
-					'targets': [tableHeaderCount - 1]
-				},
-			],
+		if (table.hasClass("disaggregation-table")) {
+			var tableOptions = {
+				dom: 'Bfrtip',
+				buttons: [
+					{
+						extend: 'copy',
+						text: 'Copy to Clipboard',
+						className: 'bg-secondary text-white border-0',
+						exportOptions: {
+							columns: ':not(.actionCol)'
+						}
+					},
+					{
+						extend: 'excel',
+						text: 'Export as Excel',
+						className: 'bg-primary text-white border-0',
+						exportOptions: {
+							columns: ':not(.actionCol)'
+						},
+					},
+					{
+						extend: 'csv',
+						text: 'Export as CSV',
+						className: 'bg-info text-white border-0',
+						exportOptions: {
+							columns: ':not(.actionCol)'
+						}
+					},
+					{
+						extend: 'print',
+						text: 'Print',
+						className: 'bg-dark text-white border-0',
+						exportOptions: {
+							columns: ':not(.actionCol)'
+						}
+					},
+				],
+				'columnDefs': [
+					{
+						'searchable': false,
+						'targets': [tableHeaderCount - 1]
+					},
+				],
+			}
+		}
+        else {
+			var tableOptions = {
+				'columnDefs': [
+					{
+						'searchable': false,
+						'targets': [tableHeaderCount - 1]
+					},
+				],
+			}
         }
+
+		
 
 		table.DataTable().destroy()
 		table.DataTable(tableOptions);

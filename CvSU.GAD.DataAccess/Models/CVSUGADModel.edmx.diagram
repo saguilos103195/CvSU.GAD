@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="83473ffe11ba4dc0b5724d1cc26627e9" Name="Diagram1" ZoomLevel="79">
-        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="1.5" PointY="18.75" />
-        <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="0.75" PointY="3.5" />
-        <EntityTypeShape EntityType="CVSUGADModel.Disaggregation" Width="1.5" PointX="3" PointY="4.25" />
-        <EntityTypeShape EntityType="CVSUGADModel.Document" Width="1.5" PointX="3" PointY="14.5" />
-        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="8.375" />
-        <EntityTypeShape EntityType="CVSUGADModel.Position" Width="1.5" PointX="5.75" PointY="1.75" />
-        <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="8.5" />
-        <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="CVSUGADModel.Seminar" Width="1.5" PointX="5.25" PointY="11.625" />
-        <EntityTypeShape EntityType="CVSUGADModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CVSUGADModel.Account" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="CVSUGADModel.College" Width="1.5" PointX="1.5" PointY="1" />
+        <EntityTypeShape EntityType="CVSUGADModel.Department" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CVSUGADModel.Disaggregation" Width="1.5" PointX="6" PointY="7.5" />
+        <EntityTypeShape EntityType="CVSUGADModel.Document" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="CVSUGADModel.Education" Width="1.5" PointX="5.25" PointY="11.875" />
+        <EntityTypeShape EntityType="CVSUGADModel.Position" Width="1.5" PointX="2.75" PointY="8.875" />
+        <EntityTypeShape EntityType="CVSUGADModel.Profile" Width="1.5" PointX="3" PointY="12.125" />
+        <EntityTypeShape EntityType="CVSUGADModel.Program" Width="1.5" PointX="6" PointY="4" />
+        <EntityTypeShape EntityType="CVSUGADModel.Seminar" Width="1.5" PointX="5.25" PointY="15.25" />
+        <EntityTypeShape EntityType="CVSUGADModel.sysdiagram" Width="1.5" PointX="8.75" PointY="1.875" />
         <AssociationConnector Association="CVSUGADModel.FK_Account_Account" />
         <AssociationConnector Association="CVSUGADModel.FK_Disaggregation_Account" />
         <AssociationConnector Association="CVSUGADModel.FK_Profile_Account" />

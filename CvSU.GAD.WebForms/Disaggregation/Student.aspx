@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GAD.Master" AutoEventWireup="true" CodeBehind="Student.aspx.cs" Inherits="CvSU.GAD.WebForms.Disaggregation.Student" %>
+﻿<%@ Page Title="Student Sex Disaggregation" Language="C#" MasterPageFile="~/GAD.Master" AutoEventWireup="true" CodeBehind="Student.aspx.cs" Inherits="CvSU.GAD.WebForms.Disaggregation.Student" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <script src="/Content/Scripts/student.js" type="text/javascript"></script>
 <input type="hidden" runat="server" id="selectedID" class="selectedID" />
@@ -85,7 +85,7 @@
 			<div class="card shadow mb-4">
 				<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="viewTable" width="100%" cellspacing="0">
+						<table class="table table-bordered disaggregation-table" id="viewTable" width="100%" cellspacing="0">
 							<thead>
 								<tr>
 									<th>Program</th>
@@ -94,7 +94,7 @@
 									<th>Female</th>
 									<th>Semester</th>
 									<th>School Year</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -113,9 +113,34 @@
 							</tbody>
 						</table>
 					</div>
+					<button id="exportBtn" type="button" onclick="exportDisaggregation();" class="exportBtn mt-3 float-right btn btn-info">Export to Report</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+    function fnExcelReport() {
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange; var j = 0;
+        tab = document.getElementById('viewTable'); // id of table
+
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+               //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+        return (sa);
+    }
+</script>
 </asp:Content>

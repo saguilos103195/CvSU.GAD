@@ -44,14 +44,14 @@
 								<tr>
 									<th>Title</th>
 									<th>Type</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
 									<th>Title</th>
 									<th>Type</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -71,14 +71,14 @@
 								<tr>
 									<th>Title</th>
 									<th>Type</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
 									<th>Title</th>
 									<th>Type</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</tfoot>
 							<tbody>

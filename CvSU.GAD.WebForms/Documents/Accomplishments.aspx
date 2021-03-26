@@ -39,14 +39,16 @@
 								<tr>
 									<th>Title</th>
 									<th>Created By</th>
-									<th>Action</th>
+									<th>Status</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
 									<th>Title</th>
 									<th>Created By</th>
-									<th>Action</th>
+									<th>Status</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</tfoot>
 							<tbody>

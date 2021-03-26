@@ -73,6 +73,114 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			return message;
 		}
 
+		public string ApproveDocument(int documentID)
+		{
+
+			string message = "Failed to save.";
+
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (DbContextTransaction transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							var approvedDocument = context.Documents.FirstOrDefault(d => d.DocumentID == documentID);
+							approvedDocument.Status = "Approved";
+							isSaved = context.SaveChanges() > 0;
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							message = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							message = "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							message = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+							message = "Please contact the support. ";
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				message = "Please contact the support. ";
+			}
+
+			return message;
+		}
+
+		public string RejectDocument(int documentID)
+		{
+
+			string message = "Failed to save.";
+
+			try
+			{
+				using (CVSUGADDBContext context = _dataAccessFactory.GetCVSUGADDBContext())
+				{
+					using (DbContextTransaction transaction = context.Database.BeginTransaction())
+					{
+						bool isSaved = false;
+
+						try
+						{
+							var rejectedDocument = context.Documents.FirstOrDefault(d => d.DocumentID == documentID);
+							rejectedDocument.Status = "Rejected";
+							isSaved = context.SaveChanges() > 0;
+						}
+						catch (DbEntityValidationException ex)
+						{
+							transaction.Rollback();
+							LogDbEntityValidationException(ex);
+							message = "Please contact the support. ";
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							LogException(ex);
+							message = "Please contact the support. ";
+						}
+
+						if (isSaved)
+						{
+							transaction.Commit();
+							message = string.Empty;
+						}
+						else
+						{
+							transaction.Rollback();
+							message = "Please contact the support. ";
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				LogException(ex);
+				message = "Please contact the support. ";
+			}
+
+			return message;
+		}
+
 		public List<Document> GetAccomplishments()
         {
 			List<Document> accomplishments = new List<Document>();
@@ -81,7 +189,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
             {
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					accomplishments = ctx.Documents.Include(p => p.Account).Where(p => p.Type == "Accomplishment").ToList();
+					accomplishments = ctx.Documents.Include(p => p.Account).Include(p => p.Account.Profiles).Where(p => p.Type == "Accomplishment").ToList();
 					accomplishments.ForEach(p => p.DocumentFile = "");
 				}
 			}
@@ -102,7 +210,7 @@ namespace CvSU.GAD.DataAccess.DatabaseConnectors
 			{
 				using (CVSUGADDBContext ctx = _dataAccessFactory.GetCVSUGADDBContext())
 				{
-					projects = ctx.Documents.Include(p => p.Account).Where(p => p.Type == "Extension").ToList();
+					projects = ctx.Documents.Include(p => p.Account).Include(p => p.Account.Profiles).Where(p => p.Type == "Extension").ToList();
 					projects.ForEach(p => p.DocumentFile = "");
 				}
 			}

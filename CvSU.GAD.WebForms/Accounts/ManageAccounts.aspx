@@ -28,7 +28,7 @@
 									<th>Type</th>
 									<th>Created By</th>
 									<th>College</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -37,7 +37,7 @@
 									<th>Type</th>
 									<th>Created By</th>
 									<th>College</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -59,7 +59,7 @@
 									<th>Type</th>
 									<th>Created By</th>
 									<th>College</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -68,7 +68,7 @@
 									<th>Type</th>
 									<th>Created By</th>
 									<th>College</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</tfoot>
 							<tbody>

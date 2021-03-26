@@ -21,6 +21,7 @@ namespace CvSU.GAD.DataAccess.Models
         public string DocumentMimeType { get; set; }
         public string DocumentName { get; set; }
         public int CreatedBy { get; set; }
+        public string Status { get; set; }
     
         public virtual Account Account { get; set; }
     }

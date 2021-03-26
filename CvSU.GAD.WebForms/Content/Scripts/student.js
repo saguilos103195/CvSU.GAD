@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿var exportDocumentName = "Student_Disaggregation" + moment(new Date()).format('YYYYMMDD');
+
+$(document).ready(function () {
 
 	$("#collapseDisaggregation").parent(".nav-item").addClass("active");
 	$("#studentDisaggregationTab").addClass("active");
@@ -74,6 +76,28 @@ function initializeUser()
     }
 }
 
+function exportDisaggregation() {
+
+	var disaggregationData = [];
+
+	$.each($('#viewTable').DataTable().data().toArray(), function (index, item) {
+
+		var disaggregation = {
+			Program: $(this)[0],
+			Department: $(this)[1],
+			Male: $(this)[2],
+			Female: $(this)[3],
+			Semester: $(this)[4],
+			SchoolYear: $(this)[5]
+		}
+
+		disaggregationData.push(disaggregation);
+
+	});
+
+	console.log(disaggregationData);
+}
+
 function loadDisaggragationData()
 {
 
@@ -139,9 +163,6 @@ function loadDisaggragationData()
 
 			filterSelect.appendTo(filterBody).on('change', function () {
 				var val = $(this).val();
-
-				console.log(val);
-
 				table.column(i)
 					.search(val ? '^' + $(this).val() + '$' : val, true, false)
 					.draw();
@@ -167,12 +188,7 @@ function loadDisaggragationData()
 
 					filterSelect.append('<option value="">All</option>');
 
-					var schoolYearData = [];
-
-					table.column(i).data().unique().sort().each(function (d, j)
-					{
-						schoolYearData.push(d);
-					});
+					var schoolYearData = table.column(i).data().unique().sort().toArray();
 					var currentYear = parseInt(new Date().getFullYear());
 					var startYear = currentYear - 19;
 

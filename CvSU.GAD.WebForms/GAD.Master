@@ -11,10 +11,10 @@
 		<link href="/Content/Stylesheets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 		<link href="/Content/Stylesheets/sb-admin-2.css" rel="stylesheet" />
 
-		<link href="/Content/Scripts/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+		<link href="/Content/Scripts/datatables/buttons.dataTables.min.css" rel="stylesheet">
+		<link href="/Content/Scripts/datatables/datatables.min.css" rel="stylesheet">
 		
-
+		
 		<!-- Bootstrap core JavaScript-->
 		<script src="/Content/Scripts/jquery/jquery.min.js"></script>
 		<script src="/Content/Scripts/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -25,7 +25,8 @@
 		<script src="/Content/Scripts/jquery-easing/jquery.easing.min.js"></script>
 		<!-- Custom scripts for all pages-->
 		
-		<script src="/Content/Scripts/datatables/jquery.dataTables.min.js"></script>
+		<script src="/Content/Scripts/datatables/datatables.min.js"></script>
+		<%--<script src="/Content/Scripts/datatables/jquery.dataTables.min.js"></script>--%>
 		<script src="/Content/Scripts/datatables/dataTables.bootstrap4.min.js"></script>
 		<script src="/Content/Scripts/moment.min.js"></script>
 
@@ -98,17 +99,17 @@
 						<div class="bg-white py-2 collapse-inner rounded">
 							<a class="collapse-item" id="applyProjectsTab" href="/projects/apply.aspx">Apply</a>
 							<a class="collapse-item" id="viewProjectsTab" href="/projects/view.aspx">View</a>
+							<a class="collapse-item" id="accomplishmentsDocumentsTab" href="/documents/accomplishments.aspx">Accomplishments</a>
 						</div>
 					</div>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocuments" aria-expanded="true" aria-controls="collapseUtilities">
-					<i class="fas fa-fw fa-book"></i>
-					<span>Documents</span>
+					<i class="fas fa-cog"></i>
+					<span>Settings</span>
 					</a>
 					<div id="collapseDocuments" class="collapse" aria-labelledby="headingDocuments" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" id="accomplishmentsDocumentsTab" href="/documents/accomplishments.aspx">Accomplishments</a>
 							<a class="collapse-item" id="collegesDocumentsTab" href="/documents/colleges.aspx">Colleges</a>
 							<a class="collapse-item" id="departmentsDocumentsTab" href="/documents/departments.aspx">Departments</a>
 							<a class="collapse-item" id="programsDocumentsTab" href="/documents/programs.aspx">Programs</a>

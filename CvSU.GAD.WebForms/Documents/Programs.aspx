@@ -60,7 +60,7 @@
 									<th>Title</th>
 									<th>Alias</th>
 									<th>Department</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -68,7 +68,7 @@
 									<th>Title</th>
 									<th>Alias</th>
 									<th>Department</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -89,7 +89,7 @@
 									<th>Title</th>
 									<th>Alias</th>
 									<th>Department</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -97,7 +97,7 @@
 									<th>Title</th>
 									<th>Alias</th>
 									<th>Department</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</tfoot>
 							<tbody>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GAD.Master" AutoEventWireup="true" CodeBehind="Faculty.aspx.cs" Inherits="CvSU.GAD.WebForms.Disaggregation.Faculty" %>
+﻿<%@ Page Title="Faculty Sex Disaggregation" Language="C#" MasterPageFile="~/GAD.Master" AutoEventWireup="true" CodeBehind="Faculty.aspx.cs" Inherits="CvSU.GAD.WebForms.Disaggregation.Faculty" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <script src="/Content/Scripts/employee.js" type="text/javascript"></script>
 <input type="hidden" runat="server" id="selectedID" class="selectedID" />
@@ -85,7 +85,7 @@
 			<div class="card shadow mb-4">
 				<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="viewTable" width="100%" cellspacing="0">
+						<table class="table table-bordered disaggregation-table" id="viewTable" width="100%" cellspacing="0">
 							<thead>
 								<tr>
 									<th>Position</th>
@@ -94,7 +94,7 @@
 									<th>Female</th>
 									<th>Semester</th>
 									<th>School Year</th>
-									<th>Action</th>
+									<th class="actionCol">Action</th>
 								</tr>
 							</thead>
 							<tfoot>

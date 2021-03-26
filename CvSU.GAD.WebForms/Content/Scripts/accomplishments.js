@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $("#collapseDocuments").parent(".nav-item").addClass("active");
+	$("#collapseProjects").parent(".nav-item").addClass("active");
     $("#accomplishmentsDocumentsTab").addClass("active");
 
     $("#createBtn").click(function () {
@@ -27,9 +27,32 @@ function loadAccomplishments() {
 		$(downloadBtn).attr("onclick", "downloadDocument(" + report.DocumentID + ");");
 		downloadBtn = downloadBtn.outerHTML;
 
+		var profile = report.Account.Profiles[0];
+		var middleInitial = profile.Middlename.length > 0 ? profile.Middlename.charAt(0) + "." : "";
+
+		var statusTxt = document.createElement("span");
+		$(statusTxt).html(report.Status);
+		
+		switch (report.Status) {
+			case "Pending":
+				$(statusTxt).addClass("text-warning");
+				break;
+			case "Approved":
+				$(statusTxt).addClass("text-primary");
+				break;
+			case "Rejected":
+				$(statusTxt).addClass("text-danger");
+				break;
+			default:
+				break;
+		}
+
+		statusTxt = statusTxt.outerHTML;
+
 		$('#viewTable').dataTable().fnAddData([
 			report.Title,
-			report.Account.Username,
+			profile.Firstname + " " + middleInitial + " " + profile.Lastname,
+			statusTxt,
 			downloadBtn
 		]);
 

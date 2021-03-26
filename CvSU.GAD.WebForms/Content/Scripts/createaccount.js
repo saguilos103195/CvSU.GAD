@@ -40,8 +40,7 @@ function isPasswordValid()
     {
         if ($(".txtPassword").val().length < 8)
         {
-            console.log("Password weak.");
-            $("#passwordError").html("Passwords too weak.");
+            $("#passwordError").html("Passwords must be atleast 8 characters.");
             $(".txtPassword").addClass("is-invalid");
             isValid = false;
         }

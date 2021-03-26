@@ -22,9 +22,32 @@ function loadProjects()
 		$(downloadBtn).attr("onclick", "downloadDocument(" + project.DocumentID + ");");
 		downloadBtn = downloadBtn.outerHTML;
 
+		var profile = project.Account.Profiles[0];
+		var middleInitial = profile.Middlename.length > 0 ? profile.Middlename.charAt(0) + "." : "";
+
+		var statusTxt = document.createElement("span");
+		$(statusTxt).html(project.Status);
+
+		switch (project.Status) {
+			case "Pending":
+				$(statusTxt).addClass("text-warning");
+				break;
+			case "Approved":
+				$(statusTxt).addClass("text-primary");
+				break;
+			case "Rejected":
+				$(statusTxt).addClass("text-danger");
+				break;
+			default:
+				break;
+		}
+
+		statusTxt = statusTxt.outerHTML;
+
 		$('#viewTable').dataTable().fnAddData([
 			project.Title,
-			project.Account.Username,
+			profile.Firstname + " " + middleInitial + " " + profile.Lastname,
+			statusTxt,
 			downloadBtn
 		]);
 
@@ -46,8 +69,6 @@ function downloadDocument(id)
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function (response) {
-
-				console.log(response);
 
 				if (response.d != "" && response.d != null)
 				{

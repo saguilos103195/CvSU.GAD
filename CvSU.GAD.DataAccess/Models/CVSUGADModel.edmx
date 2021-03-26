@@ -63,6 +63,7 @@
           <Property Name="DocumentMimeType" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="DocumentName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Education">
           <Key>
@@ -417,6 +418,7 @@
           <Property Name="DocumentMimeType" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="CVSUGADModel.FK_Project_Account" FromRole="Document" ToRole="Account" />
         </EntityType>
         <EntityType Name="Education">
@@ -667,6 +669,7 @@
           <EntitySetMapping Name="Documents">
             <EntityTypeMapping TypeName="CVSUGADModel.Document">
               <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
                 <ScalarProperty Name="DocumentMimeType" ColumnName="DocumentMimeType" />
